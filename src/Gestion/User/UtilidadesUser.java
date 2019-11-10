@@ -18,10 +18,10 @@ public class UtilidadesUser {
             System.out.println("4) Realizar ingreso.");
             System.out.println("5) Retirar dinero.");
             System.out.println("6) Ver movimientos.");
-            System.out.println("7) Salir.");
+            System.out.println("0) Salir.");
 
             opcion = teclado.nextInt();
-        }while(opcion < 0 && opcion > 7);
+        }while(opcion < 0 && opcion > 6);
 
         return opcion;
     }

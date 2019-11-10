@@ -4,8 +4,8 @@ import Gestion.Admin.Utilidades;
 import java.util.Scanner;
 
 /*
-mientras quiera ejecutar
-    MostrarMenu, leeryValidarOpcionMenu
+si quiere ejecutar
+    mientras no quiera salir (opcionMenu != 6)
         segun(opcionMenu)
             caso 1: CrearPartido
             caso 2: AbrirPartido
@@ -13,30 +13,34 @@ mientras quiera ejecutar
             caso 4: ConsultarApuestasPartido
             caso 5: PagarApuestas
         fin_segun
-fin_mientras
+    fin_mientras
+fin_si
  */
 public class MainAdministradores {
     public static void main(String[]args){
+        int opcionMenu = 0;
 
-        while(Utilidades.leerValidarEjecutar() == 's'){
-            switch(Utilidades.MostrarMenuLeerValidarOpcion()){
-                case 1: //Crear partido
+        if(Utilidades.leerValidarEjecutar() == 's') {
+            while ((opcionMenu = Utilidades.MostrarMenuLeerValidarOpcion()) != 0) {
+                switch (opcionMenu) {
+                    case 1: //Crear partido
 
-                    break;
-                case 2: //Abrir partido
+                        break;
+                    case 2: //Abrir partido
 
-                    break;
-                case 3: //Cerrar partido
+                        break;
+                    case 3: //Cerrar partido
 
-                    break;
-                case 4: //Consultar apuestas partido
+                        break;
+                    case 4: //Consultar apuestas partido
 
-                    break;
-                case 5: //Pagar apuestas
+                        break;
+                    case 5: //Pagar apuestas
 
-                    break;
+                        break;
+                }
+
             }
-
         }
 
     }
