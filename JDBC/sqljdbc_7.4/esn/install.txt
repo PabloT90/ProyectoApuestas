@@ -1,0 +1,39 @@
+﻿Instrucciones de instalación
+Controlador JDBC 7.4 de Microsoft para SQL Server
+
+
+INTRODUCCIÓN
+------------
+A continuación se incluyen las instrucciones para desempaquetar sqljdbc_<versión>_esp.exe y 
+sqljdbc_<versión>_esp.tar.gz.
+
+
+WINDOWS
+-------
+1. Lea el archivo license.txt. La descarga y el uso de Microsoft JDBC Driver 7.4 para SQL Server implican la aceptación de esta licencia.
+
+2. Descargue sqljdbc_<versión>_enu.exe en un directorio temporal.
+
+3. Ejecute sqljdbc_<versión>_enu.exe
+
+4. Escriba el directorio de instalación cuando se le solicite; se recomienda desempaquetar
+   este archivo .zip en %ProgramFiles% con el directorio predeterminado:
+
+	Microsoft JDBC DRIVER 7.4 para SQL Server
+
+
+UNIX
+----
+1. Lea el archivo license.txt. La descarga y el uso de Microsoft JDBC Driver 7.4 para SQL Server implican la aceptación de esta licencia.
+
+2. Descargue sqljdbc_<versión>_enu.tar.gz en un directorio temporal.
+
+3. Para desempaquetar el archivo .tar comprimido, vaya al directorio en el que quiera
+   desempaquetar el controlador y escriba lo siguiente:
+
+	gzip -d sqljdbc_<versión>_enu.tar.gz
+
+4. Para desempaquetar el archivo .tar, muévalo al directorio en el que 
+   quiera instalarlo y escriba lo siguiente:
+
+	tar -xf sqljdbc_<versión>_enu.tar

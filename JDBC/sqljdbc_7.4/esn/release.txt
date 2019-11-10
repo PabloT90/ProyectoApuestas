@@ -1,0 +1,299 @@
+﻿Información de la versión
+Microsoft JDBC Driver 7.4 para SQL Server
+Agosto de 2019
+
+------------
+INTRODUCCIÓN
+------------
+Este archivo contiene información importante o de última hora que complementa a Microsoft JDBC. 
+Documentación de Driver 7.4 para SQL Server. Debe leer este archivo en su totalidad antes de instalar 
+el controlador JDBC.
+
+Sus comentarios son muy importantes y haremos lo posible para responderle puntualmente 
+. Para más información sobre cómo proporcionar comentarios mediante los blogs y los foros en línea del controlador JDBC, 
+consulte la página de Microsoft JDBC Driver 7.4 para SQL Server, disponible en https://aka.ms/mssql-jdbc-feedback.
+
+
+------------
+INSTALACIÓN
+------------
+Las instrucciones para instalar el controlador JDBC se encuentran en install.txt. Consulte este archivo para 
+obtener información sobre cómo instalar el controlador JDBC en los sistemas operativos Windows. Linux y Mac.
+
+
+---------------------------
+SISTEMAS OPERATIVOS ADMITIDOS
+---------------------------
+Sistemas operativos compatibles con Microsoft JDBC Driver 7.4 para SQL Server:
+  Windows Server 2008 SP2
+  Windows Server 2008 R2 SP1
+  Windows Server 2012
+  Windows Server 2012 R2
+  Windows Server 2016
+  Windows Server 2019
+  Windows 8
+  Windows 8.1
+  Windows 10
+  Linux
+  Mac
+
+Esta lista es un ejemplo de algunos de los sistemas operativos admitidos. El controlador JDBC está diseñado 
+para funcionar en cualquier sistema operativo que admita el uso de una máquina virtual Java (JVM). 
+
+Sin embargo, solo en los sistemas operativos Linux y macOS más recientes (Ubuntu 19.04, Ubuntu 18.10, CentOs 7, Suse 12 y 
+macOS 10.14) se han realizado pruebas de compatibilidad y soporte técnico.
+
+
+-----------------------
+VERSIONES DE JAVA COMPATIBLES
+-----------------------
+Microsoft JDBC Driver 7.4 para SQL Server se ha probado y es compatible con las versiones más recientes de 
+las compilaciones de kit de desarrollo de Java (JDK) de Open JDK y Zulu admitidas en los sistemas operativos mencionados anteriormente.
+Se admiten las siguientes versiones de la familia de bibliotecas del sistema de Java Runtime Environment (JRE):
+
+  ----------------------------------------------------------------------
+  Versión de la familia JRE | JAR de Driver para una compatibilidad óptima
+  ----------------------------------------------------------------------
+  8 y posteriores                 | mssql-jdbc-7.4.1.jre8.jar
+  11 y posteriores                 | mssql-jdbc-7.4.1.jre11.jar
+  12 y posteriores                 | mssql-jdbc-7.4.1.jre12.jar
+
+
+----------------
+CONTENIDO DE LA VERSIÓN
+----------------
+El archivo .zip o .tar ejecutable de Microsoft JDBC Driver 7.4 para SQL Server desempaqueta los siguientes archivos 
+en las ubicaciones especificadas, relativas al directorio de instalación:
+
+<directorio de instalación>\sqljdbc_<versión>\<idioma>\install.txt
+<directorio de instalación>\sqljdbc_<versión>\<idioma>\release.txt
+<directorio de instalación>\sqljdbc_<versión>\<idioma>\license.txt
+<directorio de instalación>\sqljdbc_<versión>\<idioma>\thirdpartynotices.txt
+<directorio de instalación>\sqljdbc_<versión>\<idioma>\mssql-jdbc-7.4.1.jre8.jar
+<directorio de instalación>\sqljdbc_<versión>\<idioma>\mssql-jdbc-7.4.1.jre8-shaded.jar
+<directorio de instalación>\sqljdbc_<versión>\<idioma>\mssql-jdbc-7.4.1.jre11.jar
+<directorio de instalación>\sqljdbc_<versión>\<idioma>\mssql-jdbc-7.4.1.jre11-shaded.jar
+<directorio de instalación>\sqljdbc_<versión>\<idioma>\mssql-jdbc-7.4.1.jre12.jar
+<directorio de instalación>\sqljdbc_<versión>\<idioma>\mssql-jdbc-7.4.1.jre12-shaded.jar
+<directorio de instalación>\sqljdbc_<versión>\<idioma>\auth\x86\sqljdbc_auth.dll
+<directorio de instalación>\sqljdbc_<versión>\<idioma>\auth\x64\sqljdbc_auth.dll
+<directorio de instalación>\sqljdbc_<versión>\<idioma>\samples\<archivos de ejemplo...>
+<directorio de instalación>\sqljdbc_<versión>\<idioma>\xa\xa_install.sql
+<directorio de instalación>\sqljdbc_<versión>\<idioma>\xa\x86\sqljdbc_xa.dll
+<directorio de instalación>\sqljdbc_<versión>\<idioma>\xa\x64\sqljdbc_xa.dll
+
+Para obtener información detallada sobre cada componente, consulte la documentación en línea,
+Documentación de Microsoft JDBC Driver para SQL Server: 
+https://msdn.microsoft.com/en-us/library/dn197850(v=sql.10).aspx
+
+
+-------------
+DOCUMENTACIÓN
+-------------
+En este paquete se incluye la información de versión, las instrucciones de instalación y los términos de licencia. 
+El resto de la documentación se puede encontrar en línea.
+
+Tenga en cuenta que los archivos de ayuda sin conexión se han suspendido. 
+
+
+---------
+ARCHIVOS .JAR
+---------
+Para permitir la compatibilidad con versiones anteriores y posibles casos de actualización, JDBC Driver 7.4 incluye 
+tres bibliotecas de clases JAR en cada paquete de instalación:
+	mssql-jdbc-7.4.1.jre8.jar
+	mssql-jdbc-7.4.1.jre11.jar
+	mssql-jdbc-7.4.1.jre12.jar
+
+
+----------------------
+ARCHIVOS DE CARACTERÍSTICAS ESPECÍFICAS
+----------------------
+Se incluyen componentes de Azure Active Directory y autenticación integrada (en Windows) 
+en el directorio "auth".
+
+Se incluyen componentes de transacciones distribuidas de JDBC en el directorio "xa".
+
+
+--------------------
+DEPENDENCIAS DE CARACTERÍSTICAS
+--------------------
+Algunas características de Microsoft JDBC Driver 7.4 para SQL Server dependen de bibliotecas externas, 
+como se muestra a continuación:
+
+1. Uso de "Always Encrypted" con Azure Key Vault Provider
+   Bibliotecas dependientes: azure-keyvault (versión 1.2.1), adal4j (versión 1.6.4)
+   y client-runtime (versión 1.6.10)
+   
+2. Uso de "Autenticación integrada de Azure Active Directory" en sistemas operativos Windows, Linux y Mac
+   Bibliotecas dependientes: adal4j (versión 1.6.4) y client-runtime (versión 1.6.10)
+   
+3. Uso de "useFmtOnly" para recuperar metadatos de parámetros
+   Bibliotecas dependientes: antlr-runtime (versión 4.7.2)
+
+En el vínculo siguiente encontrará información detallada sobre cómo incluir estas bibliotecas dependientes en una aplicación de Java estándar 
+o una aplicación de Maven: https://go.microsoft.com/fwlink/?linkid=867575
+
+
+---------
+EJEMPLOS
+---------
+Se incluyen aplicaciones de ejemplo que muestran diversas características de JDBC Driver en el directorio
+"samples". Para más información sobre cada ejemplo y cómo ejecutarlo, consulte la documentación 
+en línea.
+
+
+-----------
+LISTA DE CAMBIOS
+-----------
+Cambios entre las versiones 7.2.2.0 y 7.4.1.0
+- Se ha agregado la compatibilidad con la autenticación NTLM.
+- Se ha agregado una nueva propiedad de conexión, "useFmtOnly", para recuperar los metadatos de los parámetros.
+- Se ha agregado la compatibilidad con JDK 12 mediante un JAR adicional, "jre12".
+- Se han agregado las propiedades de conexión "keyVaultProviderClientId" y "keyVaultProviderClientKey" para mejorar la usabilidad de Always Encrypted.
+- Se ha agregado la configuración de Maven Shade Plugin para incluir los archivos .jar de controlador y todas sus dependencias en el paquete uber-jars.
+- Se ha agregado la compatibilidad necesaria en "SQLServerBulkCopy" para permitir las instancias "PooledConnection"/"XAConnection" durante la creación de objetos.
+- Se ha agregado la compatibilidad con el tipo de datos FLOAT en "SQLServerBulkCopy" al usar "RowSet".
+- Se ha introducido una nueva dependencia de Maven de "ANTLR 4 Runtime" (versión 4.7.2).
+- Se ha actualizado la dependencia de Maven de "Microsoft Azure Active Directory Authentication Library (ADAL4J) for Java"
+a la versión 1.6.4 de la biblioteca.
+- Se ha actualizado la dependencia de Maven de "Java Client Runtime for AutoRest" a la versión 1.6.10 de la biblioteca.
+- Se ha actualizado la dependencia de Maven de "Microsoft Azure Key Vault SDK for Java" a la versión 1.2.1 de la biblioteca,
+con lo que también se elimina "Microsoft Azure SDK for Key Vault WebKey" de las dependencias de Maven.
+- Se ha actualizado la dependencia de Maven de "OSGi Core" a la versión 6.0.0 de la biblioteca.
+- Se ha actualizado la dependencia de Maven de "OSGi Compendium" a la versión 5.0.0 de la biblioteca.
+
+Mejoras:
+- Se han mejorado las implementaciones de la API de "SQLServerParameterMetadata" para evitar "NullPointerException".
+- Se ha mejorado el rendimiento mediante la eliminación de las llamadas "Enum.values()" para evitar la clonación de matrices innecesarias.
+- Se ha mejorado el rendimiento del controlador mediante la limpieza continua de los elementos "ActivityIds" almacenados en el Map interno.
+- Se ha mejorado el rendimiento del método "SQLServerDataTable.internalAddRow()".
+- Se ha mejorado el rendimiento de varios métodos "SQLServerBulkCopy" y "PreparedStatement" mediante la eliminación de la creación de objetos innecesarios.
+
+Correcciones de errores:
+- Se ha corregido un error por el que la API de "DatabaseMetadata.getColumns()" devolvía "ResultSet" según las especificaciones de JDBC 4.3.
+- Se ha corregido un problema con los tipos de datos espaciales no válidos marcándolos como válidos de forma predeterminada.
+- Se han corregido problemas por los que el tiempo de expiración de inicio de sesión no se aplicaba correctamente.
+- Se ha corregido la implementación de "SharedTimer" para que use el bloqueo de nivel de clase en la seguridad para subprocesos.
+- Se han corregido problemas con la consulta de la API de "SQLServerDatabaseMetadata.getMaxConnections()".
+- Se han corregido problemas por los que el próximo elemento "ResultSet" se consumía al leer advertencias.
+- Se ha corregido el control de excepciones de "SQLServerPreparedStatement" para que sea coherente con "SQLServerStatement".
+- Se ha corregido un mensaje de excepción confuso de la implementación de "SQLServerCallableStatement".
+- Se ha corregido "SELECT_METHOD" de "SQLServerConnection" para que no capture la misma propiedad de conexión dos veces.
+- Se ha corregido una posible fuga de instrucciones en la API de "SQLServerConnection.isValid()".
+- Se ha corregido el comportamiento de redondeo al insertar valores de fecha y hora en la versión 2016 y versiones posteriores de SQL Server.
+- Se ha corregido el comportamiento de la API de "SQLServerConnection.abort()" para que borre los recursos de forma coherente.
+- Se ha corregido la longitud del estado de error "SQLException" para que respete los estándares de SQLSTATE.
+
+Cambios entre las versiones 7.2.1.0 y 7.2.2.0:
+Correcciones de errores:
+- Se han corregido varios problemas que causaban que la limpieza de los elementos ActivityID no se efectuara correctamente.
+
+Cambios entre las versiones 7.2.0.0 y 7.2.1.0:
+Correcciones de errores:
+- Se han corregido varios problemas relacionados con el análisis de ciertas consultas parametrizadas.
+
+Cambios entre las versiones 7.0.0.0 y 7.2.0.0:
+- En la última versión de Java SE 11 (18.9 LTS), el controlador ahora admite Java 11 y los artefactos 
+compatibles con las versiones.
+- Se ha actualizado la dependencia de Maven de "Microsoft Azure Active Directory Authentication Library (ADAL4J) for Java"
+a la versión 1.6.3 de la biblioteca, con lo que también se agrega "Java Client Runtime for AutoRest" como dependencia de 
+Maven (versión 1.6.5).
+- Se ha actualizado la dependencia de Maven de "Microsoft Azure Key Vault SDK for Java" a la versión 1.2.0 de la biblioteca, 
+con lo que también se agrega "Microsoft Azure SDK for Key Vault WebKey" como dependencia de Maven (versión 1.2.0).
+- Se ha agregado compatibilidad con la autenticación de Active Directory Managed Service Identity (MSI) con las identidades 
+asignadas por el sistema o el usuario en el entorno de Azure mediante la introducción de la opción de autenticación 
+"ActiveDirectoryMSI" en el controlador.
+- Se ha agregado compatibilidad con OSGi en el controlador mediante la adición de las API para DataSourceFactory y OSGI Framework.
+- Se han agregado nuevas API para recuperar la información sobre errores de SQL Server recibida mediante SQLServerException.
+- Se ha agregado compatibilidad con la lectura de las advertencias de SQL recibidas de SQL Server tras leer completamente un elemento ResultSet.
+- Se ha agregado un nuevo constructor de SQLServerMetaData para aceptar la longitud de la cadena que se pasará como columna de datos.
+- Se ha agregado compatibilidad con "java.time.LocalDate", "java.time.LocalTime", "java.time.LocalDateTime" y 
+"java.time.OffsetDateTime", de modo que se pasen como valor "type" en la API "ResultSet.getObject()".
+- Se han agregado capacidades de streaming para la API Clob.getAsciiStream().
+- Se ha actualizado la lista de palabras clave de SQL en "SQLServerDatabaseMetaData" para que coincida con la lista más reciente de las palabras clave reservadas de 
+la documentación de Transact-SQL.
+
+Mejoras: 
+- Se ha simplificado la implementación del registrador para mejorar el rendimiento del controlador de Always Encrypted.
+- Se ha mejorado el rendimiento de la función "readLong()".
+- Se ha mejorado la implementación de "SQLServerDatabaseMetadata" para evitar las fugas del elemento "Statement" y mejorar 
+el almacenamiento en caché de "PreparedStatement".
+- Se ha mejorado la lógica del tiempo de expiración de las consultas para que solo se use un subproceso.
+- Se ha mejorado la lógica de reintento para un problema intermitente de TLS 1.2 al establecer una conexión.
+
+Correcciones de errores:
+- Se ha corregido la validación de certificados SSL para que se respeten los caracteres comodín de los certificados.
+- Se ha corregido un problema que causaba que el controlador volviera a conectarse cada 15 minutos cuando estaba conectado con los modos de autenticación federada 
+de Azure Database o Azure Data Warehouse.
+- Se han corregido fugas de instrucciones y se ha mejorado la administración de las excepciones en "SQLServerParameterMetadata".
+- Se han corregido ciertos problemas con los valores "java.time.OffsetDateTime" y "java.time.OffsetTime" enviados al servidor 
+afectados por la zona horaria predeterminada del cliente.
+- Se ha corregido un error que causaba que, al llamar a "length()" tras obtener un flujo, se cerrase el de Clob/NClob.
+- Se han corregido los problemas de codificación de los tipos de datos Clob/NClob, así como "SQLServerClob", que ahora usa "StandardCharsets.US_ASCII" 
+en lugar de una cadena codificada de forma rígida.
+- Se ha corregido un problema que causaba que el controlador rellenase Lobs al llamar a "ResultSet.wasNull()".
+- Se han corregido varios problemas en el control de excepciones de copia masiva.
+- Se han corregido varios problemas con la funcionalidad del controlador en los casos en los que el nombre de tabla proporcionado en consultas de SQL y API públicas 
+contiene una comilla simple.
+- Se ha corregido una posible excepción NullPointerException en el método interno "logException()".
+- Se ha corregido la API "useBulkCopyForBatchInserts" para que respete el valor de tiempo de expiración del elemento "Statement".
+- Se ha corregido la API "useBulkCopyForBatchInserts" para cambiar a la inserción por lotes al trabajar con tipos de datos no compatibles 
+con la operación de copia masiva de Azure Data Warehouse.
+- Se ha corregido un error que causaba que el valor "Geography.point()" mostrase las coordenadas invertidas.
+- Se ha corregido un error que causaba que "setAutoCommit()" dejase una transacción abierta al ejecutarse con Azure Data Warehouse.
+- Se ha corregido la sincronización de los campos no finales.
+- Se ha corregido un mensaje de error que el controlador generaba al detectar datos fuera del alcance para los tipos DECIMAL y NUMERIC.
+- Se ha eliminado el uso de la reflexión para acceder a clases JDK internas al realizar la autenticación Kerberos.
+
+------------
+PROBLEMAS CONOCIDOS
+------------
+Estos son los problemas conocidos de Microsoft JDBC Driver 7.4 para SQL Server:
+
+1) LIMITACIONES DE METADATOS DE PARÁMETROS AL USAR SQL SERVER 2008 O 2008 R2
+
+1.a) PreparedStatement.getParameterMetadata() genera una excepción de tipo SQLException cuando se usa
+con una consulta MERGE parametrizada.
+
+1.b) Los metadatos de parámetros para instrucciones preparadas no funcionan con consultas con combinaciones o subconsultas.
+
+
+2) QUITAR CONEXIONES CON SQL AZURE
+
+Al conectarse a SQL Azure, un componente de red podría terminar las conexiones inactivas (como un 
+firewall) después de un período de inactividad. Para evitar la eliminación de las conexiones inactivas por un componente de red, 
+se debe establecer la siguiente configuración del Registro (o sus equivalentes que no son de Windows) en 
+el sistema operativo donde está cargado el controlador:
+           
+Configuración del Registro                                                                   Valor recomendado
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\KeepAliveTime            30000
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\KeepAliveInterval         1000
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\TcpMaxDataRetransmission  10
+
+
+3) USO DE TVP CON SQL_VARIANT 
+
+3.a) PARA VALORES DE FECHA
+
+Al usar TVP para rellenar una tabla que contiene los valores de datetime/smalldatetime/date almacenados en la columna sql_variant, 
+las llamadas a getDateTime()/getSmallDateTime()/getDate() en ResultSet no funcionan y producen la excepción siguiente:
+
+	java.lang.String no se puede convertir en java.sql.Timestamp
+
+Solución alternativa: use getString() o getObject() en su lugar.
+
+3.b) USO DE TVP CON SQL_VARIANT PARA VALORES NULL
+
+Si usa TVP para rellenar una tabla y envía un valor NULL al tipo de columna sql_variant, encontrará
+una excepción dado que actualmente no se admite la inserción del valor NULL con el tipo de columna sql_variant en TVP.
+
+
+(4) AL USAR LA AUTENTICACIÓN NTLM
+
+Actualmente, no se permite habilitar la protección ampliada y las conexiones cifradas al mismo tiempo.
+
+(5) AL USAR useFmtOnly
+
+Hay algunos problemas con esta característica; su causa son las deficiencias en la lógica de análisis de SQL.
+Vea https://docs.microsoft.com/en-us/sql/connect/jdbc/using-usefmtonly para obtener más detalles y sugerencias de soluciones alternativas.

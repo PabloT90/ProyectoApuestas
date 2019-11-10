@@ -17,8 +17,27 @@ fin_mientras
  */
 public class MainAdministradores {
     public static void main(String[]args){
+
         while(Utilidades.leerValidarEjecutar() == 's'){
+            switch(Utilidades.MostrarMenuLeerValidarOpcion()){
+                case 1: //Crear partido
+
+                    break;
+                case 2: //Abrir partido
+
+                    break;
+                case 3: //Cerrar partido
+
+                    break;
+                case 4: //Consultar apuestas partido
+
+                    break;
+                case 5: //Pagar apuestas
+
+                    break;
+            }
 
         }
+
     }
 }
