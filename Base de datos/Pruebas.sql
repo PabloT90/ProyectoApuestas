@@ -31,8 +31,10 @@ insert into Competiciones(id,nombre,año) values(NEWID(), 'Copa del Rey', 2019)
 
 insert into Competiciones values(NEWID(), 'Copa de la autoestima perdida', 2019)
 
-insert into Partidos values(NEWID(), 4,5,0,50,'2019-3-12 11:00:00','')
-
+insert into Partidos values(NEWID(), 4,5,0,50,30,60,'2019-3-12 11:00:00','')
+insert into Partidos values(NEWID(), 4,5,0,50,30,60,'2019-3-12 11:00:00','')
+insert into Partidos values(NEWID(), 4,5,0,50,30,60,'2019-3-12 11:00:00','')
+insert into Partidos values(NEWID(), 4,5,0,50,30,60,'2019-3-12 11:00:00','')
 insert into Partidos(id,resultadoLocal,resultadoVisitante,isAbierto,maxApuesta1,maxApuesta2,maxApuesta3,fechaPartido,idCompeticion) 
 values(NEWID(), 3, 4, 0, 60, 80, 90, '2019-14-07 11:00:00', '6027536A-F049-474D-90C8-744315FB4B6C')
 
