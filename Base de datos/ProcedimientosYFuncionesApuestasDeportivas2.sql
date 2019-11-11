@@ -6,7 +6,9 @@ Dentro de este procedimiento se llama a la función obtenerCuota.
 Cabecera: procedure realizarApuesta()
 */
 
-
+--Primera actividad:
+--T = total cantidad apostada de apuestas a un mismo partido y un mismo tipo de una apuesta determinada dada
+--F = total cantidad apostada de apuestas de un mismo partido con un mismo tipo y misma especificaciones del tipo de una apuesta determinada dada
 
 /*
 Interfaz
@@ -21,29 +23,29 @@ Salida:
 Postcondiciones: El método devuelve un número decimal asociado al nombre,
 que es la nueva cuota.
 */
-GO
-CREATE FUNCTION obtenerCuota(@capitalApostado smallmoney, @tipo tinyint) RETURNS decimal(6, 2) 
-BEGIN
-	DECLARE @cuota decimal(6,2)
+--GO
+--CREATE FUNCTION obtenerCuota(@capitalApostado smallmoney, @tipo tinyint) RETURNS decimal(6, 2) 
+--BEGIN
+--	DECLARE @cuota decimal(6,2)
 
 	
 
-	if @capitalApostado < 40	--Si el capital apostado es menos de 40
-	BEGIN
-		SELECT @cuota = 
-		CASE @tipo
-			WHEN 1 then 4
-			WHEN 2 then 3
-			WHEN 3 then 1.5
-		END
-	END
-	ELSE
-	BEGIN
-		SET @cuota = ((/)-1)*0.8
-	END
+--	if @capitalApostado < 40	--Si el capital apostado es menos de 40
+--	BEGIN
+--		SELECT @cuota = 
+--		CASE @tipo
+--			WHEN 1 then 4
+--			WHEN 2 then 3
+--			WHEN 3 then 1.5
+--		END
+--	END
+--	ELSE
+--	BEGIN
+--		SET @cuota = ((/)-1)*0.8
+--	END
 
-END
-GO
+--END
+--GO
 
 /*
 Interfaz
@@ -52,25 +54,6 @@ Comentario: Este método nos permite obtener el capital total apostado de un tipo
 en un partido en concreto.
 Cabecera:
 */
---Dani sacame las comprobaciones de aqui!!!!!!
-Begin transaction
-insert into Competiciones(id,nombre,año) values(NEWID(), 'Copa del Rey', 2019)
-go
-Select * from Competiciones
-insert into Partidos(id,resultadoLocal,resultadoVisitante,isAbierto,maxApuesta1,maxApuesta2,maxApuesta3,fechaPartido,idCompeticion) 
-values(NEWID(), 3, 4, 0, 60, 80, 90, '2019-14-07 11:00:00', '6027536A-F049-474D-90C8-744315FB4B6C')
-go
-insert into Usuarios(correo,contraseña,saldoActual) 
-values ('lauraortiz@gmail.com', 245, 300 )
-go
-SELECT * FROM Usuarios
-SELECT * FROM Partidos
-insert into Apuestas(ID, cuota, FechaHoraApuesta, DineroApostado, CorreoUsuario, IDPartido, Tipo, IsGanador) 
-values(NEWID(), 3.8, '2019-05-06 10:45:00', 10, 'lauraortiz@gmail.com', '68143F26-0C1B-4288-9749-25A542DCE9DA', 2, 0)
-go
-SELECT * FROM Apuestas
---insert into Apuestas (ID,FechaHoraApuesta,DineroApostado,CorreoUsuario,Cuota) values (NEWID(),CURRENT_TIMESTAMP,20,'danielgordillo9@gmail.com',4.5)
-rollback
 
 GO
 /*
@@ -88,7 +71,7 @@ CREATE FUNCTION obtenerPartidosDisponiblesParaApostar ()
 RETURNS TABLE
 AS
 RETURN
-	SELECT * FROM Partidos WHERE isAbierto = 0--Supongo que 0 significa que sigue abierto
+	SELECT * FROM Partidos WHERE isAbierto = 1--Supongo que 1 significa que sigue abierto
 GO
 
 GO
@@ -104,25 +87,33 @@ Entrada:
 Salida:
 	-@apuestaGanada bit OUTPUT
 	-@capital smallmoney OUTPUT
-Postcondiciones: Si la apuesta es ganadora la función devuelve 0 y en caso contrarion devuelve 1.
+Postcondiciones: Si la apuesta es ganadora la función devuelve 0 y el capital ganado, si la apuesta es perdedora devuelve 1 y el capital perdido y si el partido aun no ha finalizado
+se devuelve -1 y un capital de 0.
 */
 CREATE PROCEDURE comprobarResultadoDeUnaApuesta(@idApuesta uniqueidentifier, @apuestaGanada bit OUTPUT, @capital smallmoney OUTPUT)
 AS	--Creo un procedimiento porque tengo que devolver dos resultados, no creo una función de multiples instrucciones porque solo devolvería una fila.
 BEGIN
-	DECLARE @isGanador bit = (SELECT IsGanador FROM Apuestas WHERE ID = @idApuesta)
+	DECLARE @isGanador bit --= (SELECT IsGanador FROM Apuestas WHERE ID = @idApuesta)
+	--Obtenemos como va el partido, si ha gnado, perdido o si aún no se ha asignado el resultado.
+	SELECT @isGanador = ISNULL(IsGanador, -1) FROM Apuestas WHERE ID = @idApuesta
+	
+	SELECT @isGanador,
+	CASE @capital
+	  WHEN 1 THEN (SELECT DineroApostado * Cuota FROM Apuestas WHERE ID = @idApuesta)
+	  WHEN 2 THEN (SELECT DineroApostado FROM Apuestas WHERE ID = @idApuesta)
+	  ELSE 0
+	END
 
-	--TODO	--> Tengo que preguntar que ocurre si aún no se ha registrado isGanador
-	--Posiblemente tendre que hacer una comprobación y devolver -1 si aun no se sabe el resultado de la apuesta
-	if @isGanador = 0--Supongo que 0 significa que se ha ganado la apuesta
-	BEGIN
-		SET @apuestaGanada = 0
-		SET @capital = (SELECT DineroApostado * Cuota FROM Apuestas WHERE ID = @idApuesta) 
-	END
-	ELSE
-	BEGIN
-		SET @apuestaGanada = 1
-		SET @capital = (SELECT DineroApostado FROM Apuestas WHERE ID = @idApuesta)
-	END
+	--if @isGanador = 1--Supongo que 1 significa que se ha ganado la apuesta
+	--BEGIN
+	--	SET @apuestaGanada = 1
+	--	SET @capital = (SELECT DineroApostado * Cuota FROM Apuestas WHERE ID = @idApuesta) 
+	--END
+	--ELSE
+	--BEGIN
+	--	SET @apuestaGanada = 0
+	--	SET @capital = (SELECT DineroApostado FROM Apuestas WHERE ID = @idApuesta)
+	--END
 END
 GO
 
