@@ -38,4 +38,11 @@ public class Utilidades {
 
         return opcion;
     }
+
+    public boolean crearPartido(){
+        boolean ret = true;
+
+        return ret;
+    }
+
 }
