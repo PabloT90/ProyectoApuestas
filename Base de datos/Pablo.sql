@@ -33,10 +33,4 @@ BEGIN
 END
 GO
 
-
-GO
-CREATE FUNCTION verPartidosAbiertos AS
-
-GO
-
 SELECT * FROM Partidos
