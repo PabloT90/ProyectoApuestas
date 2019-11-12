@@ -1,14 +1,137 @@
+--Primera actividad:
+--T = total cantidad apostada de apuestas a un mismo partido y un mismo tipo de una apuesta determinada dada
+--F = total cantidad apostada de apuestas de un mismo partido con un mismo tipo y misma especificaciones del tipo de una apuesta determinada dada
 /*
 Interfaz
 Nombre: realizarApuesta
 Comentario: Este procedimiento nos permite realizar una apuesta.
 Dentro de este procedimiento se llama a la función obtenerCuota.
-Cabecera: procedure realizarApuesta()
+Cabecera: procedure realizarApuesta(@FechaHora smalldatetime, @CapitalAApostar smallmoney, @Correo char(30), @IdPartido, @IdTipo tinyint)
+Postcondiciones: El procedimiento nos permite realizar una apuesta. El procedimiento
+devuelve 0 si se ha realizado correctamente la apuesta, -1 si el partido no existe, -2
+si el correo de usuario es incorrecto o 3 si el capital es negativo o igual a 0.
 */
 
---Primera actividad:
---T = total cantidad apostada de apuestas a un mismo partido y un mismo tipo de una apuesta determinada dada
---F = total cantidad apostada de apuestas de un mismo partido con un mismo tipo y misma especificaciones del tipo de una apuesta determinada dada
+
+/*
+Nombre: realizarApuestaTipo1
+Comentario: Este procedimiento nos permite realizar una apuesta del tipo 1.
+Dentro de este procedimiento se llama a la función obtenerCuota.
+Cabecera: procedure realizarApuesta(@FechaHora smalldatetime, @CapitalAApostar smallmoney, @Correo char(30), @IdPartido uniqueidentifier, @NumGolesLocal tinyint, @NumGolesVisitante tinyint, @Error tinyint)
+Postcondiciones: El procedimiento nos permite realizar una apuesta del tipo 1. El procedimiento
+devuelve 0 si se ha realizado correctamente la apuesta, -1 si el correo es incorrecto, -2
+si el partido no existe, -3 si el capital es negativo o igual a 0, -4 si el
+número de goles locales en menor que 0 o -5 si el número de goles del visitante es menor que 0.
+*/
+CREATE PROCEDURE realizarApuestaTipo1(@FechaHora smalldatetime, @CapitalAApostar smallmoney, @Correo char(30), @IdPartido uniqueidentifier, @NumGolesLocal tinyint, @NumGolesVisitante tinyint, @Error tinyint)
+AS
+BEGIN
+	IF EXISTS(SELECT * FROM Usuarios WHERE correo = @Correo)
+	BEGIN
+		IF EXISTS(SELECT * FROM Partidos WHERE id = @IdPartido)
+		BEGIN
+			IF @CapitalAApostar > 0
+			BEGIN
+				IF @NumGolesLocal >= 0
+				BEGIN
+					IF @NumGolesVisitante >= 0
+					BEGIN
+						
+						SET @Error = -0
+					END
+					ELSE
+					BEGIN
+						SET @Error = -5
+					END
+				END
+				ELSE
+				BEGIN
+					SET @Error = -4
+				END
+			END
+			ELSE
+			BEGIN
+				SET @Error = -3
+			END
+		END
+		ELSE
+		BEGIN
+			SET @Error = -2
+		END
+	END
+	ELSE
+	BEGIN
+		SET @Error = -1
+	END
+END
+
+/*
+Interfaz
+Nombre: obtenerCantidadApostada
+Comentario: Este método nos permite obtener el capital total apostado en
+un determinado partido con un tipo de apuesta específico.
+Cabecera: function obtenerCantidadApostada(@idPartido uniqueidentifier, @idTipoApuesta tinyint)
+Entrada:
+	-@idPartido uniqueidentifier
+	-@idTipoApuesta tinyint
+Salida:
+	-@CapitalTotalApostado smallmoney
+Postcondiciones: La función devuelve el capital total apostado para ese partido y ese tipo en concreto.
+*/
+GO
+CREATE FUNCTION obtenerCantidadApostada(@idPartido uniqueidentifier, @idTipoApuesta tinyint)
+RETURNS INT AS
+BEGIN
+	DECLARE @CapitalTotalApostado smallmoney
+
+	SELECT @CapitalTotalApostado = SUM(DineroApostado) FROM Apuestas WHERE IDPartido = @idPartido AND Tipo = @idTipoApuesta
+
+	RETURN @CapitalTotalApostado
+END
+GO
+
+/*
+Interfaz
+Nombre: obtenerCantidadApostada	//No valida hacer una por cada tipo de apuesta
+Comentario: Este método nos permite obtener el capital total apostado en
+un determinado partido con un tipo de apuesta específico y con las mismas especificaciones
+en el tipo de apuesta, es decir, para apuestas que tengan el mismo valor en el tipo. Todos
+estos datos son suministrados desde una apuesta concreta.
+Este método es utilizado en el método realizar apuesta.
+Cabecera: function obtenerCantidadApostada(@IdApuesta)
+Entrada:
+	-@idPartido uniqueidentifier
+	-@idTipoApuesta tinyint
+Salida:
+	-@CapitalTotalApostado smallmoney
+Postcondiciones: La función devuelve el capital total apostado para ese partido y ese tipo en concreto.
+*/
+GO
+CREATE FUNCTION obtenerCantidadApostadaTipoEspecifico(@idApuesta uniqueidentifier)
+RETURNS INT AS
+BEGIN
+	DECLARE @CapitalTotalApostado smallmoney
+	DECLARE @Tipo tinyint = (SELECT Tipo FROM Apuestas WHERE ID = @idApuesta) --Obtenemos el tipo de la apuesta
+	DECLARE @IdPartido uniqueidentifier = (SELECT IDPartido FROM Apuestas WHERE ID = @idApuesta)--Obtenemos el id del partido
+	
+	SELECT @CapitalTotalApostado =
+		CASE @Tipo
+			WHEN 1 THEN (SELECT SUM(DineroApostado) FROM Apuestas AS [A] 
+							INNER JOIN ApuestaTipo1 AS [T1] ON A.ID = T1.id
+								WHERE A.IDPartido = @IdPartido AND T1.NumGolesLocal = (SELECT NumGolesLocal FROM ApuestaTipo1 WHERE ID = @idApuesta)
+								AND T1.numGolesVisitante = (SELECT numGolesVisitante FROM ApuestaTipo1 WHERE ID = @idApuesta))
+			WHEN 2 THEN (SELECT SUM(DineroApostado) FROM Apuestas AS [A] 
+							INNER JOIN ApuestaTipo2 AS [T2] ON A.ID = T2.id
+								WHERE A.IDPartido = @IdPartido AND T2.equipo = (SELECT equipo FROM ApuestaTipo2 WHERE ID = @idApuesta)
+								AND T2.goles = (SELECT goles FROM ApuestaTipo2 WHERE ID = @idApuesta))
+			WHEN 3 THEN (SELECT SUM(DineroApostado) FROM Apuestas AS [A] 
+							INNER JOIN ApuestaTipo3 AS [T3] ON A.ID = T3.id
+								WHERE A.IDPartido = @IdPartido AND T3.ganador = (SELECT ganador FROM ApuestaTipo3 WHERE ID = @idApuesta))
+		END
+
+	RETURN @CapitalTotalApostado
+END
+GO
 
 /*
 Interfaz
