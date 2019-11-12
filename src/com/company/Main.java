@@ -25,12 +25,15 @@ public class Main {
             while((opcionMenu = UtilidadesUser.MostrarMenuLeerValidarOpcion()) != 0){
                 switch(opcionMenu){
                     case 1: //Apostar partidos
-                        
+                        if(true) { //Este tiene que ser si hay algun partido al que apostar.
+                            UtilidadesComunes.leerIDpartido();
+                            System.out.println("Habia alguno");
+                        }
                         break;
                     case 2://Ver partidos disponibles
                         UtilidadesComunes.verPartidosDisponiblesParaApostar();
                         break;
-                    case 3: //Co probar resultados de apuestas anteriores
+                    case 3: //Comprobar resultados de apuestas anteriores
 
                         break;
                     case 4: //Realizar ingreso

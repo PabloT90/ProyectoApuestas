@@ -78,4 +78,18 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/Gestion/UtilidadesComunes.java</url>
+          <line>62</line>
+          <properties class="Gestion.UtilidadesComunes" method="partidoEncontrado">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
 </project>
