@@ -1,6 +1,7 @@
 package com.company;
 import Gestion.Admin.Utilidades;
 import Gestion.User.UtilidadesUser;
+import Gestion.UtilidadesComunes;
 
 /*
 si quiere ejecutar
@@ -27,7 +28,7 @@ public class Main {
                         
                         break;
                     case 2://Ver partidos disponibles
-
+                        UtilidadesComunes.verPartidosDisponiblesParaApostar();
                         break;
                     case 3: //Co probar resultados de apuestas anteriores
 
