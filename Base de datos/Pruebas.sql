@@ -54,7 +54,6 @@ Insert into Apuestas values(NEWID(),5.2,'2019-9-11 10:01:00',5.5,'sulviagurdillo
 
 INSERT INTO Apuestas VALUES(NEWID(),2.8,'2019-10-11 10:00:00', 2.9,'decisiones@gmail.com',(Select id From Partidos WHERE resultadoVisitante = 2),2,1)
 
-
 Rollback 
 Commit
 
@@ -63,12 +62,34 @@ Commit
 SELECT * FROM dbo.obtenerPartidosDisponiblesParaApostar()
 
 --Procediemiento comprobarResultadoDeUnaApuesta
-DISABLE dbo.noSeAceptanModificaciones On DATABASE
-DELETE FROM Apuestas 
-SELECT * FROM Apuestas
+--DISABLE TRIGGER dbo.noSeAceptanModificaciones On dbo.Apuestas
+DELETE FROM Usuarios 
+SELECT * FROM Usuarios
+--TIPOS Y NO SALE DINERO
 declare @ganada bit
 declare @dineros smallmoney
 declare @id uniqueidentifier
+--ALTER Table Usuarios
+--Alter COLUMN saldoActual smallmoney
+
+--Alter table Usuarios
+--DROP CONSTRAINT CK_SaldoActual
+--El correo electronico tiene un char(30) y no un varchar
 Set @id =(SELECT ID FROM Apuestas Where CorreoUsuario = 'decisiones@gmail.com')
 EXECUTE dbo.comprobarResultadoDeUnaApuesta @id,@ganada,@dineros
-SELECT @ganada AS [Hola], @dineros as [que]
+SELECT @ganada, @dineros
+
+--Procedure ingresoACuenta
+Declare @resultado as tinyint
+EXECUTE dbo.ingresoACuenta 'sulviagurdillo@gmail.com',500,@resultado
+Select @resultado
+GO
+Declare @resultado as tinyint
+EXECUTE dbo.ingresoACuenta 'silviagurdillo@gmail.com',500,@resultado
+Select @resultado
+GO
+Declare @resultado as tinyint
+EXECUTE dbo.ingresoACuenta 'sulviagurdillo@gmail.com',0,@resultado
+Select @resultado
+Select * From Cuentas
+--El saldoActual del usuario es int
