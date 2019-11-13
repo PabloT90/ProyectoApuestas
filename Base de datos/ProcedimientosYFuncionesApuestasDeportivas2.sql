@@ -17,13 +17,22 @@ si el correo de usuario es incorrecto o 3 si el capital es negativo o igual a 0.
 Nombre: realizarApuestaTipo1
 Comentario: Este procedimiento nos permite realizar una apuesta del tipo 1.
 Dentro de este procedimiento se llama a la función obtenerCuota.
-Cabecera: procedure realizarApuesta(@FechaHora smalldatetime, @CapitalAApostar smallmoney, @Correo char(30), @IdPartido uniqueidentifier, @NumGolesLocal tinyint, @NumGolesVisitante tinyint, @Error tinyint)
+Cabecera: procedure realizarApuesta(@FechaHora smalldatetime, @CapitalAApostar smallmoney, @Correo char(30), @IdPartido uniqueidentifier, @NumGolesLocal tinyint, @NumGolesVisitante tinyint, @Error smallint)
+Entradas:
+	-@FechaHora smalldatetime
+	-@CapitalAApostar smallmoney
+	-@Correo char(30)
+	-@IdPartido uniqueidentifier
+	-@NumGolesLocal tinyint
+	-@NumGolesVisitante tinyint
+Salidas:
+	-@Error smallint
 Postcondiciones: El procedimiento nos permite realizar una apuesta del tipo 1. El procedimiento
 devuelve 0 si se ha realizado correctamente la apuesta, -1 si el correo es incorrecto, -2
 si el partido no existe, -3 si el capital es negativo o igual a 0, -4 si el
 número de goles locales en menor que 0 o -5 si el número de goles del visitante es menor que 0.
 */
-CREATE PROCEDURE realizarApuestaTipo1(@FechaHora smalldatetime, @CapitalAApostar smallmoney, @Correo char(30), @IdPartido uniqueidentifier, @NumGolesLocal tinyint, @NumGolesVisitante tinyint, @Error tinyint)
+CREATE PROCEDURE realizarApuestaTipo1(@FechaHora smalldatetime, @CapitalAApostar smallmoney, @Correo char(30), @IdPartido uniqueidentifier, @NumGolesLocal tinyint, @NumGolesVisitante tinyint, @Error smallint OUTPUT)
 AS
 BEGIN
 	IF EXISTS(SELECT * FROM Usuarios WHERE correo = @Correo)
@@ -204,24 +213,24 @@ Nombre: comprobarResultadoDeUnaApuesta
 Comentario: Este método nos permite comprobar el resultado de una apuesta.
 El método nos devuelve si la apuesta ha sigo ganadora y el capital ganado o perdido
 dependiendo de si se ha ganado la apuesta.
-Cabecera: function comprobarResultadoDeUnaApuesta(@idApuesta uniqueidentifier, @apuestaGanada bit OUTPUT, @capital smallmoney OUTPUT)
+Cabecera: function comprobarResultadoDeUnaApuesta(@idApuesta uniqueidentifier, @apuestaGanada smallint OUTPUT, @capital smallmoney OUTPUT)
 Entrada:
 	-@idApuesta uniqueidentifier
 Salida:
-	-@apuestaGanada bit OUTPUT
+	-@apuestaGanada smallint OUTPUT
 	-@capital smallmoney OUTPUT
 Postcondiciones: Si la apuesta es ganadora la función devuelve 0 y el capital ganado, si la apuesta es perdedora devuelve 1 y el capital perdido y si el partido aun no ha finalizado
 se devuelve -1 y un capital de 0.
 */
-CREATE PROCEDURE comprobarResultadoDeUnaApuesta(@idApuesta uniqueidentifier, @apuestaGanada bit OUTPUT, @capital smallmoney OUTPUT)
+ALTER PROCEDURE comprobarResultadoDeUnaApuesta(@idApuesta uniqueidentifier, @apuestaGanada smallint OUTPUT, @capital smallmoney OUTPUT)
 AS	--Creo un procedimiento porque tengo que devolver dos resultados, no creo una función de multiples instrucciones porque solo devolvería una fila.
 BEGIN
-	DECLARE @isGanador bit --= (SELECT IsGanador FROM Apuestas WHERE ID = @idApuesta)
+	--DECLARE @isGanador smallint --= (SELECT IsGanador FROM Apuestas WHERE ID = @idApuesta)
 	--Obtenemos como va el partido, si ha gnado, perdido o si aún no se ha asignado el resultado.
-	SELECT @isGanador = ISNULL(IsGanador, -1) FROM Apuestas WHERE ID = @idApuesta
+	SELECT @apuestaGanada = ISNULL(IsGanador, -1) FROM Apuestas WHERE ID = @idApuesta
 	
-	SELECT @isGanador,
-	CASE @capital
+	SELECT @capital =
+	CASE @apuestaGanada
 	  WHEN 1 THEN (SELECT DineroApostado * Cuota FROM Apuestas WHERE ID = @idApuesta)
 	  WHEN 2 THEN (SELECT DineroApostado FROM Apuestas WHERE ID = @idApuesta)
 	  ELSE 0
@@ -245,16 +254,16 @@ GO
 Interfaz
 Nombre: ingresoACuenta
 Comentario: Este método nos permite ingresar un capital a la cuenta de un usuario.
-Cabecera: procedure ingresoACuenta (@CorreoUsuario varchar(30), @ingreso smallmoney, @resultadoIngreso tinyint OUTPUT)
+Cabecera: procedure ingresoACuenta (@CorreoUsuario varchar(30), @ingreso smallmoney, @resultadoIngreso smallint OUTPUT)
 Entrada:
 	-@CorreoUsuario varchar(30)
 	-@ingreso smallmoney
 Salida:
-	-@resultadoIngreso tinyint
+	-@resultadoIngreso smallint
 Postcondiciones: El procedimiento devuelve 0 si se ha conseguido realizar el ingreso, -1
 si el correo es incorrecto o -2 si el ingreso es negativo o igual a 0.
 */
-CREATE PROCEDURE ingresoACuenta (@CorreoUsuario varchar(30), @ingreso smallmoney, @resultadoIngreso tinyint OUTPUT)
+Alter PROCEDURE ingresoACuenta (@CorreoUsuario varchar(30), @ingreso smallmoney, @resultadoIngreso smallint OUTPUT)
 AS
 BEGIN
 	IF EXISTS(SELECT * FROM Usuarios WHERE correo = @CorreoUsuario)
@@ -289,11 +298,11 @@ Entrada:
 	-@CorreoUsuario varchar(30)
 	-@capitalARetirar smallmoney
 Salida:
-	-@resultadoTransaccion tinyint
+	-@resultadoTransaccion smallint
 Postcondiciones: El procedimiento devuelve 0 si se ha conseguido realizar la transacción, -1
 si el correo es incorrecto, -2 si el capitalARetirar es negativo o igual a 0 o -3 si capitalARetirar es superior al saldo del usuario.
 */
-CREATE PROCEDURE retirarCapitalCuenta (@CorreoUsuario varchar(30), @capitalARetirar smallmoney, @resultadoIngreso tinyint OUTPUT)
+alter PROCEDURE retirarCapitalCuenta (@CorreoUsuario varchar(30), @capitalARetirar smallmoney, @resultadoIngreso smallint OUTPUT)
 AS
 BEGIN
 	IF EXISTS(SELECT * FROM Usuarios WHERE correo = @CorreoUsuario)

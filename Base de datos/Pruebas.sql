@@ -65,77 +65,80 @@ SELECT * FROM dbo.obtenerPartidosDisponiblesParaApostar()
 --DISABLE TRIGGER dbo.noSeAceptanModificaciones On dbo.Apuestas
 DELETE FROM Usuarios 
 SELECT * FROM Usuarios
+
+
 --ALTER Table Usuarios
 --Alter COLUMN saldoActual smallmoney
 
 --Alter table Usuarios
 --DROP CONSTRAINT CK_SaldoActual
 --El correo electronico tiene un char(30) y no un varchar
+SELECT * FROM Apuestas
 
 
---Sale null
-declare @ganada bit
+declare @ganada smallint
 declare @dineros smallmoney
 declare @id uniqueidentifier
-Set @id =(SELECT ID FROM Apuestas Where CorreoUsuario = 'decisionesdificile@gmail.com')
-EXECUTE dbo.comprobarResultadoDeUnaApuesta @id,@ganada,@dineros
-SELECT @ganada, @dineros
+Set @id =(SELECT ID FROM Apuestas Where CorreoUsuario = 'decisiones@gmail.com')
+EXECUTE dbo.comprobarResultadoDeUnaApuesta @id,@ganada OUTPUT,@dineros OUTPUT
+SELECT @ganada AS ganado, @dineros as dinero
 
 --Procedure ingresoACuenta
 
---Creo que funciona bien tiene que dar 0
-Declare @resultado as tinyint
-EXECUTE dbo.ingresoACuenta 'sulviagurdilloabcdef@gmail.com',500,@resultado
+
+Declare @resultado as smallint
+EXECUTE dbo.ingresoACuenta 'sulviagurdillo@gmail.com',500,@resultado OUTPUT
+Select @resultado
+GO
+ALTER TABLE CUENTAS
+ALTER COLUMN saldo smallmoney
+
+
+Declare @resultado as smallint
+EXECUTE dbo.ingresoACuenta 'silviagurdillo@gmail.com',500,@resultado OUTPUT
 Select @resultado
 GO
 
---Desbordamiento aritmetico tendria que dar -1
-Declare @resultado as tinyint
-EXECUTE dbo.ingresoACuenta 'silviagurdillo@gmail.com',500,@resultado
-Select @resultado
-GO
 
---Desbordamiento aritmetico tendra que dar -2
-Declare @resultado as tinyint
-EXECUTE dbo.ingresoACuenta 'sulviagurdilloabcdef@gmail.com',0,@resultado
-Select @resultado
+Declare @resultado as smallint
+EXECUTE dbo.ingresoACuenta 'sulviagurdillo@gmail.com',0,@resultado OUTPUT
+SELECT  @resultado
 Select * From Cuentas
 --El saldoActual del usuario es int
 
 --Procedure retirarCapitalCuenta
 --Resultado me devuelve null pero si que se retira el dinero
 GO
-DECLARE @resultado tinyint
+DECLARE @resultado smallint
 DECLARE @retirado Smallmoney
 SET @retirado = 10.5
-EXECUTE dbo.retirarCapitalCuenta 'decisionesdificile@gmail.com',@retirado,@resultado
+EXECUTE dbo.retirarCapitalCuenta 'decisiones@gmail.com',@retirado,@resultado OUTPUT
 SELECT @resultado as resultado
 Select * From Cuentas
 
---Desbordamiento aritmético tiene que dar -1
+
 GO
-DECLARE @resultado tinyint
+DECLARE @resultado smallint
 DECLARE @retirado Smallmoney
-SET @retirado = 10.5
-EXECUTE dbo.retirarCapitalCuenta 'decioionesdificile@gmail.com',@retirado,@resultado
+SET @retirado = 10.5 
+EXECUTE dbo.retirarCapitalCuenta 'decioionesdificile@gmail.com',@retirado,@resultado OUTPUT
 SELECT @resultado as resultado
 
---Desbordamiento aritmético tiene que dar -2
 GO
-DECLARE @resultado tinyint
+DECLARE @resultado smallint
 DECLARE @retirado Smallmoney
 SET @retirado = 0
-EXECUTE dbo.retirarCapitalCuenta 'decisionesdificile@gmail.com',@retirado,@resultado
+EXECUTE dbo.retirarCapitalCuenta 'decisiones@gmail.com',@retirado,@resultado OUTPUT
 SELECT @resultado as resultado
 
 SELECT * FROM Usuarios
 
---Desbordamiento aritmético tiene que dar -3
+
 GO
-DECLARE @resultado tinyint
+DECLARE @resultado smallint
 DECLARE @retirado Smallmoney
 SET @retirado = 1000
-EXECUTE dbo.retirarCapitalCuenta 'decisionesdificile@gmail.com',@retirado,@resultado
+EXECUTE dbo.retirarCapitalCuenta 'decisiones@gmail.com',@retirado,@resultado OUTPUT
 SELECT @resultado as resultado
 
 --Funcion obtenerCantidadApostadaTipoEspecifico
