@@ -19,7 +19,7 @@
     <setting file="file://$PROJECT_DIR$/src/com/company/Main.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Gestion/UtilidadesComunes.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/com/company/MainAdministradores.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Gestion/Admin/Utilidades.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Gestion/Admin/UtilidadesAdmin.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectId" id="1TKJg7mfOEeQUtCLUB33qhbOqem" />
   <component name="PropertiesComponent">
@@ -77,19 +77,5 @@
         <item itemvalue="Application.MainAdministradores" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/Gestion/UtilidadesComunes.java</url>
-          <line>62</line>
-          <properties class="Gestion.UtilidadesComunes" method="partidoEncontrado">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

@@ -1,5 +1,5 @@
 package com.company;
-import Gestion.Admin.Utilidades;
+import Gestion.Admin.UtilidadesAdmin;
 import Gestion.User.UtilidadesUser;
 import Gestion.UtilidadesComunes;
 
@@ -21,7 +21,7 @@ public class Main {
     public static void main(String[] args) {
         int opcionMenu = 0;
 
-        if(Utilidades.leerValidarEjecutar() == 's'){
+        if(UtilidadesAdmin.leerValidarEjecutar() == 's'){
             while((opcionMenu = UtilidadesUser.MostrarMenuLeerValidarOpcion()) != 0){
                 switch(opcionMenu){
                     case 1: //Apostar partidos

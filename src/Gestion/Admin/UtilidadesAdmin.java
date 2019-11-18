@@ -2,7 +2,7 @@ package Gestion.Admin;
 
 import java.util.Scanner;
 
-public class Utilidades {
+public class UtilidadesAdmin {
     /**
      * Lee y valida si el usuario quiere ejecutar una aplicacion.
      */

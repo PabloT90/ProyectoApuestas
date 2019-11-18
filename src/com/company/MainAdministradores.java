@@ -1,7 +1,6 @@
 package com.company;
 
-import Gestion.Admin.Utilidades;
-import java.util.Scanner;
+import Gestion.Admin.UtilidadesAdmin;
 
 /*
 si quiere ejecutar
@@ -20,8 +19,8 @@ public class MainAdministradores {
     public static void main(String[]args){
         int opcionMenu = 0;
 
-        if(Utilidades.leerValidarEjecutar() == 's') {
-            while ((opcionMenu = Utilidades.MostrarMenuLeerValidarOpcion()) != 0) {
+        if(UtilidadesAdmin.leerValidarEjecutar() == 's') {
+            while ((opcionMenu = UtilidadesAdmin.MostrarMenuLeerValidarOpcion()) != 0) {
                 switch (opcionMenu) {
                     case 1: //Crear partido
 

@@ -43,7 +43,7 @@ public class UtilidadesComunes {
 
             // Mostrar los datos del ResultSet
             while (partidos.next()) {
-                System.out.println(partidos.getInt("ID") + " -> " + partidos.getTimestamp("Fecha"));
+                System.out.println(partidos.getString("ID") + " -> " + partidos.getTimestamp("fechaPartido"));
             }
 
             // Cerrar conexion
@@ -84,7 +84,6 @@ public class UtilidadesComunes {
                 if(partidos.next()){ //Si tiene una fila
                     ret = true;
                 }
-
                 // Cerrar conexion
                 connexionBaseDatos.close();
             } catch (ClassNotFoundException cnfe) {
