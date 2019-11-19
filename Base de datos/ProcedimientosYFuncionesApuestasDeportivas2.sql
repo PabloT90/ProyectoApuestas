@@ -35,7 +35,7 @@ BEGIN
 				BEGIN
 					IF @NumGolesVisitante >= 0
 					BEGIN
-						
+						INSERT INTO Apuestas VALUES(dbo.obtenerCuotaTipo1(@IdPartido, @CapitalAApostar, @NumGolesLocal, @NumGolesVisitante), CURRENT_TIMESTAMP, @CapitalAApostar, @Correo, @IdPartido, 1, null)  
 						SET @Error = -0
 					END
 					ELSE
@@ -65,6 +65,125 @@ BEGIN
 END
 
 GO
+
+/*
+Nombre: realizarApuestaTipo2
+Comentario: Este procedimiento nos permite realizar una apuesta del tipo 2.
+Dentro de este procedimiento se llama a la función obtenerCuota.
+Cabecera: procedure realizarApuesta(@FechaHora smalldatetime, @CapitalAApostar smallmoney, @Correo char(30), @IdPartido uniqueidentifier, @NumGolesLocal tinyint, @NumGolesVisitante tinyint, @Error smallint)
+Entradas:
+	-@FechaHora smalldatetime
+	-@CapitalAApostar smallmoney
+	-@Correo char(30)
+	-@Equipo varchar(10) 
+	-@Goles tinyint
+	-@NumGolesVisitante tinyint
+Salidas:
+	-@Error smallint
+Postcondiciones: El procedimiento nos permite realizar una apuesta del tipo 2. El procedimiento
+devuelve 0 si se ha realizado correctamente la apuesta, -1 si el correo es incorrecto, -2
+si el partido no existe, -3 si el capital es negativo o igual a 0, -4 si el
+equipo no es igual a 'local' o 'visitante' o -5 si el número de goles es menor que 0.
+*/
+CREATE PROCEDURE realizarApuestaTipo2(@FechaHora smalldatetime, @CapitalAApostar smallmoney, @Correo char(30), @IdPartido uniqueidentifier, @Equipo varchar(10), @Goles tinyint, @Error smallint OUTPUT)
+AS
+BEGIN
+	IF EXISTS(SELECT * FROM Usuarios WHERE correo = @Correo)
+	BEGIN
+		IF EXISTS(SELECT * FROM Partidos WHERE id = @IdPartido)
+		BEGIN
+			IF @CapitalAApostar > 0
+			BEGIN
+				IF @Equipo = 'local' OR @Equipo = 'visitante'
+				BEGIN
+					IF @Goles >= 0
+					BEGIN
+						INSERT INTO Apuestas VALUES(dbo.obtenerCuotaTipo2(@IdPartido, @CapitalAApostar, @Equipo, @Goles), CURRENT_TIMESTAMP, @CapitalAApostar, @Correo, @IdPartido, 1, null)  
+						SET @Error = -0
+					END
+					ELSE
+					BEGIN
+						SET @Error = -5
+					END
+				END
+				ELSE
+				BEGIN
+					SET @Error = -4
+				END
+			END
+			ELSE
+			BEGIN
+				SET @Error = -3
+			END
+		END
+		ELSE
+		BEGIN
+			SET @Error = -2
+		END
+	END
+	ELSE
+	BEGIN
+		SET @Error = -1
+	END
+END
+
+GO
+
+/*
+Nombre: realizarApuestaTipo3
+Comentario: Este procedimiento nos permite realizar una apuesta del tipo 3.
+Dentro de este procedimiento se llama a la función obtenerCuota.
+Cabecera: procedure realizarApuesta(@FechaHora smalldatetime, @CapitalAApostar smallmoney, @Correo char(30), @IdPartido uniqueidentifier, @NumGolesLocal tinyint, @NumGolesVisitante tinyint, @Error smallint)
+Entradas:
+	-@FechaHora smalldatetime
+	-@CapitalAApostar smallmoney
+	-@Correo char(30)
+	-@Equipo varchar(10) 
+	-@Ganador varchar(15)
+Salidas:
+	-@Error smallint
+Postcondiciones: El procedimiento nos permite realizar una apuesta del tipo 2. El procedimiento
+devuelve 0 si se ha realizado correctamente la apuesta, -1 si el correo es incorrecto, -2
+si el partido no existe, -3 si el capital es negativo o igual a 0, -4 si el
+el ganador es diferente de 'local' o 'visitante'.
+*/
+CREATE PROCEDURE realizarApuestaTipo3(@FechaHora smalldatetime, @CapitalAApostar smallmoney, @Correo char(30), @IdPartido uniqueidentifier, @Ganador varchar(15), @Error smallint OUTPUT)
+AS
+BEGIN
+	IF EXISTS(SELECT * FROM Usuarios WHERE correo = @Correo)
+	BEGIN
+		IF EXISTS(SELECT * FROM Partidos WHERE id = @IdPartido)
+		BEGIN
+			IF @CapitalAApostar > 0
+			BEGIN
+				IF @Ganador = 'local' OR @Ganador = 'visitante'
+				BEGIN
+					INSERT INTO Apuestas VALUES(dbo.obtenerCuotaTipo2(@IdPartido, @CapitalAApostar, @Equipo, @Goles), CURRENT_TIMESTAMP, @CapitalAApostar, @Correo, @IdPartido, 1, null)  
+					SET @Error = -0
+				END
+				ELSE
+				BEGIN
+					SET @Error = -4
+				END
+			END
+			ELSE
+			BEGIN
+				SET @Error = -3
+			END
+		END
+		ELSE
+		BEGIN
+			SET @Error = -2
+		END
+	END
+	ELSE
+	BEGIN
+		SET @Error = -1
+	END
+END
+
+GO
+
 /*
 Interfaz
 Nombre: obtenerCuotaTipo1
@@ -89,8 +208,85 @@ BEGIN
 	END
 	ELSE
 	BEGIN
-		DECLARE @T smallmoney = (SELECT * FROM obtenerParametroT(@IdPartido, 1))
-		DECLARE @F smallmoney = (SELECT * FROM obtenerTipo1ParametroF(@IdPartido, @NumGolesLocal, @NumGolesVisitante))
+		DECLARE @T smallmoney = (dbo.obtenerParametroT(@IdPartido, 1))
+		DECLARE @F smallmoney = (dbo.obtenerTipo1ParametroF(@IdPartido, @NumGolesLocal, @NumGolesVisitante))
+		SET @Cuota = ((@T/@F)-1)*8.0
+		IF @Cuota < 1.5
+		BEGIN
+			SET @Cuota = -1
+		END
+	END
+
+	RETURN @Cuota
+END
+
+GO
+
+GO
+/*
+Interfaz
+Nombre: obtenerCuotaTipo2
+Comentario: Este método nos permite obtener una cuota para una puesta del tipo 2 en un determinado partido.
+Cabecera: function obtenerCuotaTipo2(@IdPartido uniqueidentifier, @CantidadApostada smallmoney, @Equipo varchar(10), @Goles tinyint)
+Entrada:
+	-@IdPartido uniqueidentifier
+	-@CantidadApostada smallmoney
+	-@Equipo varchar(10)
+	-@Goles tinyint
+Salida:
+	-@Cuota decimal(6,2)
+Postcondiciones: Si la cuota obtenida es menor que 1,5 la función devuelve -1.
+*/
+CREATE FUNCTION obtenerCuotaTipo2(@IdPartido uniqueidentifier, @CantidadApostada smallmoney, @Equipo varchar(10), @Goles tinyint) RETURNS decimal(6, 2)
+BEGIN
+	DECLARE @Cuota decimal(6,2)
+
+	IF @CantidadApostada < 40
+	BEGIN
+		SET @Cuota = 4;
+	END
+	ELSE
+	BEGIN
+		DECLARE @T smallmoney = (dbo.obtenerParametroT(@IdPartido, 1))
+		DECLARE @F smallmoney = (dbo.obtenerTipo2ParametroF(@IdPartido, @Equipo, @Goles))
+		SET @Cuota = ((@T/@F)-1)*8.0
+		IF @Cuota < 1.5
+		BEGIN
+			SET @Cuota = -1
+		END
+	END
+
+	RETURN @Cuota
+END
+
+GO
+
+GO
+/*
+Interfaz
+Nombre: obtenerCuotaTipo3
+Comentario: Este método nos permite obtener una cuota para una puesta del tipo 3 en un determinado partido.
+Cabecera: function obtenerCuotaTipo3(@IdPartido uniqueidentifier, @CantidadApostada smallmoney, @Ganador varchar(15))
+Entrada:
+	-@IdPartido uniqueidentifier
+	-@CantidadApostada smallmoney
+	-@Ganador varchar(15)
+Salida:
+	-@Cuota decimal(6,2)
+Postcondiciones: Si la cuota obtenida es menor que 1,5 la función devuelve -1.
+*/
+CREATE FUNCTION obtenerCuotaTipo3(@IdPartido uniqueidentifier, @CantidadApostada smallmoney, @Ganador varchar(15)) RETURNS decimal(6, 2)
+BEGIN
+	DECLARE @Cuota decimal(6,2)
+
+	IF @CantidadApostada < 40
+	BEGIN
+		SET @Cuota = 4;
+	END
+	ELSE
+	BEGIN
+		DECLARE @T smallmoney = (dbo.obtenerParametroT(@IdPartido, 1))
+		DECLARE @F smallmoney = (dbo.obtenerTipo3ParametroF(@IdPartido, @Ganador))
 		SET @Cuota = ((@T/@F)-1)*8.0
 		IF @Cuota < 1.5
 		BEGIN
@@ -108,7 +304,7 @@ GO
 Interfaz
 Nombre: obtenerTipo1ParametroF
 Comentario: Este método nos permite obtener el parámetro F para el método obtenerCuotaTipo1.
-Cabecera: function obtenerTipo1ParametroT (@IdPartido uniqueidentifier, @NumGolesLocal tinyint, @NumGolesVisitante tinyint)
+Cabecera: function obtenerTipo1ParametroF (@IdPartido uniqueidentifier, @NumGolesLocal tinyint, @NumGolesVisitante tinyint)
 Entrada:
 	-@IdPartido uniqueidentifier
 	-@NumGolesLocal tinyint
@@ -124,6 +320,57 @@ BEGIN
 	(SELECT SUM (A.DineroApostado) FROM Apuestas AS [A]
 		INNER JOIN ApuestaTipo1 AS [T1] ON A.ID = T1.id
 		WHERE T1.NumGolesLocal = @NumGolesLocal AND T1.numGolesVisitante = @NumGolesVisitante)
+
+	RETURN @CantidadApostada
+END
+GO
+
+GO
+/*
+Interfaz
+Nombre: obtenerTipo2ParametroF
+Comentario: Este método nos permite obtener el parámetro F para el método obtenerCuotaTipo2.
+Cabecera: function obtenerTipo2ParametroF (@IdPartido uniqueidentifier, @NumGolesLocal tinyint, @NumGolesVisitante tinyint)
+Entrada:
+	-@IdPartido uniqueidentifier
+	-@Equipo varchar(10)
+	-@Goles tinyint
+Salida:
+	-@CantidadApostada smallmoney
+Postcondiciones: El método devuelve la cantidad apostada para apuestas iguales a las que estamos grabando.
+*/
+CREATE FUNCTION obtenerTipo2ParametroF (@IdPartido uniqueidentifier, @Equipo varchar(10), @Goles tinyint) RETURNS smallmoney
+BEGIN
+	DECLARE @CantidadApostada smallmoney
+	=
+	(SELECT SUM (A.DineroApostado) FROM Apuestas AS [A]
+		INNER JOIN ApuestaTipo2 AS [T2] ON A.ID = T2.id
+		WHERE T2.equipo = @Equipo AND T2.goles = @Goles)
+
+	RETURN @CantidadApostada
+END
+GO
+
+GO
+/*
+Interfaz
+Nombre: obtenerTipo3ParametroF
+Comentario: Este método nos permite obtener el parámetro F para el método obtenerCuotaTipo3.
+Cabecera: function obtenerTipo3ParametroF (@IdPartido uniqueidentifier, @Ganador varchar(15))
+Entrada:
+	-@IdPartido uniqueidentifier
+	-@Ganador varchar(15)
+Salida:
+	-@CantidadApostada smallmoney
+Postcondiciones: El método devuelve la cantidad apostada para apuestas iguales a las que estamos grabando.
+*/
+CREATE FUNCTION obtenerTipo3ParametroF (@IdPartido uniqueidentifier, @Ganador varchar(15)) RETURNS smallmoney
+BEGIN
+	DECLARE @CantidadApostada smallmoney
+	=
+	(SELECT SUM (A.DineroApostado) FROM Apuestas AS [A]
+		INNER JOIN ApuestaTipo3 AS [T3] ON A.ID = T3.id
+		WHERE T3.ganador = @Ganador)
 
 	RETURN @CantidadApostada
 END
