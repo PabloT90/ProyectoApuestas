@@ -32,7 +32,7 @@ public class UtilidadesComunes {
 
             // Define the data source for the driver
             String sourceURL = "jdbc:sqlserver://localhost";
-            String usuario = "manue";
+            String usuario = "pablo";
             String password = "qq";
             String miSelect = "SELECT ID, fechaPartido FROM Partidos WHERE isAbierto = 1";
 
@@ -71,7 +71,7 @@ public class UtilidadesComunes {
 
                 // Define the data source for the driver
                 String sourceURL = "jdbc:sqlserver://localhost";
-                String usuario = "manue";
+                String usuario = "pablo";
                 String password = "qq";
                 String miSelect = "SELECT id FROM Partidos where id = " +idPartido.toString();
 
@@ -95,4 +95,38 @@ public class UtilidadesComunes {
         return ret;
     }
 
+    public static boolean existenPartidos(){
+        boolean ret = false;
+
+        //Buscamos el partido
+        //Hacemos un SELECT con ese ID y si devuelve una fila es que existe.
+        try {
+            // Carga la clase del driver
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+            // Define the data source for the driver
+            String sourceURL = "jdbc:sqlserver://localhost";
+            String usuario = "pablo";
+            String password = "qq";
+            String miSelect = "SELECT * FROM Partidos";
+
+            // Crear una connexion con el DriverManager
+            Connection connexionBaseDatos = DriverManager.getConnection(sourceURL, usuario, password);
+            Statement sentencia = connexionBaseDatos.createStatement();
+            ResultSet partidos = sentencia.executeQuery(miSelect);
+
+            // Mostrar los datos del ResultSet
+            if(partidos.next()){ //Si tiene una fila
+                ret = true;
+            }
+            // Cerrar conexion
+            connexionBaseDatos.close();
+        } catch (ClassNotFoundException cnfe) {
+            System.err.println(cnfe);
+        } catch (SQLException sqle) {
+            System.err.println(sqle);
+        }
+
+        return ret;
+    }
 }
