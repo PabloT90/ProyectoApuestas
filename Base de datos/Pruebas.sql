@@ -145,5 +145,4 @@ SELECT @resultado as resultado
 
 --Funcion obtenerCantidadApostadaTipoEspecifico
 SELECT * FROM Apuestas
---Me da null pero puede ser problema mio mirar despues
-SELECT dbo.obtenerCantidadApostadaTipoEspecifico('F95768C6-D91A-4938-89D3-458C6F110120')
+
