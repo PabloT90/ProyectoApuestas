@@ -116,7 +116,7 @@ go
 CREATE TABLE Cuentas
 (
 	id INT IDENTITY(1,1) not null,
-	saldo INT NOT NULL,
+	saldo smallmoney NOT NULL,
 	fechaYHora SMALLDATETIME NOT NULL,
 	correoUsuario CHAR(30),
 
