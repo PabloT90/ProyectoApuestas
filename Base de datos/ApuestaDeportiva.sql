@@ -1,7 +1,8 @@
+
 create 
-database ApuestasDeportivas
+database PruebasPablo
 go
-use ApuestasDeportivas
+use PruebasPablo
 go
 
 CREATE TABLE Usuarios
@@ -17,7 +18,7 @@ go
 
 CREATE TABLE Competiciones
 (
-	id UNIQUEIDENTIFIER not null,
+	id int identity(1,1) not null,
 	nombre VARCHAR(20) NOT NULL,
 	año INT,
 
@@ -28,7 +29,7 @@ go
 
 CREATE TABLE Partidos
 (
-	id UNIQUEIDENTIFIER not null,
+	id int identity(1,1) not null,
 	resultadoLocal TINYINT null,
 	resultadoVisitante TINYINT null,
 	isAbierto BIT null,
@@ -36,7 +37,7 @@ CREATE TABLE Partidos
 	maxApuesta2 INT NOT NULL,
 	maxApuesta3 INT NOT NULL,
 	fechaPartido SMALLDATETIME null,
-	idCompeticion uniqueidentifier not null,
+	idCompeticion int not null,
 
 	---------------pk------------------------------------
 	constraint PK_Partidos PRIMARY KEY (id),
@@ -48,12 +49,12 @@ go
 
 
 CREATE TABLE Apuestas (
-	ID UNIQUEIDENTIFIER NOT NULL,
+	ID int identity(1,1) NOT NULL,
 	Cuota TINYINT NOT NULL,
 	FechaHoraApuesta SMALLDATETIME NOT NULL,
 	DineroApostado SMALLMONEY NOT NULL,
 	CorreoUsuario CHAR(30) NOT NULL,
-	IDPartido UNIQUEIDENTIFIER NOT NULL,
+	IDPartido int NOT NULL,
 	Tipo TINYINT NOT NULL,
 	IsGanador bit NULL,--1 si es ganador y 0 si no lo es
 
@@ -70,7 +71,7 @@ CREATE TABLE Apuestas (
 
 CREATE TABLE ApuestaTipo1
 (
-	id UNIQUEIDENTIFIER not null,
+	id int not null,
 	NumGolesLocal TINYINT NOT NULL,
 	numGolesVisitante TINYINT NOT NULL,
 
@@ -86,7 +87,7 @@ go
 
 CREATE TABLE ApuestaTipo2
 (	
-	id UNIQUEIDENTIFIER not null,
+	id int not null,
 	equipo VARCHAR(10) NOT NULL,
 	goles TINYINT NOT NULL,
 
@@ -101,7 +102,7 @@ go
 
 CREATE TABLE ApuestaTipo3
 (
-	id UNIQUEIDENTIFIER not null,
+	id int not null,
 	ganador VARCHAR(15) NOT NULL,
 
 	---------------pk------------------------------------

@@ -25,11 +25,12 @@ public class Main {
             while((opcionMenu = UtilidadesUser.MostrarMenuLeerValidarOpcion()) != 0){
                 switch(opcionMenu){
                     case 1: //Apostar partidos
-                        if(UtilidadesComunes.existenPartidos()) { //Si existe algun partido
-                            //Hay que comprobar que este abierto
-                            UtilidadesComunes.leerIDpartido();
+                        if(UtilidadesComunes.existenPartidosAbiertos()) { //Si existe algun partido abierto
+                            if(UtilidadesComunes.partidoAbierto(UtilidadesComunes.leerIDpartido())){ //Si el partido elegido es correcto, es decir, está abierto
+
+                            }
                         }else{
-                            System.out.println("No hay partidos.");
+                            System.out.println("No hay partidos abiertos para apostar.");
                         }
                         break;
                     case 2://Ver partidos disponibles
