@@ -19,15 +19,17 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/com/company/Main.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/com/company/MainUser.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Gestion/UtilidadesComunes.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/com/company/MainAdministradores.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Gestion/Admin/UtilidadesAdmin.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1TKJg7mfOEeQUtCLUB33qhbOqem" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Driver JDBC/sqljdbc_7.4/esn/mssql-jdbc-7.4.1.jre11.jar!/" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
@@ -48,9 +50,9 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.MainAdministradores">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="com.company.Main" />
+      <option name="MAIN_CLASS_NAME" value="com.company.MainUser" />
       <module name="untitled104" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <RunnerSettings RunnerId="Run" />
@@ -68,8 +70,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainAdministradores" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.MainAdministradores" />
       </list>
     </recent_temporary>
   </component>
@@ -95,7 +97,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

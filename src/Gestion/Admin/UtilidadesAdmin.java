@@ -37,7 +37,7 @@ public class UtilidadesAdmin {
             System.out.println("0) Salir.");
 
             opcion = teclado.nextInt();
-        }while(opcion < 0 && opcion > 5);
+        }while(opcion < 0 || opcion > 5);
 
         return opcion;
     }
@@ -53,10 +53,9 @@ public class UtilidadesAdmin {
      */
     public static boolean cerrarPartido(int idPartido){
         boolean ret = true;
-        int resul = 0;
+        int resul;
 
         try {
-
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
             // Define the data source for the driver
@@ -71,19 +70,12 @@ public class UtilidadesAdmin {
             resul = sentencia.executeUpdate(miUpdate);
 
             if (resul == 0){
-
                 ret = false;
-
             }
-
-        }
-        catch (SQLException | ClassNotFoundException e){
-
+        } catch (SQLException | ClassNotFoundException e){
             e.printStackTrace();
         }
-
         return  ret;
-
     }
 
 }

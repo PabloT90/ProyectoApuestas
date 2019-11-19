@@ -2,7 +2,6 @@ package com.company;
 import Gestion.Admin.UtilidadesAdmin;
 import Gestion.User.UtilidadesUser;
 import Gestion.UtilidadesComunes;
-
 /*
 si quiere ejecutar
     mientras no quiera salir (opcionMenu != 7)
@@ -17,7 +16,7 @@ si quiere ejecutar
     fin_mientras
 fin_si
 * */
-public class Main {
+public class MainUser {
     public static void main(String[] args) {
         int opcionMenu = 0;
 
@@ -42,10 +41,10 @@ public class Main {
 
                         break;
                     case 4: //Realizar ingreso
-
+                        //Llamar a la funcion sql (ingresoACuenta)
                         break;
                     case 5: //Retirar dinero
-
+                        //Llamar a la funcion sql (retirarCapitalCuenta)
                         break;
                     case 6: //Ver movimientos.
 
