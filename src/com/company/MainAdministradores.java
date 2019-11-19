@@ -1,6 +1,7 @@
 package com.company;
 
 import Gestion.Admin.UtilidadesAdmin;
+import Gestion.UtilidadesComunes;
 
 /*
 si quiere ejecutar
@@ -17,7 +18,7 @@ fin_si
  */
 public class MainAdministradores {
     public static void main(String[]args){
-        int opcionMenu = 0;
+        int opcionMenu = 0, idPartido = 0;
 
         if(UtilidadesAdmin.leerValidarEjecutar() == 's') {
             while ((opcionMenu = UtilidadesAdmin.MostrarMenuLeerValidarOpcion()) != 0) {
@@ -29,6 +30,14 @@ public class MainAdministradores {
 
                         break;
                     case 3: //Cerrar partido
+                        idPartido = UtilidadesComunes.leerIDpartido();
+
+                        if (!UtilidadesAdmin.cerrarPartido(idPartido)){
+
+                            System.out.println("Ha ocurrido un error");
+
+                        }
+
 
                         break;
                     case 4: //Consultar apuestas partido

@@ -80,7 +80,7 @@ select * from Partidos
 
 --Funcion al que pasaremos el id de una apuesta y el correo de un usuario y nos devolvera el tipo de esa apuesta
 GO
-create function FN_TipoApuesta(@IDApuesta uniqueidentifier)
+create function FN_TipoApuesta(@IDApuesta int)
 returns tinyint as
 begin
 	declare @Tipo as tinyint
@@ -117,7 +117,7 @@ or alter
 trigger T_ActualizarGanador on Partidos
 after update as
 begin
-	declare @IDPartido uniqueidentifier,
+	declare @IDPartido int,
 			@ResLocal tinyint,
 			@ResVisitante tinyint,
 			--@isAbierto bit,
@@ -125,7 +125,7 @@ begin
 			--@ApuestaMaxima2 int,
 			--@ApuestaMaxima3 int,
 			@FechaPartido smalldatetime,
-			@IdCompeticion uniqueidentifier
+			@IdCompeticion int
 
 	declare @Tipo tinyint,
 			@ApostadoResLocal tinyint,

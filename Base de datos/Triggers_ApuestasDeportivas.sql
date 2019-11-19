@@ -173,7 +173,7 @@ select * from APUESTAS
 --ALTER
 CREATE 
 FUNCTION 
-cuantoDineroHayApostadoAUnPartido (@IDPartido UNIQUEIDENTIFIER, @tipoApuesta int)
+cuantoDineroHayApostadoAUnPartido (@IDPartido int, @tipoApuesta int)
 	RETURNS INT AS
 	BEGIN 
 
@@ -206,7 +206,7 @@ ON APUESTAS
 AFTER INSERT AS
 BEGIN
 
-	DECLARE @IDPARTIDO UNIQUEIDENTIFIER 
+	DECLARE @IDPARTIDO int 
 	SET @IDPARTIDO = (SELECT IDPARTIDO
 					FROM inserted)
 
