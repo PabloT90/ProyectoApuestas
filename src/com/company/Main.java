@@ -27,7 +27,9 @@ public class Main {
                     case 1: //Apostar partidos
                         if(UtilidadesComunes.existenPartidosAbiertos()) { //Si existe algun partido abierto
                             if(UtilidadesComunes.partidoAbierto(UtilidadesComunes.leerIDpartido())){ //Si el partido elegido es correcto, es decir, está abierto
-
+                                //Apostar al partido elegido
+                            }else{
+                                System.out.println("El partido seleccionado no esta disponible para apostar");
                             }
                         }else{
                             System.out.println("No hay partidos abiertos para apostar.");
