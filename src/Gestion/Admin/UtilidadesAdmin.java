@@ -1,5 +1,8 @@
 package Gestion.Admin;
 
+import Gestion.UtilidadesComunes;
+
+import java.sql.*;
 import java.util.Scanner;
 
 public class UtilidadesAdmin {
@@ -43,6 +46,44 @@ public class UtilidadesAdmin {
         boolean ret = true;
 
         return ret;
+    }
+
+    /*
+    Cierra el partido que tenga el id que le pasas
+     */
+    public static boolean cerrarPartido(int idPartido){
+        boolean ret = true;
+        int resul = 0;
+
+        try {
+
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+            // Define the data source for the driver
+            String sourceURL = "jdbc:sqlserver://localhost";
+            String usuario = "pablo";
+            String password = "qq";
+            String miUpdate = "UPDATE Partidos SET isAbierto = 0 WHERE id =" + idPartido;
+
+            // Crear una connexion con el DriverManager
+            Connection connexionBaseDatos = DriverManager.getConnection(sourceURL, usuario, password);
+            Statement sentencia = connexionBaseDatos.createStatement();
+            resul = sentencia.executeUpdate(miUpdate);
+
+            if (resul == 0){
+
+                ret = false;
+
+            }
+
+        }
+        catch (SQLException | ClassNotFoundException e){
+
+            e.printStackTrace();
+        }
+
+        return  ret;
+
     }
 
 }
