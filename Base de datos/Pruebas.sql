@@ -72,60 +72,66 @@ SELECT * FROM Usuarios
 --ALTER Table Usuarios
 --Alter COLUMN saldoActual smallmoney
 
---Alter table Usuarios
---DROP CONSTRAINT CK_SaldoActual
+Alter table Usuarios
+DROP CONSTRAINT CK_SaldoActual
 --El correo electronico tiene un char(30) y no un varchar
 SELECT * FROM Apuestas
 
 
 declare @ganada smallint
 declare @dineros smallmoney
-declare @id uniqueidentifier
-Set @id =(SELECT ID FROM Apuestas Where CorreoUsuario = 'decisiones@gmail.com')
+declare @id int
+Set @id =(SELECT ID FROM Apuestas Where CorreoUsuario = 'decisionesdificile@gmail.com')
 EXECUTE dbo.comprobarResultadoDeUnaApuesta @id,@ganada OUTPUT,@dineros OUTPUT
 SELECT @ganada AS ganado, @dineros as dinero
 
+--Hemos cambiado el saldo de la tabla cuentas de int a smallmoney
+
 --Procedure ingresoACuenta
 
-
+-- 0
 Declare @resultado as smallint
-EXECUTE dbo.ingresoACuenta 'sulviagurdillo@gmail.com',500,@resultado OUTPUT
+EXECUTE dbo.ingresoACuenta 'sulviagurdilloabcdef@gmail.com',5000,@resultado OUTPUT
 Select @resultado
 GO
 ALTER TABLE CUENTAS
 ALTER COLUMN saldo smallmoney
 
-
+ALTER TABLE Usuarios
+ALTER COLUMN saldoActual smallmoney
+-- -1
 Declare @resultado as smallint
 EXECUTE dbo.ingresoACuenta 'silviagurdillo@gmail.com',500,@resultado OUTPUT
 Select @resultado
 GO
 
-
+-- -2
 Declare @resultado as smallint
-EXECUTE dbo.ingresoACuenta 'sulviagurdillo@gmail.com',0,@resultado OUTPUT
+EXECUTE dbo.ingresoACuenta 'sulviagurdilloabcdef@gmail.com',0,@resultado OUTPUT
 SELECT  @resultado
 Select * From Cuentas
 --El saldoActual del usuario es int
 
 --Procedure retirarCapitalCuenta
 --Resultado me devuelve null pero si que se retira el dinero
+-- 0
 GO
 DECLARE @resultado smallint
 DECLARE @retirado Smallmoney
 SET @retirado = 10.5
-EXECUTE dbo.retirarCapitalCuenta 'decisiones@gmail.com',@retirado,@resultado OUTPUT
+EXECUTE dbo.retirarCapitalCuenta 'decisionesdificile@gmail.com',@retirado,@resultado OUTPUT
 SELECT @resultado as resultado
 Select * From Cuentas
 
-
+-- -1
 GO
 DECLARE @resultado smallint
 DECLARE @retirado Smallmoney
 SET @retirado = 10.5 
-EXECUTE dbo.retirarCapitalCuenta 'decioionesdificile@gmail.com',@retirado,@resultado OUTPUT
+EXECUTE dbo.retirarCapitalCuenta 'decioionesdificil@gmail.com',@retirado,@resultado OUTPUT
 SELECT @resultado as resultado
 
+-- -2
 GO
 DECLARE @resultado smallint
 DECLARE @retirado Smallmoney
@@ -135,7 +141,7 @@ SELECT @resultado as resultado
 
 SELECT * FROM Usuarios
 
-
+-- -3
 GO
 DECLARE @resultado smallint
 DECLARE @retirado Smallmoney

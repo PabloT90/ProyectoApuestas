@@ -9,7 +9,7 @@ CREATE TABLE Usuarios
 (
 	correo CHAR(30) not null,
 	contraseña VARCHAR(10) NOT NULL,
-	saldoActual INT NOT NULL,	
+	saldoActual SMALLMONEY NOT NULL,	
 
 	----------------PK-------------------------
 	constraint PK_Usuarios PRIMARY KEY (correo)
