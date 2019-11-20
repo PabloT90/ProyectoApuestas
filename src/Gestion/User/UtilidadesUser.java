@@ -1,5 +1,7 @@
 package Gestion.User;
 
+import Conexion.clsConexion;
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -26,25 +28,59 @@ public class UtilidadesUser {
         return opcion;
     }
 
-    //TODO leer el correo, el ingreso
-    public static int ingresarDinero(int cantidad){
+    /**
+     * Ingresa una cantidad de dinero a un usuario determinado
+     * @param cantidad Cantidad de dinero a ingresar.
+     * @param correo Correo de la persona.
+     * @return entero con el numero de error producido.
+     */
+    public static int ingresarDinero(int cantidad, String correo){
         int resultado = 0;
+        clsConexion conexion = new clsConexion();
+
         try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-
-            // Define the data source for the driver
-            String sourceURL = "jdbc:sqlserver://localhost";
-            String usuario = "pablo";
-            String password = "qq";
-            String miSentencia = "EXEC dbo.ingresoACuenta ("+")";
-
-            // Crear una connexion con el DriverManager
-            Connection connexionBaseDatos = DriverManager.getConnection(sourceURL, usuario, password);
-            Statement sentencia = connexionBaseDatos.createStatement();
-            sentencia.executeUpdate(miSentencia);
-        } catch (SQLException | ClassNotFoundException e){
+            //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            conexion.abrirConexion();
+            CallableStatement cstmt = conexion.getConnexionBaseDatos().prepareCall("{call ingresoACuenta(?,?)}"); //Aqui llamamos al procedimiento que queramos.
+            cstmt.setString(1, correo);
+            cstmt.setInt(2,cantidad);
+            conexion.cerrarConexion();
+        } catch (SQLException e){
             e.printStackTrace();
         }
+
         return resultado;
+    }
+
+    /**
+     * Leer y valida la cantidad de dinero que queremos ingresar.
+     * @return cantidad a ingresar.
+     */
+    public static int LeerValidarDinero(){
+        int cantidad;
+        Scanner teclado = new Scanner(System.in);
+
+        do{
+            System.out.println("Cantidad de dinero a ingresar:");
+            cantidad = teclado.nextInt();
+        }while(cantidad < 0);
+
+        return cantidad;
+    }
+
+    /**
+     * Leer un correo electronico
+     * @return Correo de la persona.
+     */
+    public static String LeerCorreo(){
+        String correo;
+        Scanner teclado = new Scanner(System.in);
+
+        do{
+            System.out.println("Cantidad de dinero a ingresar:");
+            correo = teclado.nextLine();
+        }while(correo == ""); //Aqui seria que encuentre a la persona con el correo introducido
+
+        return correo;
     }
 }

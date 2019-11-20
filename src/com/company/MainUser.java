@@ -41,7 +41,7 @@ public class MainUser {
 
                         break;
                     case 4: //Realizar ingreso
-                        //Llamar a la funcion sql (ingresoACuenta)
+                        UtilidadesUser.ingresarDinero(UtilidadesUser.LeerValidarDinero(), UtilidadesUser.LeerCorreo());
                         break;
                     case 5: //Retirar dinero
                         //Llamar a la funcion sql (retirarCapitalCuenta)
