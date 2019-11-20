@@ -27,9 +27,9 @@ rollback
 
 Begin tran
 
-insert into Competiciones(id,nombre,año) values(NEWID(), 'Copa del Rey', 2019)
+insert into Competiciones(id,nombre,año) values( 'Copa del Rey', 2019)
 
-insert into Competiciones(id,nombre,año) values(NEWID(), 'Copa autoestima', 2019)
+insert into Competiciones(id,nombre,año) values( 'Copa autoestima', 2019)
 
 SELECT * FROM Competiciones
 
@@ -66,6 +66,9 @@ SELECT * FROM dbo.obtenerPartidosDisponiblesParaApostar()
 --Procediemiento comprobarResultadoDeUnaApuesta
 --DISABLE TRIGGER dbo.noSeAceptanModificaciones On dbo.Apuestas
 DELETE FROM Usuarios 
+
+--No se cambia el saldoActual de usuario debe de ser por culpa de trigger
+
 SELECT * FROM Usuarios
 
 
@@ -91,7 +94,7 @@ SELECT @ganada AS ganado, @dineros as dinero
 
 -- 0
 Declare @resultado as smallint
-EXECUTE dbo.ingresoACuenta 'sulviagurdilloabcdef@gmail.com',5000,@resultado OUTPUT
+EXECUTE dbo.ingresoACuenta 'sulviagurdilloabcdef@gmail.com',200.0,@resultado OUTPUT
 Select @resultado
 GO
 ALTER TABLE CUENTAS
@@ -104,7 +107,7 @@ Declare @resultado as smallint
 EXECUTE dbo.ingresoACuenta 'silviagurdillo@gmail.com',500,@resultado OUTPUT
 Select @resultado
 GO
-
+SELECT * FROM Cuentas
 -- -2
 Declare @resultado as smallint
 EXECUTE dbo.ingresoACuenta 'sulviagurdilloabcdef@gmail.com',0,@resultado OUTPUT
@@ -118,8 +121,8 @@ Select * From Cuentas
 GO
 DECLARE @resultado smallint
 DECLARE @retirado Smallmoney
-SET @retirado = 10.5
-EXECUTE dbo.retirarCapitalCuenta 'decisionesdificile@gmail.com',@retirado,@resultado OUTPUT
+SET @retirado = 200.5
+EXECUTE dbo.retirarCapitalCuenta 'sulviagurdilloabcdef@gmail.com',@retirado,@resultado OUTPUT
 SELECT @resultado as resultado
 Select * From Cuentas
 
@@ -127,7 +130,7 @@ Select * From Cuentas
 GO
 DECLARE @resultado smallint
 DECLARE @retirado Smallmoney
-SET @retirado = 10.5 
+SET @retirado = 5.5 
 EXECUTE dbo.retirarCapitalCuenta 'decioionesdificil@gmail.com',@retirado,@resultado OUTPUT
 SELECT @resultado as resultado
 
@@ -136,7 +139,7 @@ GO
 DECLARE @resultado smallint
 DECLARE @retirado Smallmoney
 SET @retirado = 0
-EXECUTE dbo.retirarCapitalCuenta 'decisiones@gmail.com',@retirado,@resultado OUTPUT
+EXECUTE dbo.retirarCapitalCuenta 'decisionesdificile@gmail.com',@retirado,@resultado OUTPUT
 SELECT @resultado as resultado
 
 SELECT * FROM Usuarios
@@ -145,8 +148,8 @@ SELECT * FROM Usuarios
 GO
 DECLARE @resultado smallint
 DECLARE @retirado Smallmoney
-SET @retirado = 1000
-EXECUTE dbo.retirarCapitalCuenta 'decisiones@gmail.com',@retirado,@resultado OUTPUT
+SET @retirado = 10000
+EXECUTE dbo.retirarCapitalCuenta 'decisionesdificile@gmail.com',@retirado,@resultado OUTPUT
 SELECT @resultado as resultado
 
 --Funcion obtenerCantidadApostadaTipoEspecifico
