@@ -598,7 +598,7 @@ Salida:
 Postcondiciones: El procedimiento devuelve 0 si se ha conseguido realizar el ingreso, -1
 si el correo es incorrecto o -2 si el ingreso es negativo o igual a 0.
 */
-CREATE PROCEDURE ingresoACuenta (@CorreoUsuario varchar(30), @ingreso smallmoney, @resultadoIngreso smallint OUTPUT)
+Alter PROCEDURE ingresoACuenta (@CorreoUsuario varchar(30), @ingreso smallmoney, @resultadoIngreso smallint OUTPUT)
 AS
 BEGIN
 	IF EXISTS(SELECT * FROM Usuarios WHERE correo = @CorreoUsuario)
@@ -606,9 +606,12 @@ BEGIN
 		IF @ingreso > 0
 		BEGIN
 			--Un usuario puede tener más de un id de cuenta??????? Se podría haber creado otra tabla RegistrosCuentas
-			DECLARE @IDCuenta int = (SELECT MAX(id) FROM Cuentas WHERE correoUsuario = @CorreoUsuario)--Obtenemos el id de la cuenta del usuario
-			DECLARE @SaldoActual smallmoney = (SELECT saldo FROM Cuentas WHERE id = @IDCuenta)
-			INSERT INTO Cuentas (saldo, fechaYHora, correoUsuario) VALUES ((@SaldoActual + @ingreso), CURRENT_TIMESTAMP, @CorreoUsuario)
+			--DECLARE @IDCuenta int = (SELECT MAX(id) FROM Cuentas WHERE correoUsuario = @CorreoUsuario)--Obtenemos el id de la cuenta del usuario
+			--DECLARE @SaldoActual smallmoney = (SELECT saldoActual FROM Usuarios WHERE correo = @CorreoUsuario)
+			--INSERT INTO Cuentas (saldo, fechaYHora, correoUsuario) VALUES ((@SaldoActual + @ingreso), CURRENT_TIMESTAMP, @CorreoUsuario)
+			UPDATE Usuarios
+				SET saldoActual += @ingreso
+			WHERE correo = @CorreoUsuario
 			SET @resultadoIngreso = 0
 		END
 		ELSE
@@ -637,7 +640,7 @@ Salida:
 Postcondiciones: El procedimiento devuelve 0 si se ha conseguido realizar la transacción, -1
 si el correo es incorrecto, -2 si el capitalARetirar es negativo o igual a 0 o -3 si capitalARetirar es superior al saldo del usuario.
 */
-CREATE PROCEDURE retirarCapitalCuenta (@CorreoUsuario varchar(30), @capitalARetirar smallmoney, @resultadoIngreso smallint OUTPUT)
+ALTER PROCEDURE retirarCapitalCuenta (@CorreoUsuario varchar(30), @capitalARetirar smallmoney, @resultadoIngreso smallint OUTPUT)
 AS
 BEGIN
 	IF EXISTS(SELECT * FROM Usuarios WHERE correo = @CorreoUsuario)
@@ -645,11 +648,15 @@ BEGIN
 		IF @capitalARetirar > 0
 		BEGIN
 		--Un usuario puede tener más de un id de cuenta???????
-			DECLARE @IDCuenta int = (SELECT MAX(id) FROM Cuentas WHERE correoUsuario = @CorreoUsuario)--Obtenemos el id de la cuenta del usuario
-			DECLARE @SaldoActual smallmoney = (SELECT saldo FROM Cuentas WHERE id = @IDCuenta)--Obtenemos el saldo actual del usuario
-			IF @capitalARetirar <= @SaldoActual
+			--DECLARE @IDCuenta int = (SELECT MAX(id) FROM Cuentas WHERE correoUsuario = @CorreoUsuario)--Obtenemos el id de la cuenta del usuario
+			--DECLARE @SaldoActual smallmoney = (SELECT saldo FROM Cuentas WHERE id = @IDCuenta)--Obtenemos el saldo actual del usuario
+			--DECLARE @SaldoActual smallmoney = (SELECT saldoActual FROM Usuarios WHERE correo = @CorreoUsuario)
+			IF @capitalARetirar <= (SELECT saldoActual FROM Usuarios WHERE correo = @CorreoUsuario)
 			BEGIN	
-				INSERT INTO Cuentas (saldo, fechaYHora, correoUsuario) VALUES ((@SaldoActual - @capitalARetirar), CURRENT_TIMESTAMP, @CorreoUsuario)
+				--INSERT INTO Cuentas (saldo, fechaYHora, correoUsuario) VALUES ((@SaldoActual - @capitalARetirar), CURRENT_TIMESTAMP, @CorreoUsuario)
+				UPDATE Usuarios
+					SET saldoActual -= @capitalARetirar
+				WHERE correo = @CorreoUsuario
 				SET @resultadoIngreso = 0
 			END
 			ELSE
