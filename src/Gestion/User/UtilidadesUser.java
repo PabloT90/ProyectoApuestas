@@ -79,7 +79,7 @@ public class UtilidadesUser {
         do{
             System.out.println("Cantidad de dinero a ingresar:");
             correo = teclado.nextLine();
-        }while(correo == ""); //Aqui seria que encuentre a la persona con el correo introducido
+        }while(correo == "");
 
         return correo;
     }
