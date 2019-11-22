@@ -67,8 +67,6 @@ SELECT * FROM dbo.obtenerPartidosDisponiblesParaApostar()
 --DISABLE TRIGGER dbo.noSeAceptanModificaciones On dbo.Apuestas
 DELETE FROM Usuarios 
 
---No se cambia el saldoActual de usuario debe de ser por culpa de trigger
-
 SELECT * FROM Usuarios
 
 
@@ -152,6 +150,14 @@ SET @retirado = 10000
 EXECUTE dbo.retirarCapitalCuenta 'decisionesdificile@gmail.com',@retirado,@resultado OUTPUT
 SELECT @resultado as resultado
 
---Funcion obtenerCantidadApostadaTipoEspecifico
+--Funcion obtenerParametroT
 SELECT * FROM Apuestas
+SELECT * FROM Partidos
+--DECLARE @Cantidad smallmoney = ([dbo].[obtenerParametroT](16,2))
+SELECT dbo.obtenerParametroT(16,2)
+SELECT dbo.obtenerParametroT(19,3)
+SELECT dbo.obtenerParametroT(18,1)
 
+--Funcion obtenerTipo3ParametroF
+SELECT * FROM ApuestaTipo3
+SELECT dbo.obtenerTipo3ParametroF(16,'visitante')

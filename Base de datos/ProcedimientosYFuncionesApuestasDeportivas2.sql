@@ -398,9 +398,9 @@ BEGIN
 
 	SELECT @CantidadApostada =
 	CASE @Tipo
-		WHEN 1 THEN (SELECT SUM (@CantidadApostada) FROM Apuestas WHERE Tipo = 1) 
-		WHEN 2 THEN (SELECT SUM (@CantidadApostada) FROM Apuestas WHERE Tipo = 2) 
-		WHEN 3 THEN (SELECT SUM (@CantidadApostada) FROM Apuestas WHERE Tipo = 3) 
+		WHEN 1 THEN (SELECT SUM (DineroApostado) FROM Apuestas WHERE Tipo = 1) 
+		WHEN 2 THEN (SELECT SUM (DineroApostado) FROM Apuestas WHERE Tipo = 2) 
+		WHEN 3 THEN (SELECT SUM (DineroApostado) FROM Apuestas WHERE Tipo = 3) 
 	END
 
 	RETURN @CantidadApostada
