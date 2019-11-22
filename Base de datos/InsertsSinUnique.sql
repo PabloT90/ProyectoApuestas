@@ -30,6 +30,7 @@ INSERT INTO Apuestas VALUES(2.8,'2019-10-11 10:00:00', 2.9,'decisionesdificile@g
 
 INSERT INTO Apuestas VALUES(4.2,'2019-9-11 10:01:00',3.5,'sulviagurdilloabcdef@gmail.com',20,1,1) 
 
+INSERT INTO Apuestas Values(6,'2019-10-11 11:00:00',1.2,'sulviagurdilloabcdef@gmail.com',16,2,0)
 
 
 SELECT * FROM Apuestas
