@@ -69,17 +69,17 @@ public class UtilidadesUser {
     }
 
     /**
-     * Leer un correo electronico
+     * Lee un correo electronico y se asegura que no esta vacio.
      * @return Correo de la persona.
      */
-    public static String LeerCorreo(){
+    public static String LeerCorreo(){ //Se podria mejorar con regex.
         String correo;
         Scanner teclado = new Scanner(System.in);
 
         do{
-            System.out.println("Cantidad de dinero a ingresar:");
+            System.out.println("Correo de la cuenta de usuario:");
             correo = teclado.nextLine();
-        }while(correo == "");
+        }while(correo == ""); //Tiene que haber algo escrito.
 
         return correo;
     }
