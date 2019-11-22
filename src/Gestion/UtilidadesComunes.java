@@ -1,5 +1,7 @@
 package Gestion;
 
+import Gestion.User.UtilidadesUser;
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -158,6 +160,36 @@ public class UtilidadesComunes {
         } catch (SQLException sqle) {
             System.err.println(sqle);
         }
+        return ret;
+    }
+
+    /**
+     * Muestra un mensaje del estado que ha devuelto la operacion seleccionada.
+     * @param codMensaje Codigo del mensaje.
+     */
+    public static void mostrarMensajeOperacion(int codMensaje){
+        switch (codMensaje){
+            case 0:
+                System.out.println("Se ha retirado correctamente.");
+                break;
+            case -1:
+                System.out.println("El correo introducido no es correcto.");
+                break;
+            case -3:
+                System.out.println("No tienes tanto dinero para retirar.");
+                break;
+        }
+    }
+
+    /**
+     * Permite saber si una cuenta especifica existe en la base de datos
+     * @param user Correo del usuario.
+     * @param pass Contraseña del usuario
+     * @return True si existe, false en caso contrario.
+     */
+    public static boolean existeCuenta(String user, String pass){
+        boolean ret = false;
+        
         return ret;
     }
 }
