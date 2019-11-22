@@ -4,6 +4,7 @@ import Gestion.User.UtilidadesUser;
 import Gestion.UtilidadesComunes;
 /*
 si quiere ejecutar
+    IngresarCuentaUsuario
     mientras no quiera salir (opcionMenu != 7)
         segun(opcionMenu)
             caso 1: ApostarPartido
@@ -18,37 +19,48 @@ fin_si
 * */
 public class MainUser {
     public static void main(String[] args) {
-        int opcionMenu = 0;
+        int opcionMenu = 0, codDevuelto;
+        String usuario, pass;
 
-        if(UtilidadesAdmin.leerValidarEjecutar() == 's'){
-            while((opcionMenu = UtilidadesUser.MostrarMenuLeerValidarOpcion()) != 0){
-                switch(opcionMenu){
-                    case 1: //Apostar partidos
-                        if(UtilidadesComunes.existenPartidosAbiertos()) { //Si existe algun partido abierto
-                            if(UtilidadesComunes.partidoAbierto(UtilidadesComunes.leerIDpartido())){ //Si el partido elegido es correcto, es decir, está abierto
-                                //Apostar al partido elegido
-                            }else{
-                                System.out.println("El partido seleccionado no esta disponible para apostar");
+        if(UtilidadesAdmin.leerValidarEjecutar() == 's') {
+            //AccederCuentaUsuario
+            usuario = UtilidadesUser.LeerCorreo();
+            pass = UtilidadesUser.LeerPassword();
+
+            if (!UtilidadesComunes.existeCuenta(usuario, pass)) {
+                System.out.println("Bienvenido: " + usuario);
+            } else {
+                while ((opcionMenu = UtilidadesUser.MostrarMenuLeerValidarOpcion()) != 0) {
+                    switch (opcionMenu) {
+                        case 1: //Apostar partidos
+                            if (UtilidadesComunes.existenPartidosAbiertos()) { //Si existe algun partido abierto
+                                if (UtilidadesComunes.partidoAbierto(UtilidadesComunes.leerIDpartido())) { //Si el partido elegido es correcto, es decir, está abierto
+                                    //Apostar al partido elegido
+                                } else {
+                                    System.out.println("El partido seleccionado no esta disponible para apostar");
+                                }
+                            } else {
+                                System.out.println("No hay partidos abiertos para apostar.");
                             }
-                        }else{
-                            System.out.println("No hay partidos abiertos para apostar.");
-                        }
-                        break;
-                    case 2://Ver partidos disponibles
-                        UtilidadesComunes.verPartidosDisponiblesParaApostar();
-                        break;
-                    case 3: //Comprobar resultados de apuestas anteriores
+                            break;
+                        case 2://Ver partidos disponibles
+                            UtilidadesComunes.verPartidosDisponiblesParaApostar();
+                            break;
+                        case 3: //Comprobar resultados de apuestas anteriores
 
-                        break;
-                    case 4: //Realizar ingreso
-                        UtilidadesUser.ingresarDinero(UtilidadesUser.LeerValidarDinero(), UtilidadesUser.LeerCorreo());
-                        break;
-                    case 5: //Retirar dinero
-                        //Llamar a la funcion sql (retirarCapitalCuenta)
-                        break;
-                    case 6: //Ver movimientos.
+                            break;
+                        case 4: //Realizar ingreso
+                            codDevuelto = UtilidadesUser.ingresarDinero(UtilidadesUser.LeerValidarDinero(), UtilidadesUser.LeerCorreo());
+                            UtilidadesComunes.mostrarMensajeOperacion(codDevuelto);
+                            break;
+                        case 5: //Retirar dinero
+                            codDevuelto = UtilidadesUser.retirarDinero(UtilidadesUser.LeerValidarDinero(), UtilidadesUser.LeerCorreo());
+                            UtilidadesComunes.mostrarMensajeOperacion(codDevuelto);
+                            break;
+                        case 6: //Ver movimientos.
 
-                        break;
+                            break;
+                    }
                 }
             }
         }

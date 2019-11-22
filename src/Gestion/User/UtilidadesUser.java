@@ -39,16 +39,16 @@ public class UtilidadesUser {
         clsConexion conexion = new clsConexion();
 
         try {
-            //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             conexion.abrirConexion();
-            CallableStatement cstmt = conexion.getConnexionBaseDatos().prepareCall("{call ingresoACuenta(?,?)}"); //Aqui llamamos al procedimiento que queramos.
+            CallableStatement cstmt = conexion.getConnexionBaseDatos().prepareCall("{call ingresoACuenta(?,?,?)}"); //Aqui llamamos al procedimiento que queramos.
             cstmt.setString(1, correo);
             cstmt.setInt(2,cantidad);
+            cstmt.setInt(3, cantidad);
+            resultado = cstmt.executeUpdate();
             conexion.cerrarConexion();
         } catch (SQLException e){
             e.printStackTrace();
         }
-
         return resultado;
     }
 
@@ -61,7 +61,7 @@ public class UtilidadesUser {
         Scanner teclado = new Scanner(System.in);
 
         do{
-            System.out.println("Cantidad de dinero a ingresar:");
+            System.out.println("Cantidad de dinero:");
             cantidad = teclado.nextInt();
         }while(cantidad < 0);
 
@@ -82,5 +82,45 @@ public class UtilidadesUser {
         }while(correo == ""); //Tiene que haber algo escrito.
 
         return correo;
+    }
+
+    /**
+     * Lee una contraseña y se asegura que no esta vacio.
+     * @return Contraseña de la persona.
+     */
+    public static String LeerPassword(){
+        String pass;
+        Scanner teclado = new Scanner(System.in);
+
+        do{
+            System.out.println("Correo de la cuenta de usuario:");
+            pass = teclado.nextLine();
+        }while(pass == "");
+
+        return pass;
+    }
+
+    /**
+     * Retira una cantidad de dinero a un usuario determinado
+     * @param cantidad Cantidad de dinero a ingresar.
+     * @param correo Correo de la persona.
+     * @return entero con el numero de error producido.
+     */
+    public static int retirarDinero(int cantidad, String correo){
+        int resultado = 0;
+        clsConexion conexion = new clsConexion();
+
+        try {
+            conexion.abrirConexion();
+            CallableStatement cstmt = conexion.getConnexionBaseDatos().prepareCall("{call retirarCapitalCuenta(?,?,?)}"); //Aqui llamamos al procedimiento que queramos.
+            cstmt.setString(1, correo);
+            cstmt.setInt(2,cantidad);
+            cstmt.setInt(3, 0);
+            resultado = cstmt.executeUpdate();
+            conexion.cerrarConexion();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return resultado;
     }
 }
