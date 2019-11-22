@@ -33,11 +33,8 @@ public class MainAdministradores {
                         idPartido = UtilidadesComunes.leerIDpartido();
 
                         if (!UtilidadesAdmin.cerrarPartido(idPartido)){
-
                             System.out.println("Ha ocurrido un error");
-
                         }
-
 
                         break;
                     case 4: //Consultar apuestas partido
