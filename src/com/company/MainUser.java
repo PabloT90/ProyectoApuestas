@@ -3,6 +3,7 @@ import Gestion.Admin.UtilidadesAdmin;
 import Gestion.User.UtilidadesUser;
 import Gestion.UtilidadesComunes;
 /*
+Nivel: 0
 si quiere ejecutar
     IngresarCuentaUsuario
     mientras no quiera salir (opcionMenu != 7)
@@ -16,6 +17,42 @@ si quiere ejecutar
         fin_segun
     fin_mientras
 fin_si
+
+Nivel: 1 ApostarPartido
+Inicio
+Si existen partidos abiertos
+    leerYValidarIdPartidoAbierto*
+    Si idPartidoAbierto != 0
+        LeerYValidarTipoApuesta
+        LeerYValidarCaracteristicasApuesta
+        LeerYValidarCantidadApuesta
+        RealizarApuesta
+    Fin_si
+Sino
+    MostrarMensajeError
+Fin_si
+Fin
+
+Nivel: 2 leerYValidarIdPartidoAbierto*
+Inicio
+     mostrarPartidosAbiertos*
+     leerIdPartidoAbiertos*  //Debe permitir leer un 0
+Fin
+
+LeerYValidarCaracteristicasApuesta
+Inicio
+    Segun (tipoApuesta)
+        para tipoApuesta == 1
+            LeerYValidarGolesLocalesYVisitantes
+
+        para tipoApuesta == 2
+            LeerYValidarEquipoYGoles
+
+        para tipoApuesta == 3
+            leerYValidarGanador*
+
+    Fin_segun
+Fin
 * */
 public class MainUser {
     public static void main(String[] args) {
