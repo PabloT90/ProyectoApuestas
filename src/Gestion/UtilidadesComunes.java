@@ -62,7 +62,7 @@ public class UtilidadesComunes {
      * @param idPartido ID del partido que queremos buscar.
      * @return True en caso de existir, false en caso contrario.
      */
-    public static boolean partidoEncontrado(int idPartido){
+    public static boolean partidoEncontrado(int idPartido){ //TODO: cambiar para que tenga en cuenta ademas los partidos abiertos.
         boolean ret = false;
 
             //Buscamos el partido
