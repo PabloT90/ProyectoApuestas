@@ -1,5 +1,6 @@
 package Gestion.Admin;
 
+import Conexion.clsConexion;
 import Gestion.UtilidadesComunes;
 
 import java.sql.*;
@@ -48,8 +49,46 @@ public class UtilidadesAdmin {
         return ret;
     }
 
-    /*
-    Cierra el partido que tenga el id que le pasas
+    /**
+     * Abre el partido del mismo id que el que se le pasa
+     * @param idPartido el id del partio que se quiere abrir
+     * @return un boolean que nos dice si se ha ejecutado bien
+     */
+    public static boolean abrirPartido(int idPartido){
+
+        boolean ret = false;
+        int resultado;
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            clsConexion miConexion = new clsConexion();
+            // Define the data source for the driver
+           // String sourceURL = "jdbc:sqlserver://localhost";
+           // String usuario = "pablo";
+           // String password = "qq";
+            String miUpdate = "UPDATE Partidos SET isAbierto = 1 WHERE id =" + idPartido; //Supongo que 1 es abierto
+
+            // Crear una connexion con el DriverManager
+            miConexion.abrirConexion();
+            Connection connexionBaseDatos = miConexion.getConnexionBaseDatos();
+            Statement sentencia = connexionBaseDatos.createStatement();
+            resultado = sentencia.executeUpdate(miUpdate);
+
+            if (resultado == 0){
+                ret = false;
+            }
+        } catch (SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+
+        return ret;
+
+    }
+
+    /***
+     *  Cierra el partido que tenga el id que le pasas
+     * @param idPartido el id del partio que se quiere cerrar
+     * @return un boolean que nos dice si se ha ejecutado bien
      */
     public static boolean cerrarPartido(int idPartido){
         boolean ret = true;
@@ -59,13 +98,15 @@ public class UtilidadesAdmin {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
             // Define the data source for the driver
-            String sourceURL = "jdbc:sqlserver://localhost";
-            String usuario = "pablo";
-            String password = "qq";
-            String miUpdate = "UPDATE Partidos SET isAbierto = 0 WHERE id =" + idPartido;
+           // String sourceURL = "jdbc:sqlserver://localhost";
+           // String usuario = "pablo";
+           // String password = "qq";
+            clsConexion miConexion = new clsConexion();
+            String miUpdate = "UPDATE Partidos SET isAbierto = 0 WHERE id =" + idPartido; //Supongo que 0 es cerrado
 
             // Crear una connexion con el DriverManager
-            Connection connexionBaseDatos = DriverManager.getConnection(sourceURL, usuario, password);
+            miConexion.abrirConexion();
+            Connection connexionBaseDatos = miConexion.getConnexionBaseDatos();
             Statement sentencia = connexionBaseDatos.createStatement();
             resul = sentencia.executeUpdate(miUpdate);
 
