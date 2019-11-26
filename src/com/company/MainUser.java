@@ -2,6 +2,10 @@ package com.company;
 import Gestion.Admin.UtilidadesAdmin;
 import Gestion.User.UtilidadesUser;
 import Gestion.UtilidadesComunes;
+
+import java.sql.Date;
+import java.util.Calendar;
+
 /*
 Nivel: 0
 si quiere ejecutar
@@ -23,23 +27,21 @@ Inicio
 Si existen partidos abiertos
     leerYValidarIdPartidoAbierto*
     Si idPartidoAbierto != 0
-        LeerYValidarTipoApuesta
-        LeerYValidarCaracteristicasApuesta
-        LeerYValidarCantidadApuesta
-        RealizarApuesta
+        leerYValidarTipoApuesta*
+        Si tipoApuesta != 0
+            LeerCaracteristicasApuesta
+            leerYValidarCantidadAApostar*
+            RealizarApuesta
+        Fin_si
     Fin_si
 Sino
     MostrarMensajeError
 Fin_si
 Fin
 
-Nivel: 2 leerYValidarIdPartidoAbierto*
-Inicio
-     mostrarPartidosAbiertos*
-     leerIdPartidoAbiertos*  //Debe permitir leer un 0
-Fin
+Nivel: 2
 
-LeerYValidarCaracteristicasApuesta
+LeerCaracteristicasApuesta
 Inicio
     Segun (tipoApuesta)
         para tipoApuesta == 1
@@ -56,8 +58,10 @@ Fin
 * */
 public class MainUser {
     public static void main(String[] args) {
-        int opcionMenu = 0, codDevuelto;
-        String usuario, pass;
+        int opcionMenu = 0, codDevuelto, idPartido, tipoApuesta, golesLocales = 0, golesVisitantes = 0, goles = 0;
+        double capitalApuesta;
+        String usuario, pass, equipo = "";
+        Date fechaActual;
 
         if(UtilidadesAdmin.leerValidarEjecutar() == 's') {
             //AccederCuentaUsuario
@@ -71,10 +75,54 @@ public class MainUser {
                     switch (opcionMenu) {
                         case 1: //Apostar partidos
                             if (UtilidadesComunes.existenPartidosAbiertos()) { //Si existe algun partido abierto
-                                if (UtilidadesComunes.partidoAbierto(UtilidadesComunes.leerIDpartido())) { //Si el partido elegido es correcto, es decir, está abierto
-                                    //Apostar al partido elegido
-                                } else {
-                                    System.out.println("El partido seleccionado no esta disponible para apostar");
+                                if(UtilidadesComunes.obtenerCapitalMaximoUsuario(usuario) > 0){
+                                    // //Si el partido elegido es correcto, es decir, está abierto
+                                    if ((idPartido = UtilidadesComunes.leerIDpartido()) != 0) {
+                                        //leerYValidarTipoApuesta*
+                                        if((tipoApuesta = UtilidadesComunes.leerYValidarTipoApuesta()) != 0){
+                                            //LeerCaracteristicasApuesta
+                                            switch (tipoApuesta){
+                                                case 1:
+                                                    //LeerYValidarGolesLocalesYVisitantes
+                                                    golesLocales = UtilidadesComunes.leerYValidarGolesLocales();
+                                                    golesVisitantes = UtilidadesComunes.leerYValidarGolesVisitante();
+                                                    break;
+                                                case 2:
+                                                    //LeerYValidarEquipoYGoles
+                                                    equipo = UtilidadesComunes.leerYValidarEquipo();
+                                                    goles = UtilidadesComunes.leerYValidarGoles();
+                                                    break;
+
+                                                case 3:
+                                                    //leerYValidarEquipo()
+                                                    equipo = UtilidadesComunes.leerYValidarEquipo();
+                                                    break;
+                                            }
+
+                                            //leerYValidarCantidadAApostar*
+                                            capitalApuesta = UtilidadesComunes.leerYValidarCantidadAApostar(usuario);
+                                            //RealizarApuesta
+                                            fechaActual = (Date) (Calendar.getInstance()).getTime();//Obtenemos la fecha actual
+                                            switch (tipoApuesta){
+                                                case 1:
+                                                    //realizarApuestaTipo1*
+                                                    UtilidadesComunes.realizarApuestaTipo1(fechaActual, capitalApuesta, usuario, idPartido, golesLocales, golesVisitantes);
+                                                    break;
+
+                                                case 2:
+                                                    //realizarApuestaTipo2*
+                                                    UtilidadesComunes.realizarApuestaTipo2(fechaActual, capitalApuesta, usuario, idPartido, equipo, goles);
+                                                    break;
+
+                                                case 3:
+                                                    //realizarApuestaTipo3*
+                                                    UtilidadesComunes.realizarApuestaTipo3(fechaActual, capitalApuesta, usuario, idPartido, equipo);
+                                                    break;
+                                            }
+                                        }
+                                    }
+                                }else{
+                                    System.out.println("El ususario no tiene capital para apostar.");
                                 }
                             } else {
                                 System.out.println("No hay partidos abiertos para apostar.");
