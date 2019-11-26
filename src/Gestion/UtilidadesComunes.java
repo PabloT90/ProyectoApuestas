@@ -53,6 +53,7 @@ public class UtilidadesComunes {
             // Cerrar conexion
             connexionBaseDatos.close();
         } catch (ClassNotFoundException cnfe) {
+            
             System.err.println(cnfe);
         } catch (SQLException sqle) {
             System.err.println(sqle);
