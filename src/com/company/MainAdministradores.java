@@ -28,7 +28,7 @@ public class MainAdministradores {
                         break;
                     case 2: //Abrir partido
 
-                        idPartido = UtilidadesComunes.leerIDpartido();
+                        idPartido = UtilidadesAdmin.leerIDpartido();
 
                         if (!UtilidadesAdmin.abrirPartido(idPartido)){
                             System.out.println("Ha ocurrido un error");

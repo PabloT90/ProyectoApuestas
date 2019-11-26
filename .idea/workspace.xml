@@ -109,9 +109,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/com/company/MainUser.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/com/company/MainAdministradores.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Gestion/UtilidadesComunes.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/com/company/MainUser.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Gestion/Admin/UtilidadesAdmin.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -130,74 +130,13 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="91" />
     <option name="y" value="129" />
     <option name="width" value="1346" />
     <option name="height" value="688" />
   </component>
   <component name="ProjectId" id="1TKJg7mfOEeQUtCLUB33qhbOqem" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="ProyectoApuestas" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProyectoApuestas" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProyectoApuestas" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProyectoApuestas" type="462c0819:PsiDirectoryNode" />
-              <item name="Base de datos" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProyectoApuestas" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProyectoApuestas" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProyectoApuestas" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProyectoApuestas" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="company" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProyectoApuestas" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProyectoApuestas" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Conexion" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProyectoApuestas" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProyectoApuestas" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Gestion" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProyectoApuestas" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProyectoApuestas" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Gestion" type="462c0819:PsiDirectoryNode" />
-              <item name="Admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProyectoApuestas" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProyectoApuestas" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Gestion" type="462c0819:PsiDirectoryNode" />
-              <item name="User" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-    </panes>
-  </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -267,6 +206,8 @@
       <workItem from="1574251347404" duration="969000" />
       <workItem from="1574674539730" duration="1897000" />
       <workItem from="1574753087006" duration="8915000" />
+      <workItem from="1574756588986" duration="4799000" />
+      <workItem from="1574753087006" duration="8127000" />
     </task>
     <servers />
   </component>
@@ -345,12 +286,6 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
               <option name="COLUMN_ORDER" />
             </State>
           </value>
