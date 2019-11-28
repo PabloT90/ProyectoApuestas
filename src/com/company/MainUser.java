@@ -68,7 +68,7 @@ public class MainUser {
             usuario = UtilidadesUser.LeerCorreo();
             pass = UtilidadesUser.LeerPassword();
 
-            if (!UtilidadesComunes.existeCuenta(usuario, pass)) {
+            if (UtilidadesComunes.existeCuenta(usuario, pass)) {
                 System.out.println("Bienvenido: " + usuario);
             } else {
                 while ((opcionMenu = UtilidadesUser.MostrarMenuLeerValidarOpcion()) != 0) {
