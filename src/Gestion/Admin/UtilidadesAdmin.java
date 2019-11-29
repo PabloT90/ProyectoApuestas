@@ -209,4 +209,21 @@ public class UtilidadesAdmin {
         return ret;
     }
 
+    /**
+     * Este metodo nos permitira consultar todas las apuestas y cuanto dinero se ha apostado a cada posible resultado
+     * @param idPartido el ide del partido que queremos consultar
+     */
+    public void consultarApuestasPartido(int idPartido){
+
+        int goles = 0;
+        clsConexion micoexion = new clsConexion();
+        //Para conseguir los goles totales no te vayas a partidos hijo mio
+        String conseguirGoles = "SELECT M FROM Partidos WHERE id = " + idPartido ;
+        //apuestas tipo 1
+
+        //apuestas tipo 2
+        //apuestas tipo 3
+
+    }
+
 }

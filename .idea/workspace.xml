@@ -23,11 +23,11 @@
     <setting file="file://$PROJECT_DIR$/src/com/company/MainUser.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Gestion/Admin/UtilidadesAdmin.java" root0="FORCE_HIGHLIGHTING" />
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
+  <component name="ProjectId" id="1TKJg7mfOEeQUtCLUB33qhbOqem" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="ProjectId" id="1TKJg7mfOEeQUtCLUB33qhbOqem" />
   <component name="ProjectViewState">
@@ -106,11 +106,9 @@
       <workItem from="1574753087006" duration="8915000" />
       <workItem from="1574756588986" duration="4799000" />
       <workItem from="1574753087006" duration="8127000" />
+      <workItem from="1575016880751" duration="2021000" />
     </task>
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10812000" />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
