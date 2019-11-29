@@ -143,7 +143,7 @@ public class MainUser {
                             UtilidadesComunes.mostrarMensajeOperacion(codDevuelto);
                             break;
                         case 6: //Ver movimientos.
-
+                            UtilidadesUser.mostrarMovimientos(usuario);
                             break;
                     }
                 }

@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3f5145e-e47e-453b-9c69-2386a688b718" name="Default Changelist" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,9 +18,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/com/company/MainUser.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Gestion/UtilidadesComunes.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/com/company/MainAdministradores.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Gestion/UtilidadesComunes.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/com/company/MainUser.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Gestion/Admin/UtilidadesAdmin.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
@@ -31,6 +30,11 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectId" id="1TKJg7mfOEeQUtCLUB33qhbOqem" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -44,18 +48,6 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\pprats\Desktop\Apuestas_2\ProyectoApuestas\src" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
@@ -85,6 +77,18 @@
         <item itemvalue="Application.MainAdministradores" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -123,5 +127,31 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1345" height="322" key="GridCell.Tab.0.bottom" timestamp="1575018843156">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1345" height="322" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575018843156" />
+    <state width="1345" height="322" key="GridCell.Tab.0.center" timestamp="1575018843156">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1345" height="322" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575018843156" />
+    <state width="1345" height="322" key="GridCell.Tab.0.left" timestamp="1575018843156">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1345" height="322" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575018843155" />
+    <state width="1345" height="322" key="GridCell.Tab.0.right" timestamp="1575018843156">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1345" height="322" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575018843156" />
+    <state x="379" y="187" key="com.intellij.ide.util.TipDialog" timestamp="1575017673995">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="379" y="187" key="com.intellij.ide.util.TipDialog/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575017673995" />
+    <state x="1442" y="0" width="1153" height="611" maximized="true" key="dock-window-1" timestamp="1575018729216">
+      <screen x="1366" y="0" width="1366" height="728" />
+    </state>
+    <state x="1442" y="0" width="1153" height="611" maximized="true" key="dock-window-1/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575018729216" />
   </component>
 </project>

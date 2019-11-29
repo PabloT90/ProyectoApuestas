@@ -93,7 +93,7 @@ public class UtilidadesUser {
         Scanner teclado = new Scanner(System.in);
 
         do{
-            System.out.println("Correo de la cuenta de usuario:");
+            System.out.println("Contrasenha:");
             pass = teclado.nextLine();
         }while(pass == "");
 
@@ -123,4 +123,34 @@ public class UtilidadesUser {
         }
         return resultado;
     }
+
+    public static void mostrarMovimientos(String usuario){
+        try{
+            // Carga la clase del driver
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+            clsConexion miconexion = new clsConexion();
+            String miSelect = "SELECT saldo, fechaYHora FROM Cuentas WHERE CorreoUsuario="+usuario; //Cambiar, tiene que ser con Binding
+
+            // Crear una connexion con el DriverManager
+            miconexion.abrirConexion();
+            Connection connexionBaseDatos = miconexion.getConnexionBaseDatos();
+            Statement sentencia = connexionBaseDatos.createStatement();
+            ResultSet partidos = sentencia.executeQuery(miSelect);
+
+            // Mostrar los datos del ResultSet
+            while (partidos.next()) {
+                System.out.println(partidos.getString("Saldo") + " -> " + partidos.getTimestamp("fechaYHora"));
+            }
+
+            // Cerrar conexion
+            connexionBaseDatos.close();
+        } catch (ClassNotFoundException cnfe) {
+
+            System.err.println(cnfe);
+        } catch (SQLException sqle) {
+            System.err.println(sqle);
+        }
+    }
+
 }

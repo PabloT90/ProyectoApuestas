@@ -193,6 +193,33 @@ public class UtilidadesComunes {
     public static boolean existeCuenta(String user, String pass){
         boolean ret = false;
 
+        try {
+            // Carga la clase del driver
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+            // Define the data source for the driver
+            String sourceURL = "jdbc:sqlserver://localhost";
+            String usuario = "pablo";
+            String password = "qq";
+            String miSelect = "SELECT correo FROM Usuarios where contraseña = " +pass+" AND correo = " + user ;
+
+            // Crear una connexion con el DriverManager
+            Connection connexionBaseDatos = DriverManager.getConnection(sourceURL, usuario, password);
+            Statement sentencia = connexionBaseDatos.createStatement();
+            ResultSet partidos = sentencia.executeQuery(miSelect);
+
+            // Mostrar los datos del ResultSet
+            if(partidos.next()){ //Si tiene una fila
+                ret = true;
+            }
+            // Cerrar conexion
+            connexionBaseDatos.close();
+        } catch (ClassNotFoundException cnfe) {
+            System.err.println(cnfe);
+        } catch (SQLException sqle) {
+            System.err.println(sqle);
+        }
+
         return ret;
     }
 
