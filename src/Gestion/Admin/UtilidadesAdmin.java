@@ -215,10 +215,20 @@ public class UtilidadesAdmin {
      */
     public void consultarApuestasPartido(int idPartido){
 
-        int goles = 0;
+        int goles = 0, resultado = 0;
         clsConexion micoexion = new clsConexion();
         //Para conseguir los goles totales no te vayas a partidos hijo mio
-        String conseguirGoles = "SELECT M FROM Partidos WHERE id = " + idPartido ;
+        //String conseguirGoles = "SELECT M FROM Partidos WHERE id = " + idPartido ;
+
+        try {
+
+            micoexion.abrirConexion();
+            
+
+        }
+        catch (SQLException r){
+            r.printStackTrace();
+        }
         //apuestas tipo 1
 
         //apuestas tipo 2
