@@ -1,7 +1,6 @@
 package Gestion.User;
 
 import Conexion.clsConexion;
-
 import java.sql.*;
 import java.util.Scanner;
 
@@ -124,13 +123,14 @@ public class UtilidadesUser {
         return resultado;
     }
 
+    /**
+     * Muestra los movimientos que ha hecho un usuario concreto.
+     * @param usuario Correo del usuario a consultar.
+     */
     public static void mostrarMovimientos(String usuario){
         try{
-            // Carga la clase del driver
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-
             clsConexion miconexion = new clsConexion();
-            String miSelect = "SELECT saldo, fechaYHora FROM Cuentas WHERE CorreoUsuario="+usuario; //Cambiar, tiene que ser con Binding
+            String miSelect = "SELECT saldo, fechaYHora FROM Cuentas WHERE CorreoUsuario=" + "'" + usuario + "'";
 
             // Crear una connexion con el DriverManager
             miconexion.abrirConexion();
@@ -140,14 +140,11 @@ public class UtilidadesUser {
 
             // Mostrar los datos del ResultSet
             while (partidos.next()) {
-                System.out.println(partidos.getString("Saldo") + " -> " + partidos.getTimestamp("fechaYHora"));
+                System.out.println("Saldo: " + partidos.getString("Saldo") + " || Fecha: " + partidos.getTimestamp("fechaYHora"));
             }
 
             // Cerrar conexion
             connexionBaseDatos.close();
-        } catch (ClassNotFoundException cnfe) {
-
-            System.err.println(cnfe);
         } catch (SQLException sqle) {
             System.err.println(sqle);
         }

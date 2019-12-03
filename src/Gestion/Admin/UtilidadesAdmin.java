@@ -1,8 +1,6 @@
 package Gestion.Admin;
 
 import Conexion.clsConexion;
-import Gestion.UtilidadesComunes;
-
 import java.sql.*;
 import java.util.Scanner;
 
@@ -60,12 +58,7 @@ public class UtilidadesAdmin {
         int resultado;
 
         try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             clsConexion miConexion = new clsConexion();
-            // Define the data source for the driver
-           // String sourceURL = "jdbc:sqlserver://localhost";
-           // String usuario = "pablo";
-           // String password = "qq";
             String miUpdate = "UPDATE Partidos SET isAbierto = 1 WHERE id =" + idPartido; //Supongo que 1 es abierto
 
             // Crear una connexion con el DriverManager
@@ -77,7 +70,7 @@ public class UtilidadesAdmin {
             if (resultado == 0){
                 ret = false;
             }
-        } catch (SQLException | ClassNotFoundException e){
+        } catch (SQLException e){
             e.printStackTrace();
         }
 
@@ -95,12 +88,6 @@ public class UtilidadesAdmin {
         int resul;
 
         try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-
-            // Define the data source for the driver
-           // String sourceURL = "jdbc:sqlserver://localhost";
-           // String usuario = "pablo";
-           // String password = "qq";
             clsConexion miConexion = new clsConexion();
             String miUpdate = "UPDATE Partidos SET isAbierto = 0 WHERE id =" + idPartido; //Supongo que 0 es cerrado
 
@@ -113,7 +100,7 @@ public class UtilidadesAdmin {
             if (resul == 0){
                 ret = false;
             }
-        } catch (SQLException | ClassNotFoundException e){
+        } catch (SQLException e){
             e.printStackTrace();
         }
         return  ret;
@@ -125,13 +112,6 @@ public class UtilidadesAdmin {
    public static void verPartidosCerrados(){
 
        try {
-           // Carga la clase del driver
-           Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-
-           // Define the data source for the driver
-           //String sourceURL = "jdbc:sqlserver://localhost";
-           //String usuario = "pablo";
-           //String password = "qq";
            clsConexion miconexion = new clsConexion();
            String miSelect = "SELECT ID, fechaPartido FROM Partidos WHERE isAbierto = 0";
 
@@ -148,9 +128,6 @@ public class UtilidadesAdmin {
 
            // Cerrar conexion
            connexionBaseDatos.close();
-       } catch (ClassNotFoundException cnfe) {
-
-           System.err.println(cnfe);
        } catch (SQLException sqle) {
            System.err.println(sqle);
        }
@@ -180,15 +157,6 @@ public class UtilidadesAdmin {
         //Buscamos el partido
         //Hacemos un SELECT con ese ID y si devuelve una fila es que existe.
         try {
-            // Carga la clase del driver
-            //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-
-            //TODO Hacerlo con myconnection
-
-            // Define the data source for the driver
-            /*String sourceURL = "jdbc:sqlserver://localhost";
-            String usuario = "pablo";
-            String password = "qq";*/
             clsConexion miConexion = new clsConexion();
             String miSelect = "SELECT id FROM Partidos where id = " +idPartido;
 
@@ -204,8 +172,6 @@ public class UtilidadesAdmin {
             }
             // Cerrar conexion
             connexionBaseDatos.close();
-        //} //catch (ClassNotFoundException cnfe) {
-            //System.err.println(cnfe);
         } catch (SQLException sqle) {
             System.err.println(sqle);
         }

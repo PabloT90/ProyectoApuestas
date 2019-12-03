@@ -136,11 +136,11 @@ public class MainUser {
 
                             break;
                         case 4: //Realizar ingreso
-                            codDevuelto = UtilidadesUser.ingresarDinero(UtilidadesUser.LeerValidarDinero(), UtilidadesUser.LeerCorreo());
+                            codDevuelto = UtilidadesUser.ingresarDinero(UtilidadesUser.LeerValidarDinero(), usuario);
                             UtilidadesComunes.mostrarMensajeOperacion(codDevuelto);
                             break;
                         case 5: //Retirar dinero
-                            codDevuelto = UtilidadesUser.retirarDinero(UtilidadesUser.LeerValidarDinero(), UtilidadesUser.LeerCorreo());
+                            codDevuelto = UtilidadesUser.retirarDinero(UtilidadesUser.LeerValidarDinero(), usuario);
                             UtilidadesComunes.mostrarMensajeOperacion(codDevuelto);
                             break;
                         case 6: //Ver movimientos.
