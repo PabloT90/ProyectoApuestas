@@ -183,6 +183,8 @@ public class UtilidadesAdmin {
             // Carga la clase del driver
             //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
+            //TODO Hacerlo con myconnection
+
             // Define the data source for the driver
             /*String sourceURL = "jdbc:sqlserver://localhost";
             String usuario = "pablo";
@@ -217,7 +219,8 @@ public class UtilidadesAdmin {
      */
     public void consultarApuestasPartido(int idPartido){
 
-        int maxGolesLocales = 0, resultado = 0, maxGolesVisitantes;
+        int maxGolesLocales = 0, maxGolesVisitantes;
+        ResultSet resultado;
         try {
             clsConexion miconexion = new clsConexion();
             String conseguirGolesLocales = "Select MAX(NumGolesLocal) from ApuestaTipo1";
@@ -232,18 +235,23 @@ public class UtilidadesAdmin {
             maxGolesLocales = golesL.getInt("NumGolesLocal");
             maxGolesVisitantes = golesV.getInt("numGolesVisitante");
 
-            //apuestas tipo 1
+            //TODO reprobar todo ahora con nueva columna cambiar insert por nueva columna MATADME  
 
+            //apuestas tipo 1
             for (int i = 0; i< maxGolesLocales; i++){
 
                 for (int x = 0; i< maxGolesVisitantes; x++){
 
+                    callStatementApuesta1.setInt(1,idPartido);
+                    callStatementApuesta1.setInt(2,i);
+                    callStatementApuesta1.setInt(3,x);
+                    resultado = callStatementApuesta1.executeQuery();
 
-
+                    if (resultado.getString("id") == null){
+                        System.out.println("Goles locales: "+resultado.getString("NumGolesLocal")+" Goles visitante: "+ resultado.getString("numGolesVisitante")+ " Dinero apostado: ");
+                    }
                 }
-
             }
-
         }
         catch (SQLException r){
             r.printStackTrace();
