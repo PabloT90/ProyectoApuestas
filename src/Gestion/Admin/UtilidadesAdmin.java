@@ -201,7 +201,7 @@ public class UtilidadesAdmin {
             maxGolesLocales = golesL.getInt("NumGolesLocal");
             maxGolesVisitantes = golesV.getInt("numGolesVisitante");
 
-            //TODO reprobar todo ahora con nueva columna cambiar insert por nueva columna MATADME  
+            //TODO reprobar todo ahora con nueva columna cambiar insert por nueva columna MATADME
 
             //apuestas tipo 1
             for (int i = 0; i< maxGolesLocales; i++){
