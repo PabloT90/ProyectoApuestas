@@ -148,6 +148,7 @@ devuelve 0 si se ha realizado correctamente la apuesta, -1 si el correo es incor
 si el partido no existe, -3 si el capital es negativo o igual a 0, -4 si el
 el ganador es diferente de 'local' o 'visitante'.
 */
+--ESTE PROCEDIMIENTO DA ERROR AL CREAR
 CREATE PROCEDURE realizarApuestaTipo3(@FechaHora smalldatetime, @CapitalAApostar smallmoney, @Correo char(30), @IdPartido int, @Ganador varchar(15), @Error smallint OUTPUT)
 AS
 BEGIN
@@ -598,7 +599,7 @@ Salida:
 Postcondiciones: El procedimiento devuelve 0 si se ha conseguido realizar el ingreso, -1
 si el correo es incorrecto o -2 si el ingreso es negativo o igual a 0.
 */
-Alter PROCEDURE ingresoACuenta (@CorreoUsuario varchar(30), @ingreso smallmoney, @resultadoIngreso smallint OUTPUT)
+CREATE PROCEDURE ingresoACuenta (@CorreoUsuario varchar(30), @ingreso smallmoney, @resultadoIngreso smallint OUTPUT)
 AS
 BEGIN
 	IF EXISTS(SELECT * FROM Usuarios WHERE correo = @CorreoUsuario)
@@ -640,7 +641,7 @@ Salida:
 Postcondiciones: El procedimiento devuelve 0 si se ha conseguido realizar la transacción, -1
 si el correo es incorrecto, -2 si el capitalARetirar es negativo o igual a 0 o -3 si capitalARetirar es superior al saldo del usuario.
 */
-ALTER PROCEDURE retirarCapitalCuenta (@CorreoUsuario varchar(30), @capitalARetirar smallmoney, @resultadoIngreso smallint OUTPUT)
+CREATE PROCEDURE retirarCapitalCuenta (@CorreoUsuario varchar(30), @capitalARetirar smallmoney, @resultadoIngreso smallint OUTPUT)
 AS
 BEGIN
 	IF EXISTS(SELECT * FROM Usuarios WHERE correo = @CorreoUsuario)
