@@ -76,3 +76,49 @@ BEGIN
 	SET @FilasModificadas = @@ROWCOUNT	--Nos devuelve el número de filas afectadas en la transacción anterior
 END
 GO
+
+GO
+/*
+Interfaz
+Nombre: obtenerApuestasNoContabilizadas
+Comentario: Este método nos permite obtener todas las apuestas no contabilizadas de un partido.
+Cabecera: function obtenerApuestasNoContabilizadas(@idPartido int)
+Entrada:
+	-@idPartido int
+Salida:
+	-Tabla de apuestas no contabilizadas
+Postcondiciones: El método devuelve una tabla con las apuestas no contabilizadas de un partido.
+*/
+CREATE FUNCTION obtenerApuestasNoContabilizadas(@idPartido int)
+RETURNS TABLE
+AS
+RETURN
+    SELECT * FROM Apuestas WHERE IDPartido = @idPartido AND Contabilizada = 0 --0 significa que no ha sido contabilizada
+GO
+
+/*
+Interfaz
+Nombre: contabilizarApuestasNoContabilizadas
+Comentario: Este método nos permite contabilizar todas las apuestas que se hayan realizado a un partido.
+Solo se contabilizará las apuestas que no hayan sido marcadas como contabilizada.
+Cabecera: procedure contabilizarApuestasNoContabilizadas(@idPartido int)
+Entrada:
+	-@idPartido int
+Postcondiciones: El método contabiliza todas las apuestas no marcadas de un partido específico.
+*/
+CREATE PROCEDURE contabilizarApuestasNoContabilizadas(@idPartido int)
+AS
+BEGIN
+	DECLARE puntero CURSOR FOR SELECT ID FROM Apuestas
+	OPEN puntero
+	FETCH NEXT FROM puntero INTO @IdApuesta --Nos permite apuntar al primer dato del cursor
+
+	WHILE (@@FETCH_STATUS = 0) --Mientras aún haya filas
+	BEGIN
+		--TODO Aqui tenemos que cambiar el tipo contabilizado de la apuestas a 1 e ingresar el beneficio de la apuesta si ha sido victoriosa
+		FETCH NEXT FROM puntero INTO @IdApuesta
+	END
+
+	CLOSE puntero
+	DEALLOCATE
+END
