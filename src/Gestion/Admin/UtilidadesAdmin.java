@@ -211,4 +211,47 @@ public class UtilidadesAdmin {
         return ret;
     }
 
+    /**
+     * Este metodo nos permitira consultar todas las apuestas y cuanto dinero se ha apostado a cada posible resultado
+     * @param idPartido el ide del partido que queremos consultar
+     */
+    public void consultarApuestasPartido(int idPartido){
+
+        int maxGolesLocales = 0, resultado = 0, maxGolesVisitantes;
+        try {
+            clsConexion miconexion = new clsConexion();
+            String conseguirGolesLocales = "Select MAX(NumGolesLocal) from ApuestaTipo1";
+            String conseguirGolesVisitantes = "SELECT MAX(numGolesVisitante) from ApuestaTipo1";
+            miconexion.abrirConexion();
+            Connection connexionBaseDatos = miconexion.getConnexionBaseDatos();
+            Statement sentencia = connexionBaseDatos.createStatement();
+            ResultSet golesL = sentencia.executeQuery(conseguirGolesLocales);
+            ResultSet golesV = sentencia.executeQuery(conseguirGolesVisitantes);
+            CallableStatement callStatementApuesta1 = miconexion.getConnexionBaseDatos().prepareCall("{call consultarApuestasTipo1(?,?,?)}");
+
+            maxGolesLocales = golesL.getInt("NumGolesLocal");
+            maxGolesVisitantes = golesV.getInt("numGolesVisitante");
+
+            //apuestas tipo 1
+
+            for (int i = 0; i< maxGolesLocales; i++){
+
+                for (int x = 0; i< maxGolesVisitantes; x++){
+
+
+
+                }
+
+            }
+
+        }
+        catch (SQLException r){
+            r.printStackTrace();
+        }
+
+        //apuestas tipo 2
+        //apuestas tipo 3
+
+    }
+
 }
