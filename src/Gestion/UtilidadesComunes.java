@@ -195,16 +195,17 @@ public class UtilidadesComunes {
 
         try {
             // Carga la clase del driver
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-
+            //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            clsConexion miConexion = new clsConexion();
             // Define the data source for the driver
-            String sourceURL = "jdbc:sqlserver://localhost";
+            /*String sourceURL = "jdbc:sqlserver://localhost";
             String usuario = "pablo";
-            String password = "qq";
-            String miSelect = "SELECT correo FROM Usuarios where contraseña = " +pass+" AND correo = " + user ;
+            String password = "qq";*/
+            String miSelect = "SELECT correo FROM Usuarios where contraseña = " +"'"+pass+"'"+" AND correo = "+"'" + user+"'" ;
 
             // Crear una connexion con el DriverManager
-            Connection connexionBaseDatos = DriverManager.getConnection(sourceURL, usuario, password);
+            miConexion.abrirConexion();
+            Connection connexionBaseDatos = miConexion.getConnexionBaseDatos();
             Statement sentencia = connexionBaseDatos.createStatement();
             ResultSet partidos = sentencia.executeQuery(miSelect);
 
@@ -214,8 +215,8 @@ public class UtilidadesComunes {
             }
             // Cerrar conexion
             connexionBaseDatos.close();
-        } catch (ClassNotFoundException cnfe) {
-            System.err.println(cnfe);
+        //} catch (ClassNotFoundException cnfe) {
+            //System.err.println(cnfe);
         } catch (SQLException sqle) {
             System.err.println(sqle);
         }

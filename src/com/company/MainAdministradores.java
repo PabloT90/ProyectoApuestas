@@ -30,16 +30,20 @@ public class MainAdministradores {
 
                         idPartido = UtilidadesAdmin.leerIDpartido();
 
-                        if (!UtilidadesAdmin.abrirPartido(idPartido)){
-                            System.out.println("Ha ocurrido un error");
+                        if (UtilidadesAdmin.abrirPartido(idPartido)){
+                            System.out.println("Se ha abierto correctamente.");
+                        }else{
+                            System.out.println("No se ha podido abrir.");
                         }
 
                         break;
                     case 3: //Cerrar partido
                         idPartido = UtilidadesComunes.leerIDpartido();
 
-                        if (!UtilidadesAdmin.cerrarPartido(idPartido)){
-                            System.out.println("Ha ocurrido un error");
+                        if (UtilidadesAdmin.cerrarPartido(idPartido)){
+                            System.out.println("Cerrado correctamente.");
+                        }else{
+                            System.out.println("No se ha podido cerrar correctamente.");
                         }
 
                         break;

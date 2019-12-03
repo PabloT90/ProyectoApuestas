@@ -181,16 +181,18 @@ public class UtilidadesAdmin {
         //Hacemos un SELECT con ese ID y si devuelve una fila es que existe.
         try {
             // Carga la clase del driver
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
             // Define the data source for the driver
-            String sourceURL = "jdbc:sqlserver://localhost";
+            /*String sourceURL = "jdbc:sqlserver://localhost";
             String usuario = "pablo";
-            String password = "qq";
+            String password = "qq";*/
+            clsConexion miConexion = new clsConexion();
             String miSelect = "SELECT id FROM Partidos where id = " +idPartido;
 
             // Crear una connexion con el DriverManager
-            Connection connexionBaseDatos = DriverManager.getConnection(sourceURL, usuario, password);
+            miConexion.abrirConexion();
+            Connection connexionBaseDatos = miConexion.getConnexionBaseDatos();
             Statement sentencia = connexionBaseDatos.createStatement();
             ResultSet partidos = sentencia.executeQuery(miSelect);
 
@@ -200,8 +202,8 @@ public class UtilidadesAdmin {
             }
             // Cerrar conexion
             connexionBaseDatos.close();
-        } catch (ClassNotFoundException cnfe) {
-            System.err.println(cnfe);
+        //} //catch (ClassNotFoundException cnfe) {
+            //System.err.println(cnfe);
         } catch (SQLException sqle) {
             System.err.println(sqle);
         }

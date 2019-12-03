@@ -39,8 +39,8 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1574761307522" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Driver JDBC/sqljdbc_7.4/esn/mssql-jdbc-7.4.1.jre11.jar!/" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
@@ -129,29 +129,37 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state width="1345" height="322" key="GridCell.Tab.0.bottom" timestamp="1575018843156">
+    <state x="389" y="105" key="FileChooserDialogImpl" timestamp="1575363154394">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="322" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575018843156" />
-    <state width="1345" height="322" key="GridCell.Tab.0.center" timestamp="1575018843156">
+    <state x="389" y="105" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575363154394" />
+    <state width="1345" height="466" key="GridCell.Tab.0.bottom" timestamp="1575363541585">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="322" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575018843156" />
-    <state width="1345" height="322" key="GridCell.Tab.0.left" timestamp="1575018843156">
+    <state width="1345" height="466" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575363541585" />
+    <state width="1345" height="466" key="GridCell.Tab.0.center" timestamp="1575363541585">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="322" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575018843155" />
-    <state width="1345" height="322" key="GridCell.Tab.0.right" timestamp="1575018843156">
+    <state width="1345" height="466" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575363541585" />
+    <state width="1345" height="466" key="GridCell.Tab.0.left" timestamp="1575363541585">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="322" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575018843156" />
-    <state x="379" y="187" key="com.intellij.ide.util.TipDialog" timestamp="1575017673995">
+    <state width="1345" height="466" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575363541585" />
+    <state width="1345" height="466" key="GridCell.Tab.0.right" timestamp="1575363541585">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="379" y="187" key="com.intellij.ide.util.TipDialog/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575017673995" />
-    <state x="1442" y="0" width="1153" height="611" maximized="true" key="dock-window-1" timestamp="1575018729216">
+    <state width="1345" height="466" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575363541585" />
+    <state x="163" y="0" key="SettingsEditor" timestamp="1575363163581">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="163" y="0" key="SettingsEditor/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575363163581" />
+    <state x="379" y="187" key="com.intellij.ide.util.TipDialog" timestamp="1575360961870">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="379" y="187" key="com.intellij.ide.util.TipDialog/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575360961870" />
+    <state x="1407" y="61" width="1153" height="611" key="dock-window-1" timestamp="1575363708786">
       <screen x="1366" y="0" width="1366" height="728" />
     </state>
-    <state x="1442" y="0" width="1153" height="611" maximized="true" key="dock-window-1/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575018729216" />
+    <state x="1407" y="61" width="1153" height="611" key="dock-window-1/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575363708786" />
   </component>
 </project>

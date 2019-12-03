@@ -68,9 +68,10 @@ public class MainUser {
             usuario = UtilidadesUser.LeerCorreo();
             pass = UtilidadesUser.LeerPassword();
 
-            if (UtilidadesComunes.existeCuenta(usuario, pass)) {
-                System.out.println("Bienvenido: " + usuario);
+            if (!UtilidadesComunes.existeCuenta(usuario, pass)) {
+                System.out.println("Credenciales incorrectas para el usuario: " + usuario);
             } else {
+                System.out.println("Bienvenido: " + usuario + ". Que quieres hacer?");
                 while ((opcionMenu = UtilidadesUser.MostrarMenuLeerValidarOpcion()) != 0) {
                     switch (opcionMenu) {
                         case 1: //Apostar partidos
