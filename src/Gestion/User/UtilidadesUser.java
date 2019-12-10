@@ -150,4 +150,37 @@ public class UtilidadesUser {
         }
     }
 
+    /**
+     * Muestra las apuestas que ha realizado un usuario y su resultado.
+     * @param usuario Correo del usuario.
+     */
+    public static void MostrarApuestasAnteriores(String usuario){
+        String isGanada;
+        try{
+            clsConexion miconexion = new clsConexion();
+            String miSelect = "SELECT * FROM Apuestas WHERE CorreoUsuario=" + "'" + usuario + "'";
+
+            //Crear una connexion con el DriverManager
+            miconexion.abrirConexion();
+            Connection connexionBaseDatos = miconexion.getConnexionBaseDatos();
+            Statement sentencia = connexionBaseDatos.createStatement();
+            ResultSet partidos = sentencia.executeQuery(miSelect);
+
+            // Mostrar los datos del ResultSet
+            while (partidos.next()) {
+                if(partidos.getBoolean("IsGanador")){
+                    isGanada = " Ganada.";
+                }else{
+                    isGanada = " Perdida.";
+                }
+                System.out.println("Cuota: " + partidos.getString("Cuota") + " || Cantidad apostada: " + partidos.getBigDecimal("DineroApostado") + " || Resultado: " + isGanada);
+            }
+
+            // Cerrar conexion
+            connexionBaseDatos.close();
+        } catch (SQLException sqle) {
+            System.err.println(sqle);
+        }
+    }
+
 }

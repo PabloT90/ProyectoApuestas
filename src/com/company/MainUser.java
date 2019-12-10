@@ -133,7 +133,7 @@ public class MainUser {
                             UtilidadesComunes.verPartidosDisponiblesParaApostar();
                             break;
                         case 3: //Comprobar resultados de apuestas anteriores
-
+                            UtilidadesUser.MostrarApuestasAnteriores(usuario);
                             break;
                         case 4: //Realizar ingreso
                             codDevuelto = UtilidadesUser.ingresarDinero(UtilidadesUser.LeerValidarDinero(), usuario);
