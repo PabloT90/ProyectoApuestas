@@ -109,16 +109,17 @@ Postcondiciones: El método contabiliza todas las apuestas no marcadas de un part
 CREATE PROCEDURE contabilizarApuestasNoContabilizadas(@idPartido int)
 AS
 BEGIN
-	DECLARE puntero CURSOR FOR SELECT ID FROM Apuestas
+	DECLARE @IdApuesta int
+	DECLARE puntero CURSOR FOR SELECT ID, Contabilizada FROM Apuestas WHERE IDPartido = @idPartido AND Contabilizada = 0
 	OPEN puntero
 	FETCH NEXT FROM puntero INTO @IdApuesta --Nos permite apuntar al primer dato del cursor
 
 	WHILE (@@FETCH_STATUS = 0) --Mientras aún haya filas
 	BEGIN
-		--TODO Aqui tenemos que cambiar el tipo contabilizado de la apuestas a 1 e ingresar el beneficio de la apuesta si ha sido victoriosa
+		UPDATE Apuestas SET Contabilizada = 1 WHERE ID = @IdApuesta--Ya existe un trigger que ingresa el beneficio de la apuesta que hayan sido victoriosas
 		FETCH NEXT FROM puntero INTO @IdApuesta
 	END
 
+	--DEALLOCATE puntero --Liberamos los recursos del puntero
 	CLOSE puntero
-	DEALLOCATE
 END
