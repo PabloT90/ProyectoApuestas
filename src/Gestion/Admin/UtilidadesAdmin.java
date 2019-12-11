@@ -215,7 +215,7 @@ public class UtilidadesAdmin {
                     callStatementApuesta1.setInt(3,x);
                     resultado = callStatementApuesta1.executeQuery();
 
-                    String dineros = "SELECT SUM(DineroApostado) AS [Dineros]FROM Apuestas WHERE IDPartido = " + resultado.getInt("id") ;
+                    String dineros = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + resultado.getInt("id") +" AND Tipo = 1" ;
 
                     ResultSet dineroPartido = sentencia.executeQuery(dineros);
 
@@ -226,7 +226,6 @@ public class UtilidadesAdmin {
             }
 
             //apuestas tipo 2
-            //TODO creo que le tengo que hacer un rework a todo
             CallableStatement callStatementApuesta2 = miconexion.getConnexionBaseDatos().prepareCall("{call consultarApuestasTipo2(?,?,?)}");
             String conseguirApuesta2 = "SELECT ID FROM Apuestas WHERE IDPartido = " + idPartido+ "AND Tipo = 2";
             ResultSet partidos2 = sentencia.executeQuery(conseguirApuesta2);
@@ -234,21 +233,76 @@ public class UtilidadesAdmin {
             ResultSet goles = sentencia.executeQuery(conseguirgoles2);
             int maxgoles2 = goles.getInt("Goles");
             ResultSet resultado2;
+
+            //Visitante
             for (int i = 0; i < maxgoles2; i++){
 
                 callStatementApuesta2.setInt(1,idPartido);
                 callStatementApuesta2.setString(2, "Visitante");
                 callStatementApuesta2.setInt(3,i);
                 resultado2 = callStatementApuesta2.executeQuery();
+                String dineros = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + resultado2.getInt("id") +" AND Tipo = 2" ;
 
+                ResultSet dineroPartido = sentencia.executeQuery(dineros);
+
+                if(resultado2.getString("id") == null){
+                    System.out.println("Goles: " +resultado2.getString("goles")+ " Equipo ganador " + resultado2.getString("equipo") + " Dinero partido: "+ dineroPartido.getInt("Dineros") );
+                }
             }
 
+            //Local
+            for (int i = 0; i < maxgoles2; i++){
+
+                callStatementApuesta2.setInt(1,idPartido);
+                callStatementApuesta2.setString(2, "Local");
+                callStatementApuesta2.setInt(3,i);
+                resultado2 = callStatementApuesta2.executeQuery();
+                String dineros = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + resultado2.getInt("id") +" AND Tipo = 2" ;
+
+                ResultSet dineroPartido = sentencia.executeQuery(dineros);
+                if(resultado2.getString("id") == null){
+                    System.out.println("Goles: " +resultado2.getString("goles")+ " Equipo ganador " + resultado2.getString("equipo") + " Dinero partido: "+ dineroPartido.getInt("Dineros"));
+                }
+            }
+
+            //apuestas tipo 3
+            //Local
+            CallableStatement callStatementApuesta3 = miconexion.getConnexionBaseDatos().prepareCall("{call consultarApuestasTipo3(?,?)}");
+            String conseguirApuesta3 = "SELECT ID FROM Apuestas WHERE IDPartido = " + idPartido+ "AND Tipo = 2";
+            ResultSet partidos3 = sentencia.executeQuery(conseguirApuesta2);
+            int maxgoles3 = goles.getInt("Goles");
+            ResultSet resultado3L;
+            callStatementApuesta3.setInt(1,idPartido);
+            callStatementApuesta3.setString(2,"Local");
+            resultado3L = callStatementApuesta3.executeQuery();
+            String dineros3L = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + resultado3L.getInt("id") +" AND Tipo = 3" ;
+            ResultSet dineroPartido3L = sentencia.executeQuery(dineros3L);
+
+            if (resultado3L.getString("id") == null){
+                System.out.println("Equipo ganandor"+ resultado3L.getString("ganador")+" dinero "+ dineroPartido3L.getInt("Dineros"));
+            }
+
+            //Visitante
+            CallableStatement callStatementApuesta3V = miconexion.getConnexionBaseDatos().prepareCall("{call consultarApuestasTipo3(?,?)}");
+            String conseguirApuesta3V = "SELECT ID FROM Apuestas WHERE IDPartido = " + idPartido+ "AND Tipo = 2";
+            ResultSet partidos3V = sentencia.executeQuery(conseguirApuesta2);
+            int maxgoles3V = goles.getInt("Goles");
+            ResultSet resultado3V;
+            callStatementApuesta3.setInt(1,idPartido);
+            callStatementApuesta3.setString(2,"Visitante");
+            resultado3V = callStatementApuesta3.executeQuery();
+            String dineros3V = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + resultado3L.getInt("id") +" AND Tipo = 3" ;
+            ResultSet dineroPartido3V = sentencia.executeQuery(dineros3V);
+
+            if (resultado3L.getString("id") == null){
+                System.out.println("Equipo ganandor"+ resultado3V.getString("ganador")+" dinero "+ dineroPartido3V.getInt("Dineros"));
+            }
 
         }
         catch (SQLException r){
             r.printStackTrace();
         }
-        //apuestas tipo 3
+
 
     }
 

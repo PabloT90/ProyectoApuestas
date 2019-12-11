@@ -19,15 +19,9 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/com/company/MainAdministradores.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Gestion/UtilidadesComunes.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/com/company/MainUser.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Gestion/Admin/UtilidadesAdmin.java" root0="FORCE_HIGHLIGHTING" />
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
+    <setting file="file://$PROJECT_DIR$/src/Gestion/Admin/UtilidadesAdmin.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Gestion/UtilidadesComunes.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectId" id="1TKJg7mfOEeQUtCLUB33qhbOqem" />
   <component name="ProjectViewState">
@@ -109,11 +103,10 @@
       <workItem from="1575016880751" duration="2021000" />
       <workItem from="1575278713131" duration="2528000" />
       <workItem from="1575361060384" duration="3054000" />
+      <workItem from="1576066035494" duration="303000" />
+      <workItem from="1576066380009" duration="3985000" />
     </task>
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10812000" />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -132,6 +125,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
+    <state x="531" y="252" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1576066268160">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="531" y="252" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1576066268160" />
     <state x="389" y="105" key="FileChooserDialogImpl" timestamp="1575363154394">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -152,14 +149,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1345" height="295" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575969902252" />
-    <state x="163" y="0" key="SettingsEditor" timestamp="1575363163581">
+    <state x="163" y="0" key="SettingsEditor" timestamp="1576066337932">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="163" y="0" key="SettingsEditor/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575363163581" />
-    <state x="379" y="187" key="com.intellij.ide.util.TipDialog" timestamp="1575360961870">
+    <state x="163" y="0" key="SettingsEditor/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1576066337932" />
+    <state x="379" y="187" key="com.intellij.ide.util.TipDialog" timestamp="1576066381159">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="379" y="187" key="com.intellij.ide.util.TipDialog/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575361060922" />
+    <state x="379" y="187" key="com.intellij.ide.util.TipDialog/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1576066381159" />
     <state x="1442" y="0" width="1153" height="611" maximized="true" key="dock-window-1" timestamp="1575018729216">
       <screen x="1366" y="0" width="1366" height="728" />
     </state>
