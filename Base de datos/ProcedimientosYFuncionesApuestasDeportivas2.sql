@@ -159,7 +159,9 @@ BEGIN
 			BEGIN
 				IF @Ganador = 'local' OR @Ganador = 'visitante'
 				BEGIN
-					INSERT INTO Apuestas VALUES(dbo.obtenerCuotaTipo3(@IdPartido, @CapitalAApostar, @Ganador), CURRENT_TIMESTAMP, @CapitalAApostar, @Correo, @IdPartido, 1, null)  
+					DECLARE @FechaActual smalldatetime = CURRENT_TIMESTAMP
+					INSERT INTO Apuestas VALUES(dbo.obtenerCuotaTipo3(@IdPartido, @CapitalAApostar, @Ganador), @FechaActual, @CapitalAApostar, @Correo, @IdPartido, 1, null)  
+					INSERT INTO ApuestaTipo3 VALUES((SELECT ID FROM Apuestas WHERE IDPartido = @IdPartido AND CorreoUsuario = @Correo AND FechaHoraApuesta = @FechaActual), @Ganador)
 					SET @Error = -0
 				END
 				ELSE
