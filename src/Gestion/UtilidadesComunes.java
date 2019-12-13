@@ -552,4 +552,22 @@ public class UtilidadesComunes {
 
         return resultado;
     }
+
+    /*
+    * Interfaz
+    * Nombre: convertUtilToSql
+    * Comentario: Este método nos permite convertir un tipo java.util.Date
+    * a un tipo java.sql.Date.
+    * Cabecera: private static java.sql.Date convertUtilToSql(java.util.Date uDate)
+    * Entrada:
+    *   -java.util.Date uDate
+    * Salida:
+    *   -java.sql.Date sDate
+    * Postcondiciones: El método devuelve un tipo java.util.Date asociado al nombre,
+    * que es la conversión del tipo java.util.Date.
+    * */
+    public static java.sql.Date convertUtilToSql(java.util.Date uDate) {
+        java.sql.Date sDate = new java.sql.Date(uDate.getTime());
+        return sDate;
+    }
 }

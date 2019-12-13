@@ -2,6 +2,8 @@ package Gestion.Admin;
 
 import Conexion.clsConexion;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 public class UtilidadesAdmin {
@@ -42,78 +44,173 @@ public class UtilidadesAdmin {
     }
 
 
-    /*
+    /**
     * Interfaz
     * Nombre: insertarPartido
     * Comentario: Este método nos permite insertar un nuevo partido en la base de datos.
-    * Cabecera: public boolean crearPartido(String nombreCompeticion, String )
-    * */
-    public boolean insertarPartido(){
-        boolean ret = true;
-
-        return ret;
-    }
-
-    /**
-    * Interfaz
-    * Nombre: leerYValidarCampeonato
-    * Comentario: Este método nos permite obtener la id de un campeonato existente
-    * en la base de datos.
-    * Cabecera: public int leerYValidarCampeonato()
-    * Salida:
-    *   -int idCampeonato
-    * Postcondiciones: El método devuelve un número entero asociado al nombre,
-    * que es el id del campeonato o 0 si no has elegido ninguno.
-    * */
-    public int leerYValidarCampeonato(){
-        int idCampeonato = 0;
-        clsConexion conexion = new clsConexion();
-        int resultado = 0, error = 0;
-
-        do{
-
-        }while (idCampeonato != 0 && !campeonatoEncontrado(idCampeonato));
-
-        return idCampeonato;
-    }
-
-    /**
-    * Interfaz
-    * Nombre: campeonatoEncontrado
-    * Comentario: Este método nos permite verificar si existe un campeonato con un
-    * id en epecífica en la base de datos.
-    * Cabecera: public static boolean campeonatoEncontrado(int id)
+    * Cabecera: public static boolean crearPartido(double maximoTipo1, double maximoTipo2, double maximoTipo3, Date fechaPartido)
     * Entrada:
-    *   -int id
-    * Postcondiciones: El método devuelve un vaor booleano asociado al nombre,
-    * true si existe ese campeonato o false en caso contrario.
+    *   -double maximoTipo1
+    *   -double maximoTipo2
+    *   -double maximoTipo3
+    *   -Date fechaPartido
+    * Salida:
+    *   -boolean insertado
+    * Postcondiciones: Este método nos devuelve un valor booleano asociado al nombre, true si se ha
+    * conseguido insertar el nuevo partido en la base de datos o false en caso contrario.
     * */
-    public static boolean campeonatoEncontrado(int id){
-        boolean ret = false;
+    public static boolean insertarPartido(double maximoTipo1, double maximoTipo2, double maximoTipo3, Date fechaPartido){
+        boolean insertado = true;
 
-        //Hacemos un SELECT con ese ID y si devuelve una fila es que existe.
+        clsConexion conexion = new clsConexion();
+
         try {
-            clsConexion miConexion = new clsConexion();
-            String miSelect = "SELECT id FROM Competiciones where id = " +id;
-
-            // Crear una connexion con el DriverManager
-            miConexion.abrirConexion();
-            Connection connexionBaseDatos = miConexion.getConnexionBaseDatos();
-            Statement sentencia = connexionBaseDatos.createStatement();
-            ResultSet partidos = sentencia.executeQuery(miSelect);
-
-            // Mostrar los datos del ResultSet
-            if(partidos.next()){ //Si tiene una fila
-                ret = true;
+            conexion.abrirConexion();
+            CallableStatement cstmt = conexion.getConnexionBaseDatos().prepareCall("{call insertarPartido(?,?,?,?)}");
+            cstmt.setDouble(1, maximoTipo1);
+            cstmt.setDouble(2, maximoTipo2);
+            cstmt.setDouble(3, maximoTipo3);
+            cstmt.setDate(4, fechaPartido);
+            if (cstmt.executeUpdate() <= 0){//Si no se ha conseguido insertar ninguna fila
+                insertado = false;
             }
-            // Cerrar conexion
-            connexionBaseDatos.close();
-        } catch (SQLException sqle) {
-            System.err.println(sqle);
+            conexion.cerrarConexion();
+        } catch (SQLException e){
+            e.printStackTrace();
         }
 
-        return ret;
+        return insertado;
     }
+
+    /**
+    * Interfaz
+    * Nombre: leerYValidarMaximoApuestaTipo1
+    * Comentario: Este método nos permite leer y validar el capital máximo
+    * para una apuesta del tipo1
+    * Cabecera: public static double leerYValidarMaximoApuestaTipo1()
+    * Salida:
+    *   -double maximoApuesta
+    * Postcondiciones: El método devuelve un número entero asociado al nombre,
+    * que es el máximo posible de capital que se puede apostar al tipo 1.
+    * */
+    public static double leerYValidarMaximoApuestaTipo1(){
+        Scanner teclado = new Scanner(System.in);
+        double maximoApuesta = 0.0;
+
+        do{
+            System.out.println("Indica el maximo para apuestas del tipo 1 en este partido (Debe ser mayor que 0).");
+            maximoApuesta = teclado.nextDouble();
+        }while (maximoApuesta <= 0);
+
+        return maximoApuesta;
+    }
+
+    /**
+     * Interfaz
+     * Nombre: leerYValidarMaximoApuestaTipo2
+     * Comentario: Este método nos permite leer y validar el capital máximo
+     * para una apuesta del tipo2
+     * Cabecera: public static double leerYValidarMaximoApuestaTipo2()
+     * Salida:
+     *   -double maximoApuesta
+     * Postcondiciones: El método devuelve un número entero asociado al nombre,
+     * que es el máximo posible de capital que se puede apostar al tipo 2.
+     * */
+    public static double leerYValidarMaximoApuestaTipo2(){
+        Scanner teclado = new Scanner(System.in);
+        double maximoApuesta = 0.0;
+
+        do{
+            System.out.println("Indica el maximo para apuestas del tipo 2 en este partido (Debe ser mayor que 0).");
+            maximoApuesta = teclado.nextDouble();
+        }while (maximoApuesta <= 0);
+
+        return maximoApuesta;
+    }
+
+    /**
+    * Interfaz
+    * Nombre: leerYValidarFechaPartido
+    * Comentario: Este método nos permite leer y validar una fecha para un partido.
+    * Cabecera: public static Date leerYValidarFechaPartido()
+    * Salida:
+    *   -Date fechaValida
+    * Postcondiciones: El método devuelve un tipo Date asociado al nombre,
+    * que es la fecha válida.
+    * */
+    public static Date leerYValidarFechaPartido(){
+        Scanner teclado = new Scanner(System.in);
+        int anno = 0, mes = 0, dia = 0;
+        boolean correcto = false;
+
+        do{
+            System.out.println("Introduce el anno del partido.");
+            anno = teclado.nextInt();
+            System.out.println("Introduce el mes del partido.");
+            mes = teclado.nextInt();
+            System.out.println("Introduce el dia del partido.");
+            dia = teclado.nextInt();
+
+            if(!fechaValida(anno, mes, dia)){
+                System.out.println("La fecha "+anno+"/"+mes+"/"+dia+" no es correcta.");
+            }
+        }while (!fechaValida(anno, mes, dia));
+
+        return new Date(anno, mes, dia);
+    }
+
+    /**
+    * Interfaz
+    * Nombre: fechaValida
+    * Comentario: Este método nos permite verificar si una fecha es válida.
+    * Cabecera: public static boolean fechaValida(int anno, int mes, int dia)
+    * Entrada:
+    *   -int anno
+    *   -int mes
+    *   -int dia
+    * Salida:
+    *   -boolean fechaValida
+    * Postcondiciones: Este método nos devuelve un valor booleano asociado al nombre,
+    * true si la fecha es válida o false en caso contrario.
+    * */
+    public static boolean fechaValida(int anno, int mes, int dia){
+        boolean fechaValida = false;
+
+        try {
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");//Formato
+            formatoFecha.setLenient(false);
+            formatoFecha.parse(dia+"/"+mes+"/"+anno);//Intentamos parsearla, si falla nos salta una excepción
+            fechaValida = true;
+        } catch (ParseException e) {
+            fechaValida = false;
+        }
+
+        return fechaValida;
+    }
+
+    /**
+     * Interfaz
+     * Nombre: leerYValidarMaximoApuestaTipo3
+     * Comentario: Este método nos permite leer y validar el capital máximo
+     * para una apuesta del tipo3
+     * Cabecera: public static double leerYValidarMaximoApuestaTipo3()
+     * Salida:
+     *   -double maximoApuesta
+     * Postcondiciones: El método devuelve un número entero asociado al nombre,
+     * que es el máximo posible de capital que se puede apostar al tipo 3.
+     * */
+    public static double leerYValidarMaximoApuestaTipo3(){
+        Scanner teclado = new Scanner(System.in);
+        double maximoApuesta = 0.0;
+
+        do{
+            System.out.println("Indica el maximo para apuestas del tipo 3 en este partido (Debe ser mayor que 0).");
+            maximoApuesta = teclado.nextDouble();
+        }while (maximoApuesta <= 0);
+
+        return maximoApuesta;
+    }
+
 
     /**
      * Abre el partido del mismo id que el que se le pasa

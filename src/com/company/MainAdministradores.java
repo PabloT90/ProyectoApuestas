@@ -3,6 +3,9 @@ package com.company;
 import Gestion.Admin.UtilidadesAdmin;
 import Gestion.UtilidadesComunes;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 /*
 si quiere ejecutar
     mientras no quiera salir (opcionMenu != 6)
@@ -19,12 +22,18 @@ fin_si
 public class MainAdministradores {
     public static void main(String[]args){
         int opcionMenu = 0, idPartido = 0;
+        double maximoApuesta1, maximoApuesta2, maximoApuesta3;
+        Date fechaPartido;
 
         if(UtilidadesAdmin.leerValidarEjecutar() == 's') {
             while ((opcionMenu = UtilidadesAdmin.MostrarMenuLeerValidarOpcion()) != 0) {
                 switch (opcionMenu) {
                     case 1: //Crear partido
-
+                        maximoApuesta1 = UtilidadesAdmin.leerYValidarMaximoApuestaTipo1();
+                        maximoApuesta2 = UtilidadesAdmin.leerYValidarMaximoApuestaTipo2();
+                        maximoApuesta3 = UtilidadesAdmin.leerYValidarMaximoApuestaTipo3();
+                        fechaPartido = UtilidadesAdmin.leerYValidarFechaPartido();
+                        UtilidadesAdmin.insertarPartido(maximoApuesta1, maximoApuesta2, maximoApuesta3, UtilidadesComunes.convertUtilToSql(fechaPartido));
                         break;
                     case 2: //Abrir partido
 
