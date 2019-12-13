@@ -15,6 +15,8 @@ insert into Partidos values(4,5,1,20,30,60,'2019-25-11 11:00:00',(Select id From
 insert into Partidos values(1,6,0,35,20,50,'2019-10-12 11:00:00',(Select id From Competiciones Where nombre = 'Copa autoestima'))
 insert into Partidos values(4,5,0,50,30,35,'2019-3-12 11:00:00',(Select id From Competiciones Where nombre = 'Copa del Rey'))
 insert into Partidos values(4,5,0,50,50,35,'2019-3-12 11:00:00',(Select id From Competiciones Where nombre = 'Copa del Rey'))
+--
+insert into Partidos values(4,5,0,50,50,35,'2019-3-12 11:00:00',(Select id From Competiciones Where nombre = 'Copa autoestima'))
 
 SELECT * FROM Partidos
 insert into Partidos values(1,2,0,35,20,50,'2019-10-11 11:00:00',(Select id From Competiciones Where nombre = 'Copa del Rey'))

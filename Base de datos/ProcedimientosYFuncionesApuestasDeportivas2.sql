@@ -20,7 +20,7 @@ Salidas:
 Postcondiciones: El procedimiento nos permite realizar una apuesta del tipo 1. El procedimiento
 devuelve 0 si se ha realizado correctamente la apuesta, -1 si el correo es incorrecto, -2
 si el partido no existe, -3 si el capital es negativo o igual a 0, -4 si el
-número de goles locales en menor que 0 o -5 si el número de goles del visitante es menor que 0.
+número de goles locales en menor que 0 , -5 si el número de goles del visitante es menor que 0 o -6 si la cuota es menor que 1,5.
 */
 CREATE PROCEDURE realizarApuestaTipo1(@FechaHora smalldatetime, @CapitalAApostar smallmoney, @Correo char(30), @IdPartido int, @NumGolesLocal smallint, @NumGolesVisitante smallint, @Error smallint OUTPUT)
 AS
@@ -35,8 +35,18 @@ BEGIN
 				BEGIN
 					IF @NumGolesVisitante >= 0
 					BEGIN
-						INSERT INTO Apuestas VALUES(dbo.obtenerCuotaTipo1(@IdPartido, @CapitalAApostar, @NumGolesLocal, @NumGolesVisitante), CURRENT_TIMESTAMP, @CapitalAApostar, @Correo, @IdPartido, 1, null)  
-						SET @Error = -0
+						DECLARE @Cuota tinyint = dbo.obtenerCuotaTipo1(@IdPartido, @CapitalAApostar, @NumGolesLocal, @NumGolesVisitante)
+						IF @Cuota > 1.5
+						BEGIN
+							DECLARE @FechaActual smalldatetime = CURRENT_TIMESTAMP
+							INSERT INTO Apuestas VALUES(@Cuota, @FechaActual, @CapitalAApostar, @Correo, @IdPartido, 1, null)  
+							INSERT INTO ApuestaTipo1 VALUES((SELECT ID FROM Apuestas WHERE IDPartido = @IdPartido AND CorreoUsuario = @Correo AND FechaHoraApuesta = @FechaActual), @NumGolesLocal,@NumGolesVisitante)
+							SET @Error = -0
+						END
+						ELSE
+						BEGIN
+							SET @Error = -6
+						END
 					END
 					ELSE
 					BEGIN
@@ -83,7 +93,7 @@ Salidas:
 Postcondiciones: El procedimiento nos permite realizar una apuesta del tipo 2. El procedimiento
 devuelve 0 si se ha realizado correctamente la apuesta, -1 si el correo es incorrecto, -2
 si el partido no existe, -3 si el capital es negativo o igual a 0, -4 si el
-equipo no es igual a 'local' o 'visitante' o -5 si el número de goles es menor que 0.
+equipo no es igual a 'local' o 'visitante' , -5 si el número de goles es menor que 0 o -6 si la cuota es menor que 1,5.
 */
 CREATE PROCEDURE realizarApuestaTipo2(@FechaHora smalldatetime, @CapitalAApostar smallmoney, @Correo char(30), @IdPartido int, @Equipo varchar(10), @Goles smallint, @Error smallint OUTPUT)
 AS
@@ -98,8 +108,18 @@ BEGIN
 				BEGIN
 					IF @Goles >= 0
 					BEGIN
-						INSERT INTO Apuestas VALUES(dbo.obtenerCuotaTipo2(@IdPartido, @CapitalAApostar, @Equipo, @Goles), CURRENT_TIMESTAMP, @CapitalAApostar, @Correo, @IdPartido, 1, null)  
-						SET @Error = -0
+						DECLARE @Cuota tinyint = dbo.obtenerCuotaTipo2(@IdPartido, @CapitalAApostar, @Equipo, @Goles)
+						IF @Cuota > 1.5
+						BEGIN
+							DECLARE @FechaActual smalldatetime = CURRENT_TIMESTAMP
+							INSERT INTO Apuestas VALUES(@Cuota, @FechaActual, @CapitalAApostar, @Correo, @IdPartido, 2, null)  
+							INSERT INTO ApuestaTipo2 VALUES((SELECT ID FROM Apuestas WHERE IDPartido = @IdPartido AND CorreoUsuario = @Correo AND FechaHoraApuesta = @FechaActual), @Equipo,@Goles)
+							SET @Error = -0
+						END
+						ELSE
+						BEGIN
+						 SET @Error = -6
+						END
 					END
 					ELSE
 					BEGIN
@@ -146,7 +166,7 @@ Salidas:
 Postcondiciones: El procedimiento nos permite realizar una apuesta del tipo 2. El procedimiento
 devuelve 0 si se ha realizado correctamente la apuesta, -1 si el correo es incorrecto, -2
 si el partido no existe, -3 si el capital es negativo o igual a 0, -4 si el
-el ganador es diferente de 'local' o 'visitante'.
+el ganador es diferente de 'local' o 'visitante', -5 si la cuota es menor que 1,5.
 */
 CREATE PROCEDURE realizarApuestaTipo3(@FechaHora smalldatetime, @CapitalAApostar smallmoney, @Correo char(30), @IdPartido int, @Ganador varchar(15), @Error smallint OUTPUT)
 AS
@@ -159,10 +179,18 @@ BEGIN
 			BEGIN
 				IF @Ganador = 'local' OR @Ganador = 'visitante'
 				BEGIN
-					DECLARE @FechaActual smalldatetime = CURRENT_TIMESTAMP
-					INSERT INTO Apuestas VALUES(dbo.obtenerCuotaTipo3(@IdPartido, @CapitalAApostar, @Ganador), @FechaActual, @CapitalAApostar, @Correo, @IdPartido, 1, null)  
-					INSERT INTO ApuestaTipo3 VALUES((SELECT ID FROM Apuestas WHERE IDPartido = @IdPartido AND CorreoUsuario = @Correo AND FechaHoraApuesta = @FechaActual), @Ganador)
-					SET @Error = -0
+					DECLARE @Cuota tinyint = dbo.obtenerCuotaTipo3(@IdPartido, @CapitalAApostar, @Ganador)
+					IF @Cuota > 1.5
+					BEGIN
+						DECLARE @FechaActual smalldatetime = CURRENT_TIMESTAMP
+						INSERT INTO Apuestas VALUES(@Cuota, @FechaActual, @CapitalAApostar, @Correo, @IdPartido, 3, null)  
+						INSERT INTO ApuestaTipo3 VALUES((SELECT ID FROM Apuestas WHERE IDPartido = @IdPartido AND CorreoUsuario = @Correo AND FechaHoraApuesta = @FechaActual), @Ganador)
+						SET @Error = -0
+					END
+					ELSE
+					BEGIN
+						SET @Error = -5
+					END
 				END
 				ELSE
 				BEGIN

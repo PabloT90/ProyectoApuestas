@@ -255,19 +255,25 @@ public class UtilidadesAdmin {
 
         int maxGolesLocales = 0, maxGolesVisitantes;
         ResultSet resultado;
+        clsConexion miconexion = new clsConexion();
         try {
 
             //apuestas tipo 1
-            clsConexion miconexion = new clsConexion();
+            //Conexiones
             miconexion.abrirConexion();
             Connection connexionBaseDatos = miconexion.getConnexionBaseDatos();
             Statement sentencia = connexionBaseDatos.createStatement();
+
+            //Para conseguir el id de apuesta
             String conseguirIDApuesta = "SELECT ID FROM Apuesta WHERE IDPartido = "+ idPartido + "AND Tipo = 1";
             ResultSet ApuestaID = sentencia.executeQuery(conseguirIDApuesta);
+
+            //Consigo los goles de esa apuesta
             String conseguirGolesLocales = "Select MAX(NumGolesLocal) AS [NumGolesLocal]from ApuestaTipo1 WHERE id = " + ApuestaID.getInt("ID");
             String conseguirGolesVisitantes = "SELECT MAX(numGolesVisitante) AS [numGolesVisitante]from ApuestaTipo1 WHERE id = "+ ApuestaID.getInt("ID");
             ResultSet golesL = sentencia.executeQuery(conseguirGolesLocales);
             ResultSet golesV = sentencia.executeQuery(conseguirGolesVisitantes);
+            //Llamo a la primera funcion
             CallableStatement callStatementApuesta1 = miconexion.getConnexionBaseDatos().prepareCall("{call consultarApuestasTipo1(?,?,?)}");
 
             maxGolesLocales = golesL.getInt("NumGolesLocal");
@@ -294,9 +300,12 @@ public class UtilidadesAdmin {
             }
 
             //apuestas tipo 2
+            //Llamo a la segunda funcion
             CallableStatement callStatementApuesta2 = miconexion.getConnexionBaseDatos().prepareCall("{call consultarApuestasTipo2(?,?,?)}");
+            //Consigo el id de la apuesta2
             String conseguirApuesta2 = "SELECT ID FROM Apuestas WHERE IDPartido = " + idPartido+ "AND Tipo = 2";
             ResultSet partidos2 = sentencia.executeQuery(conseguirApuesta2);
+            //Consigo los goles 
             String conseguirgoles2 = "SELECT MAX(goles) AS [Goles] from ApuestaTipo2 WHERE id = "+ partidos2.getInt("ID");
             ResultSet goles = sentencia.executeQuery(conseguirgoles2);
             int maxgoles2 = goles.getInt("Goles");
