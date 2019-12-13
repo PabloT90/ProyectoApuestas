@@ -183,7 +183,7 @@ public class UtilidadesAdmin {
      * Este metodo nos permitira consultar todas las apuestas y cuanto dinero se ha apostado a cada posible resultado
      * @param idPartido el ide del partido que queremos consultar
      */
-    public void consultarApuestasPartido(int idPartido){
+    public static void consultarApuestasPartido(int idPartido){
 
         int maxGolesLocales = 0, maxGolesVisitantes;
         ResultSet resultado;

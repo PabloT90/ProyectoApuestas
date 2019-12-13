@@ -22,7 +22,7 @@ devuelve 0 si se ha realizado correctamente la apuesta, -1 si el correo es incor
 si el partido no existe, -3 si el capital es negativo o igual a 0, -4 si el
 número de goles locales en menor que 0 o -5 si el número de goles del visitante es menor que 0.
 */
-CREATE PROCEDURE realizarApuestaTipo1(@FechaHora smalldatetime, @CapitalAApostar smallmoney, @Correo char(30), @IdPartido int, @NumGolesLocal tinyint, @NumGolesVisitante tinyint, @Error smallint OUTPUT)
+CREATE PROCEDURE realizarApuestaTipo1(@FechaHora smalldatetime, @CapitalAApostar smallmoney, @Correo char(30), @IdPartido int, @NumGolesLocal smallint, @NumGolesVisitante smallint, @Error smallint OUTPUT)
 AS
 BEGIN
 	IF EXISTS(SELECT * FROM Usuarios WHERE correo = @Correo)
@@ -85,7 +85,7 @@ devuelve 0 si se ha realizado correctamente la apuesta, -1 si el correo es incor
 si el partido no existe, -3 si el capital es negativo o igual a 0, -4 si el
 equipo no es igual a 'local' o 'visitante' o -5 si el número de goles es menor que 0.
 */
-CREATE PROCEDURE realizarApuestaTipo2(@FechaHora smalldatetime, @CapitalAApostar smallmoney, @Correo char(30), @IdPartido int, @Equipo varchar(10), @Goles tinyint, @Error smallint OUTPUT)
+CREATE PROCEDURE realizarApuestaTipo2(@FechaHora smalldatetime, @CapitalAApostar smallmoney, @Correo char(30), @IdPartido int, @Equipo varchar(10), @Goles smallint, @Error smallint OUTPUT)
 AS
 BEGIN
 	IF EXISTS(SELECT * FROM Usuarios WHERE correo = @Correo)

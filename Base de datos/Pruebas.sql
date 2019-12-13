@@ -150,6 +150,276 @@ SET @retirado = 10000
 EXECUTE dbo.retirarCapitalCuenta 'decisionesdificile@gmail.com',@retirado,@resultado OUTPUT
 SELECT @resultado as resultado
 
+--Funciones del ejercicio 10 
+SELECT * FROM Apuestas
+SELECT * FROM ApuestaTipo1
+SELECT * FROM ApuestaTipo2
+SELECT * FROM ApuestaTipo3
+
+SELECT * FROM dbo.consultarApuestasTipo1 (7,4,5)
+SELECT * FROM dbo.consultarApuestasTipo2(6,'Visitante',2)
+SELECT * FROM dbo.consultarApuestasTipo3(5,'visitante')
+
+GO
+--Procedure realizarApuestaTipo1
+--0
+--DECLARE @Correo char = 'sulviagurdilloabcdef@gmail.com'
+--SELECT * FROM Usuarios WHERE correo = 'sulviagurdilloabcdef@gmail.com'
+SELECT * FROM Apuestas
+SELECT * FROM ApuestaTipo1
+DECLARE @fechaHora smalldatetime = '2019-3-12 10:01:00'
+DECLARE @capital smallmoney = 20
+DECLARE @IDPartido int = 1
+DECLARE @GolesL int = 3
+DECLARE @GolesV int = 2
+DECLARE @resultado smallint
+EXECUTE dbo.realizarApuestaTipo1 @fechaHora, @capital,'sulviagurdilloabcdef@gmail.com',@IDPartido,@GolesL,@GolesV,@resultado OUTPUT
+SELECT @resultado
+
+-- -1
+GO
+DECLARE @fechaHora smalldatetime = '2019-3-12 10:01:00'
+DECLARE @capital smallmoney = 20
+DECLARE @IDPartido int = 1
+DECLARE @GolesL int = 3
+DECLARE @GolesV int = 2
+DECLARE @resultado smallint
+EXECUTE dbo.realizarApuestaTipo1 @fechaHora, @capital,'correoerroeno',@IDPartido,@GolesL,@GolesV,@resultado OUTPUT
+SELECT @resultado
+GO
+
+-- -2
+
+GO
+DECLARE @fechaHora smalldatetime = '2019-3-12 10:01:00'
+DECLARE @capital smallmoney = 20
+DECLARE @IDPartido int = 7
+DECLARE @GolesL int = 3
+DECLARE @GolesV int = 2
+DECLARE @resultado smallint
+EXECUTE dbo.realizarApuestaTipo1 @fechaHora, @capital,'sulviagurdilloabcdef@gmail.com',@IDPartido,@GolesL,@GolesV,@resultado OUTPUT
+SELECT @resultado
+GO
+
+-- -3
+
+GO
+DECLARE @fechaHora smalldatetime = '2019-3-12 10:01:00'
+DECLARE @capital smallmoney = 0
+DECLARE @IDPartido int = 1
+DECLARE @GolesL int = 3
+DECLARE @GolesV int = 2
+DECLARE @resultado smallint
+EXECUTE dbo.realizarApuestaTipo1 @fechaHora, @capital,'sulviagurdilloabcdef@gmail.com',@IDPartido,@GolesL,@GolesV,@resultado OUTPUT
+SELECT @resultado
+GO
+
+-- -4
+--COMENTAR CON YERAY CAMBIO
+--PREGUNTAR POR TRIGGER PARA AÑADIR A LA TABLA APUESTA TIPO 1
+GO
+DECLARE @fechaHora smalldatetime = '2019-3-12 10:01:00'
+DECLARE @capital smallmoney = 20
+DECLARE @IDPartido int = 1
+DECLARE @GolesL int = -1
+DECLARE @GolesV int = 2
+DECLARE @resultado smallint
+EXECUTE dbo.realizarApuestaTipo1 @fechaHora, @capital,'sulviagurdilloabcdef@gmail.com',@IDPartido,@GolesL,@GolesV,@resultado OUTPUT
+SELECT @resultado
+GO
+
+-- -5
+GO
+DECLARE @fechaHora smalldatetime = '2019-3-12 10:01:00'
+DECLARE @capital smallmoney = 20
+DECLARE @IDPartido int = 1
+DECLARE @GolesL int = 1
+DECLARE @GolesV int = -2
+DECLARE @resultado smallint
+EXECUTE dbo.realizarApuestaTipo1 @fechaHora, @capital,'sulviagurdilloabcdef@gmail.com',@IDPartido,@GolesL,@GolesV,@resultado OUTPUT
+SELECT @resultado
+GO
+
+GO
+
+--Procedure realizarApuestaTipo2
+SELECT * FROM Apuestas
+-- 0
+DECLARE @fechaHora smalldatetime = '2019-3-12 10:01:00'
+DECLARE @capital smallmoney = 25
+DECLARE @IDPartido int = 2
+DECLARE @Equipo varchar(10) = 'Visitante'
+DECLARE @Goles int = 3
+DECLARE @resultado smallint
+EXECUTE dbo.realizarApuestaTipo2 @fechaHora, @capital, 'sulviagurdilloabcdef@gmail.com', @IDPartido, @Equipo, @Goles, @resultado OUTPUT
+SELECT @resultado
+
+GO
+DECLARE @fechaHora smalldatetime = '2019-3-12 10:01:00'
+DECLARE @capital smallmoney = 25
+DECLARE @IDPartido int = 2
+DECLARE @Equipo varchar(10) = 'Local'
+DECLARE @Goles int = 3
+DECLARE @resultado smallint
+EXECUTE dbo.realizarApuestaTipo2 @fechaHora, @capital, 'sulviagurdilloabcdef@gmail.com', @IDPartido, @Equipo, @Goles, @resultado OUTPUT
+SELECT @resultado
+GO
+
+-- -1
+GO
+DECLARE @fechaHora smalldatetime = '2019-3-12 10:01:00'
+DECLARE @capital smallmoney = 25
+DECLARE @IDPartido int = 2
+DECLARE @Equipo varchar(10) = 'Visitante'
+DECLARE @Goles int = 3
+DECLARE @resultado smallint
+EXECUTE dbo.realizarApuestaTipo2 @fechaHora, @capital, 'incorrecto', @IDPartido, @Equipo, @Goles, @resultado OUTPUT
+SELECT @resultado
+GO
+-- -2
+GO
+DECLARE @fechaHora smalldatetime = '2019-3-12 10:01:00'
+DECLARE @capital smallmoney = 25
+DECLARE @IDPartido int = 25
+DECLARE @Equipo varchar(10) = 'Visitante'
+DECLARE @Goles int = 3
+DECLARE @resultado smallint
+EXECUTE dbo.realizarApuestaTipo2 @fechaHora, @capital, 'sulviagurdilloabcdef@gmail.com', @IDPartido, @Equipo, @Goles, @resultado OUTPUT
+SELECT @resultado
+GO
+-- -3
+GO
+DECLARE @fechaHora smalldatetime = '2019-3-12 10:01:00'
+DECLARE @capital smallmoney = 0
+DECLARE @IDPartido int = 2
+DECLARE @Equipo varchar(10) = 'Local'
+DECLARE @Goles int = 3
+DECLARE @resultado smallint
+EXECUTE dbo.realizarApuestaTipo2 @fechaHora, @capital, 'sulviagurdilloabcdef@gmail.com', @IDPartido, @Equipo, @Goles, @resultado OUTPUT
+SELECT @resultado
+GO
+-- -4
+GO
+DECLARE @fechaHora smalldatetime = '2019-3-12 10:01:00'
+DECLARE @capital smallmoney = 25
+DECLARE @IDPartido int = 2
+DECLARE @Equipo varchar(10) = 'Algo'
+DECLARE @Goles int = 3
+DECLARE @resultado smallint
+EXECUTE dbo.realizarApuestaTipo2 @fechaHora, @capital, 'sulviagurdilloabcdef@gmail.com', @IDPartido, @Equipo, @Goles, @resultado OUTPUT
+SELECT @resultado
+GO
+-- -5
+GO
+DECLARE @fechaHora smalldatetime = '2019-3-12 10:01:00'
+DECLARE @capital smallmoney = 25
+DECLARE @IDPartido int = 2
+DECLARE @Equipo varchar(10) = 'Local'
+DECLARE @Goles int = -3
+DECLARE @resultado smallint
+EXECUTE dbo.realizarApuestaTipo2 @fechaHora, @capital, 'sulviagurdilloabcdef@gmail.com', @IDPartido, @Equipo, @Goles, @resultado OUTPUT
+SELECT @resultado
+GO
+
+--Procedure realizarApuestaTipo3
+--0
+DECLARE @fechaHora smalldatetime = '2019-3-12 10:01:00'
+DECLARE @capital smallmoney = 10
+DECLARE @IDPartido int = 2
+DECLARE @Equipo varchar(10) = 'Visitante'
+DECLARE @resultado smallint
+EXECUTE dbo.realizarApuestaTipo3 @fechaHora, @capital, 'sulviagurdilloabcdef@gmail.com', @IDPartido, @Equipo, @resultado OUTPUT
+SELECT @resultado
+GO
+DECLARE @fechaHora smalldatetime = '2019-3-12 10:01:00'
+DECLARE @capital smallmoney = 10
+DECLARE @IDPartido int = 2
+DECLARE @Equipo varchar(10) = 'Local'
+DECLARE @resultado smallint
+EXECUTE dbo.realizarApuestaTipo3 @fechaHora, @capital, 'sulviagurdilloabcdef@gmail.com', @IDPartido, @Equipo, @resultado OUTPUT
+SELECT @resultado
+
+-- -1
+GO
+DECLARE @fechaHora smalldatetime = '2019-3-12 10:01:00'
+DECLARE @capital smallmoney = 10
+DECLARE @IDPartido int = 2
+DECLARE @Equipo varchar(10) = 'Visitante'
+DECLARE @resultado smallint
+EXECUTE dbo.realizarApuestaTipo3 @fechaHora, @capital, 'error', @IDPartido, @Equipo, @resultado OUTPUT
+SELECT @resultado
+GO
+-- -2
+GO
+DECLARE @fechaHora smalldatetime = '2019-3-12 10:01:00'
+DECLARE @capital smallmoney = 10
+DECLARE @IDPartido int = 25
+DECLARE @Equipo varchar(10) = 'Local'
+DECLARE @resultado smallint
+EXECUTE dbo.realizarApuestaTipo3 @fechaHora, @capital, 'sulviagurdilloabcdef@gmail.com', @IDPartido, @Equipo, @resultado OUTPUT
+SELECT @resultado
+GO
+-- -3
+GO
+DECLARE @fechaHora smalldatetime = '2019-3-12 10:01:00'
+DECLARE @capital smallmoney = 0
+DECLARE @IDPartido int = 2
+DECLARE @Equipo varchar(10) = 'Local'
+DECLARE @resultado smallint
+EXECUTE dbo.realizarApuestaTipo3 @fechaHora, @capital, 'sulviagurdilloabcdef@gmail.com', @IDPartido, @Equipo, @resultado OUTPUT
+SELECT @resultado
+GO
+-- -4
+GO
+DECLARE @fechaHora smalldatetime = '2019-3-12 10:01:00'
+DECLARE @capital smallmoney = 10
+DECLARE @IDPartido int = 2
+DECLARE @Equipo varchar(10) = 'Leo'
+DECLARE @resultado smallint
+EXECUTE dbo.realizarApuestaTipo3 @fechaHora, @capital, 'sulviagurdilloabcdef@gmail.com', @IDPartido, @Equipo, @resultado OUTPUT
+SELECT @resultado
+GO
+
+--Funcion obtenerCuotaTipo1
+SELECT * FROM Apuestas
+SELECT * FROM Partidos
+SELECT dbo.obtenerCuotaTipo1 (1,25,6,8)
+SELECT dbo.obtenerCuotaTipo1 (2,25,6,8)
+SELECT dbo.obtenerCuotaTipo1 (1,30,9,7)
+SELECT dbo.obtenerCuotaTipo1 (1,30,0,0)
+
+--Me da Null al superar el minimo
+SELECT dbo.obtenerCuotaTipo1 (1,50,8,9)
+SELECT dbo.obtenerCuotaTipo1 (7,50,6,8)
+
+
+--ESTO NUNCA VA A PASAR LO MISMO PASA CON EL RESTO
+--Cuota menor que 1,5
+
+--Funcion obtenerCuotaTipo2
+SELECT dbo.obtenerCuotaTipo2 (1,25,'Local',8)
+SELECT dbo.obtenerCuotaTipo2 (2,25,'Visitante',8)
+SELECT dbo.obtenerCuotaTipo2 (1,30,'Local',7)
+SELECT dbo.obtenerCuotaTipo2 (1,30,'Visitante',0)
+--Me da Null
+SELECT dbo.obtenerCuotaTipo2 (7,50,'Visitante',0)
+
+--Funcion obtenerCuotaTipo3
+SELECT dbo.obtenerCuotaTipo3 (1,25,'Local')
+SELECT dbo.obtenerCuotaTipo3 (2,25,'Visitante')
+SELECT dbo.obtenerCuotaTipo3 (1,30,'Local')
+SELECT dbo.obtenerCuotaTipo3 (1,30,'Visitante')
+--Me da Null
+SELECT dbo.obtenerCuotaTipo3 (4,50,'Local')
+
+--TERMINAR DE REVISAR EN CLASE QUE SE ME VA
+--Funcion obtenerTipo1ParametroF
+SELECT * FROM Apuestas
+SELECT dbo.obtenerTipo1ParametroF(1,6,5)
+--Funcion obtenerTipo3ParametroF
+SELECT * FROM ApuestaTipo3
+SELECT dbo.obtenerTipo3ParametroF(16,'visitante')
+
 --Funcion obtenerParametroT
 SELECT * FROM Apuestas
 SELECT * FROM Partidos
@@ -158,6 +428,3 @@ SELECT dbo.obtenerParametroT(16,2)
 SELECT dbo.obtenerParametroT(19,3)
 SELECT dbo.obtenerParametroT(18,1)
 
---Funcion obtenerTipo3ParametroF
-SELECT * FROM ApuestaTipo3
-SELECT dbo.obtenerTipo3ParametroF(16,'visitante')

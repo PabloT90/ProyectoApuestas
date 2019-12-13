@@ -49,6 +49,10 @@ public class MainAdministradores {
                         break;
                     case 4: //Consultar apuestas partido
 
+                        idPartido = UtilidadesComunes.leerIDpartido();
+
+                        UtilidadesAdmin.consultarApuestasPartido(idPartido);
+
                         break;
                     case 5: //Pagar apuestas
 
