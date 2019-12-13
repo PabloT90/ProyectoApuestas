@@ -41,8 +41,76 @@ public class UtilidadesAdmin {
         return opcion;
     }
 
-    public boolean crearPartido(){
+
+    /*
+    * Interfaz
+    * Nombre: insertarPartido
+    * Comentario: Este método nos permite insertar un nuevo partido en la base de datos.
+    * Cabecera: public boolean crearPartido(String nombreCompeticion, String )
+    * */
+    public boolean insertarPartido(){
         boolean ret = true;
+
+        return ret;
+    }
+
+    /**
+    * Interfaz
+    * Nombre: leerYValidarCampeonato
+    * Comentario: Este método nos permite obtener la id de un campeonato existente
+    * en la base de datos.
+    * Cabecera: public int leerYValidarCampeonato()
+    * Salida:
+    *   -int idCampeonato
+    * Postcondiciones: El método devuelve un número entero asociado al nombre,
+    * que es el id del campeonato o 0 si no has elegido ninguno.
+    * */
+    public int leerYValidarCampeonato(){
+        int idCampeonato = 0;
+        clsConexion conexion = new clsConexion();
+        int resultado = 0, error = 0;
+
+        do{
+
+        }while (idCampeonato != 0 && !campeonatoEncontrado(idCampeonato));
+
+        return idCampeonato;
+    }
+
+    /**
+    * Interfaz
+    * Nombre: campeonatoEncontrado
+    * Comentario: Este método nos permite verificar si existe un campeonato con un
+    * id en epecífica en la base de datos.
+    * Cabecera: public static boolean campeonatoEncontrado(int id)
+    * Entrada:
+    *   -int id
+    * Postcondiciones: El método devuelve un vaor booleano asociado al nombre,
+    * true si existe ese campeonato o false en caso contrario.
+    * */
+    public static boolean campeonatoEncontrado(int id){
+        boolean ret = false;
+
+        //Hacemos un SELECT con ese ID y si devuelve una fila es que existe.
+        try {
+            clsConexion miConexion = new clsConexion();
+            String miSelect = "SELECT id FROM Competiciones where id = " +id;
+
+            // Crear una connexion con el DriverManager
+            miConexion.abrirConexion();
+            Connection connexionBaseDatos = miConexion.getConnexionBaseDatos();
+            Statement sentencia = connexionBaseDatos.createStatement();
+            ResultSet partidos = sentencia.executeQuery(miSelect);
+
+            // Mostrar los datos del ResultSet
+            if(partidos.next()){ //Si tiene una fila
+                ret = true;
+            }
+            // Cerrar conexion
+            connexionBaseDatos.close();
+        } catch (SQLException sqle) {
+            System.err.println(sqle);
+        }
 
         return ret;
     }

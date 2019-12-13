@@ -678,6 +678,22 @@ BEGIN
 END
 GO
 
+/*
+Interfaz
+Nombre: listadoCompeticiones
+Comentario: Este método nos devuelve un cursor con la lista de competiciones de la base de datos.
+Cabecera: function listadoCompeticiones()
+Salida:
+	-Cursor listadoCompeticiones
+Postcondiciones: La función devuelve un cursor con las competiciones de la base de datos.
+*/
+GO
+CREATE FUNCTION listadoCompeticiones() 
+RETURNS TABLE
+RETURN
+	SELECT id, nombre FROM Competiciones
+GO
+
 
 -----Para el ejercicio 10.
 GO
