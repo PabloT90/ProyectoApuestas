@@ -78,7 +78,7 @@ public class MainUser {
                             if (UtilidadesComunes.existenPartidosAbiertos()) { //Si existe algun partido abierto
                                 if(UtilidadesComunes.obtenerCapitalMaximoUsuario(usuario) > 0){
                                     // //Si el partido elegido es correcto, es decir, está abierto
-                                    if ((idPartido = UtilidadesComunes.leerIDpartido()) != 0) {
+                                    if ((idPartido = UtilidadesComunes.leerIDpartido()) != 0) { //Aqui faltaria comprobar que hay algun partido abierto.
                                         //leerYValidarTipoApuesta*
                                         if((tipoApuesta = UtilidadesComunes.leerYValidarTipoApuesta()) != 0){
                                             //LeerCaracteristicasApuesta
@@ -102,7 +102,7 @@ public class MainUser {
 
                                             //leerYValidarCantidadAApostar*
                                             capitalApuesta = UtilidadesComunes.leerYValidarCantidadAApostar(usuario);
-                                            //RealizarApuesta
+                                            //RealizarApuesta       //Yo esto lo haria en un modulo.
                                             fechaActual = (Date) (Calendar.getInstance()).getTime();//Obtenemos la fecha actual
                                             switch (tipoApuesta){
                                                 case 1:
