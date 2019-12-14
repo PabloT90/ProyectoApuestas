@@ -103,7 +103,8 @@ public class MainUser {
                                             //leerYValidarCantidadAApostar*
                                             capitalApuesta = UtilidadesComunes.leerYValidarCantidadAApostar(usuario);
                                             //RealizarApuesta       //Yo esto lo haria en un modulo.
-                                            fechaActual = (Date) (Calendar.getInstance()).getTime();//Obtenemos la fecha actual
+                                            //fechaActual = (Date) (Calendar.getInstance()).getTime();//Obtenemos la fecha actual
+                                            fechaActual = UtilidadesComunes.convertUtilToSql(Calendar.getInstance().getTime());
                                             switch (tipoApuesta){
                                                 case 1:
                                                     //realizarApuestaTipo1*
@@ -130,7 +131,11 @@ public class MainUser {
                             }
                             break;
                         case 2://Ver partidos disponibles
-                            UtilidadesComunes.verPartidosDisponiblesParaApostar();
+                            if(UtilidadesComunes.existenPartidosAbiertos()){
+                                UtilidadesComunes.verPartidosDisponiblesParaApostar();
+                            }else{
+                                System.out.println("No hay partidos disponibles para apostar.");
+                            }
                             break;
                         case 3: //Comprobar resultados de apuestas anteriores
                             UtilidadesUser.MostrarApuestasAnteriores(usuario);

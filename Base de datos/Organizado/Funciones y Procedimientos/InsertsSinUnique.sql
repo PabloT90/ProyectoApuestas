@@ -37,11 +37,11 @@ INSERT INTO Apuestas Values(6,'2019-10-11 11:00:00',1.2,'sulviagurdilloabcdef@gm
 
 SELECT * FROM Apuestas
 
-INSERT INTO ApuestaTipo1 VALUES(5,4,5)
+INSERT INTO ApuestaTipo1 VALUES(3,4,5)
 
 INSERT INTO ApuestaTipo2 VALUES(4,'Visitante',2)
 
-INSERT INTO ApuestaTipo3 VALUES(3,'visitante')
+INSERT INTO ApuestaTipo3 VALUES(1,'visitante')
 
 SELECT * FROM ApuestaTipo1
 SELECT * FROM ApuestaTipo2

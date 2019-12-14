@@ -36,7 +36,7 @@ public class UtilidadesComunes {
 
             // Define the data source for the driver
             String sourceURL = "jdbc:sqlserver://localhost";
-            String usuario = "pablo";
+            String usuario = "pepito";
             String password = "qq";
             String miSelect = "SELECT ID, fechaPartido FROM Partidos WHERE isAbierto = 1";
 
@@ -76,7 +76,7 @@ public class UtilidadesComunes {
 
                 // Define the data source for the driver
                 String sourceURL = "jdbc:sqlserver://localhost";
-                String usuario = "pablo";
+                String usuario = "pepito";
                 String password = "qq";
                 String miSelect = "SELECT id FROM Partidos where id = " +idPartido+" AND isAbierto = 1";
 
@@ -100,6 +100,10 @@ public class UtilidadesComunes {
         return ret;
     }
 
+    /**
+     * Permite saber si existe algun partido abierto
+     * @return True en caso de existir alguno, false en caso contrario.
+     */
     public static boolean existenPartidosAbiertos(){
         boolean ret = false;
 
@@ -111,7 +115,7 @@ public class UtilidadesComunes {
 
             // Define the data source for the driver
             String sourceURL = "jdbc:sqlserver://localhost";
-            String usuario = "pablo";
+            String usuario = "pepito";
             String password = "qq";
             String miSelect = "SELECT * FROM Partidos where isAbierto = 1";
 
@@ -134,6 +138,11 @@ public class UtilidadesComunes {
         return ret;
     }
 
+    /**
+     * Nos indica si un partido en concreto se encuentra abierto para apostar
+     * @param id ID del partido
+     * @return True si se encuentra abierto, false en caso contrario.
+     */
     public static boolean partidoAbierto(int id){
         boolean ret = false;
         //Hacemos un SELECT con ese ID y si devuelve una fila es que existe.
@@ -143,7 +152,7 @@ public class UtilidadesComunes {
 
             // Define the data source for the driver
             String sourceURL = "jdbc:sqlserver://localhost";
-            String usuario = "pablo";
+            String usuario = "pepito";
             String password = "qq";
             String miSelect = "SELECT * FROM Partidos where isAbierto = 1 AND ID="+id;
 
@@ -180,6 +189,9 @@ public class UtilidadesComunes {
                 break;
             case -3:
                 System.out.println("No tienes tanto dinero para retirar.");
+                break;
+            default:
+                System.out.println("Dinero ingresado correctamente.");
                 break;
         }
     }
@@ -324,11 +336,10 @@ public class UtilidadesComunes {
         String equipo = "";
         Scanner teclado = new Scanner(System.in);
 
-        do{
-            System.out.print("Elige 'local' o 'visitante'");
-            equipo = (teclado.nextLine()).toLowerCase();
-        }while (equipo != "local" && equipo != "visitante");
-
+        do {
+            System.out.println("Elige 'local' o 'visitante'");
+            equipo = (teclado.next()).toLowerCase();
+        }while(!equipo.equals("local") && !equipo.equals("visitante"));
         return equipo;
     }
 
@@ -404,7 +415,7 @@ public class UtilidadesComunes {
 
             // Define the data source for the driver
             String sourceURL = "jdbc:sqlserver://localhost";
-            String usuario = "pablo";
+            String usuario = "pepito";
             String password = "qq";
             String miSelect = "SELECT saldoActual FROM Usuarios where correo = '"+correo+"'";
 
@@ -537,7 +548,7 @@ public class UtilidadesComunes {
 
         try {
             conexion.abrirConexion();
-            CallableStatement cstmt = conexion.getConnexionBaseDatos().prepareCall("{call realizarApuestaTipo2(?,?,?,?,?,?,?)}"); //Aqui llamamos al procedimiento que queramos.
+            CallableStatement cstmt = conexion.getConnexionBaseDatos().prepareCall("{call realizarApuestaTipo3(?,?,?,?,?,?)}"); //Aqui llamamos al procedimiento que queramos.
             cstmt.setString(1, correo);
             cstmt.setDouble(2,capitalAApostar);
             cstmt.setString(3, correo);
