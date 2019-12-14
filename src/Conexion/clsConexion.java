@@ -11,8 +11,9 @@ public class clsConexion {
     private Connection connexionBaseDatos;
 
     public clsConexion(){
-        sourceURL="jdbc:sqlserver://localhost";
-        usuario="pablo";
+        //sourceURL="jdbc:sqlserver://localhost";
+        sourceURL="jdbc:sqlserver://KROOM/KROOM";
+        usuario="pepito"; //Cambiar a pablo
         password="qq";
     }
     public clsConexion(String sourceURL, String usuario, String password){
