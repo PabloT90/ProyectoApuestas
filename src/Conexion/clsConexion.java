@@ -12,7 +12,7 @@ public class clsConexion {
 
     public clsConexion(){
         //sourceURL="jdbc:sqlserver://localhost";
-        sourceURL="jdbc:sqlserver://KROOM/KROOM";
+        sourceURL="jdbc:sqlserver://KROOM\\KROOM";
         usuario="pepito"; //Cambiar a pablo
         password="qq";
     }
