@@ -396,9 +396,6 @@ SELECT dbo.obtenerCuotaTipo1 (1,30,9,7)
 SELECT dbo.obtenerCuotaTipo1 (1,30,0,0)
 SELECT dbo.obtenerCuotaTipo1 (15,50,3,2)
 
-
---ESTO NUNCA VA A PASAR LO MISMO PASA CON EL RESTO
---Cuota menor que 1,5
 DELETE FROM Apuestas WHERE ID = 28
 DELETE FROM Apuestas WHERE ID = 25
 DELETE FROM ApuestaTipo3 WHERE id = 25
@@ -424,10 +421,25 @@ SELECT dbo.obtenerCuotaTipo3 (1,25,'Local')
 SELECT dbo.obtenerCuotaTipo3 (2,25,'Visitante')
 SELECT dbo.obtenerCuotaTipo3 (1,30,'Local')
 SELECT dbo.obtenerCuotaTipo3 (1,30,'Visitante')
---Me da Null
 SELECT dbo.obtenerCuotaTipo3 (4,50,'Local')
 
 --TERMINAR DE REVISAR EN CLASE QUE SE ME VA
+
+--Procedure addPartido
+SELECT * FROM Partidos
+GO
+DECLARE @resultadoL tinyint = 2
+DECLARE @resultadoV tinyint = 3
+DECLARE @Abierto bit =0
+DECLARE @MaxApuesta1 int = 120
+DECLARE @MaxApuesta2 int = 80
+DECLARE @MaxApuesta3 int = 70
+DECLARE @Fecha smalldatetime = '2019-3-12 10:01:00'
+DECLARE @idComp int  = 3
+DECLARE @resultado int
+EXECUTE dbo.addPartido @resultadoL, @resultadoV, @Abierto, @MaxApuesta1, @MaxApuesta2, @MaxApuesta3, @Fecha, @idComp, @resultado OUTPUT
+SELECT @resultado
+GO
 --Funcion obtenerTipo1ParametroF
 SELECT * FROM Apuestas
 SELECT dbo.obtenerTipo1ParametroF(1,6,5)

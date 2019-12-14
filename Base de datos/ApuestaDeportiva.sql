@@ -56,7 +56,7 @@ CREATE TABLE Apuestas (
 	CorreoUsuario CHAR(30) NOT NULL,
 	IDPartido int NOT NULL,
 	Tipo TINYINT NOT NULL,
-	Contabilizada BIT NOT NULL,
+	Contabilizada BIT NULL,
 	IsGanador bit NULL,--1 si es ganador y 0 si no lo es
 
 	CONSTRAINT PK_APUESTA PRIMARY KEY (ID),

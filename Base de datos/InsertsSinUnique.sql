@@ -26,22 +26,22 @@ INSERT INTO Usuarios VALUES('sulviagurdilloabcdef@gmail.com','sul07',500)
 INSERT INTO Usuarios VALUES('decisionesdificile@gmail.com','dc19',1000)
 SELECT * FROM Usuarios
 SELECT * FROM Apuestas
-Insert into Apuestas values(5.2,'2019-9-11 10:01:00',5.5,'sulviagurdilloabcdef@gmail.com',1,3,1,1) --Pon aqui el ide de la apuesta que tenga en isAierta 0
+Insert into Apuestas values(5.2,'2019-9-11 10:01:00',5.5,'sulviagurdilloabcdef@gmail.com',9,3,1,1) --Pon aqui el ide de la apuesta que tenga en isAierta 0
 
-INSERT INTO Apuestas VALUES(2.8,'2019-10-11 10:00:00', 2.9,'decisionesdificile@gmail.com',2,2,1,0) 
+INSERT INTO Apuestas VALUES(2.8,'2019-10-11 10:00:00', 2.9,'decisionesdificile@gmail.com',10,2,1,0) 
 
-INSERT INTO Apuestas VALUES(4.2,'2019-9-11 10:01:00',3.5,'sulviagurdilloabcdef@gmail.com',3,1,1,1) 
+INSERT INTO Apuestas VALUES(4.2,'2019-2-12 10:01:00',3.5,'sulviagurdilloabcdef@gmail.com',16,1,1,1) 
 
-INSERT INTO Apuestas Values(6,'2019-10-11 11:00:00',1.2,'sulviagurdilloabcdef@gmail.com',4,2,0,1)
+INSERT INTO Apuestas Values(6,'2019-10-11 11:00:00',1.2,'sulviagurdilloabcdef@gmail.com',15,2,0,1)
 
 
 SELECT * FROM Apuestas
 
-INSERT INTO ApuestaTipo1 VALUES(5,4,5)
+INSERT INTO ApuestaTipo1 VALUES(10,4,5)
 
-INSERT INTO ApuestaTipo2 VALUES(4,'Visitante',2)
+INSERT INTO ApuestaTipo2 VALUES(9,'Visitante',2)
 
-INSERT INTO ApuestaTipo3 VALUES(3,'visitante')
+INSERT INTO ApuestaTipo3 VALUES(8,'visitante')
 
 SELECT * FROM ApuestaTipo1
 SELECT * FROM ApuestaTipo2

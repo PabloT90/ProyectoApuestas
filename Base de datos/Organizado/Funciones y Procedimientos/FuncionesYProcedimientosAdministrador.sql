@@ -20,15 +20,15 @@ Postcondiciones: El método devuelve un número entero asociado al nombre, -1 si m
 -2 si maxApuesta2 es igual o menor que cero o si es nulo, -3 si maxApuesta3 es igual o menor que cero o si es nulo, -4 si idCompeticion 
 es igual o menor que cero o si es nulo o 0 si se ha conseguido insertar el nuevo partido en la base de datos.
 */
-CREATE PROCEDURE addPartido(@resultadoLocal tinyint, @resultadoVisitante tinyint, @isAbierto bit, @MaxApuesta1 int, @MaxApuesta2 int, @MaxApuesta3 int, @FechaPartido smalldatetime, @IdCompeticion int, @Error smallint OUTPUT) AS
+ALTER PROCEDURE addPartido(@resultadoLocal tinyint, @resultadoVisitante tinyint, @isAbierto bit, @MaxApuesta1 int, @MaxApuesta2 int, @MaxApuesta3 int, @FechaPartido smalldatetime, @IdCompeticion int, @Error smallint OUTPUT) AS
 BEGIN
-	IF @MaxApuesta1 != null AND @MaxApuesta1 > 0
+	IF (@MaxApuesta1 IS NOT NULL) AND @MaxApuesta1 > 0
 	BEGIN
-		IF @MaxApuesta2 != null AND @MaxApuesta2 > 0
+		IF (@MaxApuesta2 IS NOT NULL) AND @MaxApuesta2 > 0
 		BEGIN
-			IF @MaxApuesta3 != null AND @MaxApuesta3 > 0
+			IF (@MaxApuesta3 IS NOT NULL) AND @MaxApuesta3 > 0
 			BEGIN
-				IF @IdCompeticion != null AND @IdCompeticion > 0
+				IF (@IdCompeticion IS NOT NULL) AND @IdCompeticion > 0
 				BEGIN
 					INSERT INTO Partidos VALUES(@resultadoLocal, @resultadoVisitante, @isAbierto, @MaxApuesta1, @MaxApuesta2, @MaxApuesta3, @FechaPartido, @IdCompeticion)
 					SET @Error = 0
@@ -106,11 +106,11 @@ Entrada:
 	-@idPartido int
 Postcondiciones: El método contabiliza todas las apuestas no marcadas de un partido específico.
 */
-CREATE PROCEDURE contabilizarApuestasNoContabilizadas(@idPartido int)
+ALTER PROCEDURE contabilizarApuestasNoContabilizadas(@idPartido int)
 AS
 BEGIN
 	DECLARE @IdApuesta int
-	DECLARE puntero CURSOR FOR SELECT ID, Contabilizada FROM Apuestas WHERE IDPartido = @idPartido AND Contabilizada = 0
+	DECLARE puntero CURSOR FOR SELECT ID FROM Apuestas WHERE IDPartido = @idPartido AND Contabilizada = 0
 	OPEN puntero
 	FETCH NEXT FROM puntero INTO @IdApuesta --Nos permite apuntar al primer dato del cursor
 
@@ -120,6 +120,7 @@ BEGIN
 		FETCH NEXT FROM puntero INTO @IdApuesta
 	END
 
-	--DEALLOCATE puntero --Liberamos los recursos del puntero
+	
 	CLOSE puntero
+	DEALLOCATE puntero  --Liberamos los recursos del puntero
 END

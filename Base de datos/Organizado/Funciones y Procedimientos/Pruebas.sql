@@ -1,6 +1,5 @@
 	Use PruebasPablo 
 	GO
---	--Dani sacame las comprobaciones de aqui!!!!!!
 --Begin transaction
 --insert into Competiciones(id,nombre,año) values(NEWID(), 'Copa del Rey', 2019)
 --go
@@ -64,7 +63,7 @@ Commit
 SELECT * FROM dbo.obtenerPartidosDisponiblesParaApostar()
 
 --Procediemiento comprobarResultadoDeUnaApuesta
---ENABLE TRIGGER dbo.noSeAceptanModificaciones On dbo.Apuestas
+DISABLE TRIGGER dbo.noSeAceptanModificaciones On dbo.Apuestas
 DELETE FROM Usuarios 
 
 SELECT * FROM Usuarios
@@ -397,8 +396,6 @@ SELECT dbo.obtenerCuotaTipo1 (1,30,0,0)
 SELECT dbo.obtenerCuotaTipo1 (15,50,3,2)
 
 
---ESTO NUNCA VA A PASAR LO MISMO PASA CON EL RESTO
---Cuota menor que 1,5
 DELETE FROM Apuestas WHERE ID = 28
 DELETE FROM Apuestas WHERE ID = 25
 DELETE FROM ApuestaTipo3 WHERE id = 25
@@ -416,7 +413,6 @@ SELECT dbo.obtenerCuotaTipo2 (1,25,'Local',8)
 SELECT dbo.obtenerCuotaTipo2 (2,25,'Visitante',8)
 SELECT dbo.obtenerCuotaTipo2 (1,30,'Local',7)
 SELECT dbo.obtenerCuotaTipo2 (1,30,'Visitante',0)
---Me da Null
 SELECT dbo.obtenerCuotaTipo2 (7,50,'Visitante',0)
 
 --Funcion obtenerCuotaTipo3
@@ -424,16 +420,7 @@ SELECT dbo.obtenerCuotaTipo3 (1,25,'Local')
 SELECT dbo.obtenerCuotaTipo3 (2,25,'Visitante')
 SELECT dbo.obtenerCuotaTipo3 (1,30,'Local')
 SELECT dbo.obtenerCuotaTipo3 (1,30,'Visitante')
---Me da Null
 SELECT dbo.obtenerCuotaTipo3 (4,50,'Local')
-
---TERMINAR DE REVISAR EN CLASE QUE SE ME VA
---Funcion obtenerTipo1ParametroF
-SELECT * FROM Apuestas
-SELECT dbo.obtenerTipo1ParametroF(1,6,5)
---Funcion obtenerTipo3ParametroF
-SELECT * FROM ApuestaTipo3
-SELECT dbo.obtenerTipo3ParametroF(16,'visitante')
 
 --Funcion obtenerParametroT
 SELECT * FROM Apuestas
@@ -442,4 +429,117 @@ SELECT * FROM Partidos
 SELECT dbo.obtenerParametroT(16,2)
 SELECT dbo.obtenerParametroT(19,3)
 SELECT dbo.obtenerParametroT(18,1)
+--Funcion obtenerTipo1ParametroF
+SELECT * FROM Apuestas
+SELECT dbo.obtenerTipo1ParametroF(1,6,5)
+--Funcion obtenerTipo3ParametroF
+SELECT * FROM ApuestaTipo3
+SELECT dbo.obtenerTipo3ParametroF(16,'visitante')
+
+--Procedure addPartido
+SELECT * FROM Partidos
+GO
+DECLARE @resultadoL tinyint = 2
+DECLARE @resultadoV tinyint = 3
+DECLARE @Abierto bit =0
+DECLARE @Apuesta1 int = 60
+DECLARE @Apuesta2 int = 80
+DECLARE @Apuesta3 int = 70
+DECLARE @Fecha smalldatetime = '2019-3-12 10:01:00'
+DECLARE @idComp int  = 3
+DECLARE @resultado int
+EXECUTE dbo.addPartido @resultadoL, @resultadoV, @Abierto, @Apuesta1, @Apuesta2, @Apuesta3, @Fecha, @idComp, @resultado OUTPUT
+SELECT @resultado
+GO
+
+-- -1
+GO
+DECLARE @resultadoL tinyint = 2
+DECLARE @resultadoV tinyint = 3
+DECLARE @Abierto bit =0
+DECLARE @Apuesta1 int = 0
+DECLARE @Apuesta2 int = 80
+DECLARE @Apuesta3 int = 70
+DECLARE @Fecha smalldatetime = '2019-3-12 10:01:00'
+DECLARE @idComp int  = 3
+DECLARE @resultado int
+EXECUTE dbo.addPartido @resultadoL, @resultadoV, @Abierto, @Apuesta1, @Apuesta2, @Apuesta3, @Fecha, @idComp, @resultado OUTPUT
+SELECT @resultado
+GO
+
+-- -2
+
+GO
+DECLARE @resultadoL tinyint = 2
+DECLARE @resultadoV tinyint = 3
+DECLARE @Abierto bit =0
+DECLARE @Apuesta1 int = 60
+DECLARE @Apuesta2 int = 0
+DECLARE @Apuesta3 int = 70
+DECLARE @Fecha smalldatetime = '2019-3-12 10:01:00'
+DECLARE @idComp int  = 3
+DECLARE @resultado int
+EXECUTE dbo.addPartido @resultadoL, @resultadoV, @Abierto, @Apuesta1, @Apuesta2, @Apuesta3, @Fecha, @idComp, @resultado OUTPUT
+SELECT @resultado
+GO
+
+-- -3
+
+GO
+DECLARE @resultadoL tinyint = 2
+DECLARE @resultadoV tinyint = 3
+DECLARE @Abierto bit =0
+DECLARE @Apuesta1 int = 60
+DECLARE @Apuesta2 int = 80
+DECLARE @Apuesta3 int = 0
+DECLARE @Fecha smalldatetime = '2019-3-12 10:01:00'
+DECLARE @idComp int  = 3
+DECLARE @resultado int
+EXECUTE dbo.addPartido @resultadoL, @resultadoV, @Abierto, @Apuesta1, @Apuesta2, @Apuesta3, @Fecha, @idComp, @resultado OUTPUT
+SELECT @resultado
+GO
+
+-- -4
+
+GO
+DECLARE @resultadoL tinyint = 2
+DECLARE @resultadoV tinyint = 3
+DECLARE @Abierto bit =0
+DECLARE @Apuesta1 int = 60
+DECLARE @Apuesta2 int = 80
+DECLARE @Apuesta3 int = 70
+DECLARE @Fecha smalldatetime = '2019-3-12 10:01:00'
+DECLARE @idComp int  = 0
+DECLARE @resultado int
+EXECUTE dbo.addPartido @resultadoL, @resultadoV, @Abierto, @Apuesta1, @Apuesta2, @Apuesta3, @Fecha, @idComp, @resultado OUTPUT
+SELECT @resultado
+GO
+
+--Procedure abrirPartido
+SELECT * FROM Partidos
+
+DECLARE @IDPartido int = 11
+DECLARE @filasModificadas tinyint
+EXECUTE dbo.abrirPartido @IDPartido, @filasModificadas OutPut
+SELECT @filasModificadas
+
+--0
+GO
+DECLARE @IDPartido int = 0
+DECLARE @filasModificadas tinyint
+EXECUTE dbo.abrirPartido @IDPartido, @filasModificadas OutPut
+SELECT @filasModificadas
+GO
+
+--Funcion obtenerApuestasNoContabilizadas
+SELECT * FROM Partidos
+DECLARE @IDpartido int = 15
+SELECT * FROM dbo.obtenerApuestasNoContabilizadas(@IDpartido)
+
+--Procedure contabilizarApuestasNoContabilizadas
+SELECT * FROM Apuestas
+GO
+DECLARE @idPartido int = 15
+EXECUTE contabilizarApuestasNoContabilizadas @idPartido
+GO
 

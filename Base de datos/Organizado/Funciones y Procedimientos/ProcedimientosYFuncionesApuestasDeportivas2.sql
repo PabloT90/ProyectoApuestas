@@ -39,7 +39,7 @@ BEGIN
 						IF @Cuota > 1.5
 						BEGIN
 							DECLARE @FechaActual smalldatetime = CURRENT_TIMESTAMP
-							INSERT INTO Apuestas VALUES(@Cuota, @FechaActual, @CapitalAApostar, @Correo, @IdPartido, 1, null,null)  
+							INSERT INTO Apuestas VALUES(@Cuota, @FechaActual, @CapitalAApostar, @Correo, @IdPartido, 1, 0,null)  
 							INSERT INTO ApuestaTipo1 VALUES((SELECT ID FROM Apuestas WHERE IDPartido = @IdPartido AND CorreoUsuario = @Correo AND FechaHoraApuesta = @FechaActual), @NumGolesLocal,@NumGolesVisitante)
 							SET @Error = -0
 						END
@@ -112,7 +112,7 @@ BEGIN
 						IF @Cuota > 1.5
 						BEGIN
 							DECLARE @FechaActual smalldatetime = CURRENT_TIMESTAMP
-							INSERT INTO Apuestas VALUES(@Cuota, @FechaActual, @CapitalAApostar, @Correo, @IdPartido, 2, null)  
+							INSERT INTO Apuestas VALUES(@Cuota, @FechaActual, @CapitalAApostar, @Correo, @IdPartido, 2, 0,null)  
 							INSERT INTO ApuestaTipo2 VALUES((SELECT ID FROM Apuestas WHERE IDPartido = @IdPartido AND CorreoUsuario = @Correo AND FechaHoraApuesta = @FechaActual), @Equipo,@Goles)
 							SET @Error = -0
 						END
@@ -183,7 +183,7 @@ BEGIN
 					IF @Cuota > 1.5
 					BEGIN
 						DECLARE @FechaActual smalldatetime = CURRENT_TIMESTAMP
-						INSERT INTO Apuestas VALUES(@Cuota, @FechaActual, @CapitalAApostar, @Correo, @IdPartido, 3, null)  
+						INSERT INTO Apuestas VALUES(@Cuota, @FechaActual, @CapitalAApostar, @Correo, @IdPartido, 3, 0, null)  
 						INSERT INTO ApuestaTipo3 VALUES((SELECT ID FROM Apuestas WHERE IDPartido = @IdPartido AND CorreoUsuario = @Correo AND FechaHoraApuesta = @FechaActual), @Ganador)
 						SET @Error = -0
 					END
