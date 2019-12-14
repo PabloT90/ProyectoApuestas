@@ -367,31 +367,38 @@ public class UtilidadesAdmin {
             ResultSet ApuestaID = sentencia.executeQuery(conseguirIDApuesta);
 
             //Consigo los goles de esa apuesta
-            String conseguirGolesLocales = "Select MAX(NumGolesLocal) AS [NumGolesLocal] from ApuestaTipo1 WHERE id = " + ApuestaID.getInt("ID");
-            String conseguirGolesVisitantes = "SELECT MAX(numGolesVisitante) AS [numGolesVisitante] from ApuestaTipo1 WHERE id = "+ ApuestaID.getInt("ID");
-            ResultSet golesL = sentencia.executeQuery(conseguirGolesLocales);
-            ResultSet golesV = sentencia.executeQuery(conseguirGolesVisitantes);
-            maxGolesLocales = golesL.getInt("NumGolesLocal");
-            maxGolesVisitantes = golesV.getInt("numGolesVisitante");
+            if (ApuestaID.next()) {
 
-            //Llamo a la primera funcion
-            CallableStatement callStatementApuesta1 = miconexion.getConnexionBaseDatos().prepareCall("{call consultarApuestasTipo1(?,?,?)}");
+                String conseguirGolesLocales = "Select MAX(NumGolesLocal) AS [NumGolesLocal] from ApuestaTipo1 WHERE id = " + ApuestaID.getInt("ID");
+                String conseguirGolesVisitantes = "SELECT MAX(numGolesVisitante) AS [numGolesVisitante] from ApuestaTipo1 WHERE id = " + ApuestaID.getInt("ID");
+                ResultSet golesL = sentencia.executeQuery(conseguirGolesLocales);
+                ResultSet golesV = sentencia.executeQuery(conseguirGolesVisitantes);
+                maxGolesLocales = golesL.getInt("NumGolesLocal");
+                maxGolesVisitantes = golesV.getInt("numGolesVisitante");
 
-            for (int i = 0; i< maxGolesLocales; i++){
+                //Llamo a la primera funcion
+                CallableStatement callStatementApuesta1 = miconexion.getConnexionBaseDatos().prepareCall("{call consultarApuestasTipo1(?,?,?)}");
 
-                for (int x = 0; i< maxGolesVisitantes; x++){
+                for (int i = 0; i < maxGolesLocales; i++) {
 
-                    callStatementApuesta1.setInt(1,idPartido);
-                    callStatementApuesta1.setInt(2,i);
-                    callStatementApuesta1.setInt(3,x);
-                    resultado = callStatementApuesta1.executeQuery();
+                    for (int x = 0; i < maxGolesVisitantes; x++) {
 
-                    String dineros = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + resultado.getInt("id") +" AND Tipo = 1" ;
+                        callStatementApuesta1.setInt(1, idPartido);
+                        callStatementApuesta1.setInt(2, i);
+                        callStatementApuesta1.setInt(3, x);
+                        resultado = callStatementApuesta1.executeQuery();
+                        if (resultado.next()) {
 
-                    ResultSet dineroPartido = sentencia.executeQuery(dineros);
+                            String dineros = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + resultado.getInt("id") + " AND Tipo = 1";
 
-                    if (resultado.getString("id") == null){
-                        System.out.println("Goles locales: "+resultado.getString("NumGolesLocal")+" Goles visitante: "+ resultado.getString("numGolesVisitante")+ " Dinero apostado: "+ dineroPartido.getInt("Dineros"));
+                            ResultSet dineroPartido = sentencia.executeQuery(dineros);
+                            if (dineroPartido.next()) {
+
+                                if (resultado.getString("id") == null) {
+                                    System.out.println("Goles locales: " + resultado.getString("NumGolesLocal") + " Goles visitante: " + resultado.getString("numGolesVisitante") + " Dinero apostado: " + dineroPartido.getInt("Dineros"));
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -403,39 +410,49 @@ public class UtilidadesAdmin {
             tipo++;
             ApuestaID = sentencia.executeQuery(conseguirIDApuesta);
 
-            //Consigo los goles 
-            String conseguirgoles2 = "SELECT MAX(goles) AS [Goles] from ApuestaTipo2 WHERE id = "+ ApuestaID.getInt("ID");
-            ResultSet goles = sentencia.executeQuery(conseguirgoles2);
-            int maxgoles2 = goles.getInt("Goles");
+            //Consigo los goles
+            if (ApuestaID.next()) {
+                String conseguirgoles2 = "SELECT MAX(goles) AS [Goles] from ApuestaTipo2 WHERE id = " + ApuestaID.getInt("ID");
+                ResultSet goles = sentencia.executeQuery(conseguirgoles2);
+                if (goles.next()) {
+                    int maxgoles2 = goles.getInt("Goles");
 
-            //Visitante
-            for (int i = 0; i < maxgoles2; i++){
+                    //Visitante
+                    for (int i = 0; i < maxgoles2; i++) {
 
-                callStatementApuesta2.setInt(1,idPartido);
-                callStatementApuesta2.setString(2, "Visitante");
-                callStatementApuesta2.setInt(3,i);
-                resultado = callStatementApuesta2.executeQuery();
-                String dineros = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + resultado.getInt("id") +" AND Tipo = 2" ;
+                        callStatementApuesta2.setInt(1, idPartido);
+                        callStatementApuesta2.setString(2, "Visitante");
+                        callStatementApuesta2.setInt(3, i);
+                        resultado = callStatementApuesta2.executeQuery();
+                        if (resultado.next()) {
+                            String dineros = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + resultado.getInt("id") + " AND Tipo = 2";
 
-                ResultSet dineroPartido = sentencia.executeQuery(dineros);
+                            ResultSet dineroPartido = sentencia.executeQuery(dineros);
 
-                if(resultado.getString("id") == null){
-                    System.out.println("Goles: " +resultado.getString("goles")+ " Equipo ganador " + resultado.getString("equipo") + " Dinero partido: "+ dineroPartido.getInt("Dineros") );
-                }
-            }
+                            if (resultado.getString("id") == null) {
+                                System.out.println("Goles: " + resultado.getString("goles") + " Equipo ganador " + resultado.getString("equipo") + " Dinero partido: " + dineroPartido.getInt("Dineros"));
+                            }
+                        }
+                    }
 
-            //Local
-            for (int i = 0; i < maxgoles2; i++){
+                    //Local
+                    for (int i = 0; i < maxgoles2; i++) {
 
-                callStatementApuesta2.setInt(1,idPartido);
-                callStatementApuesta2.setString(2, "Local");
-                callStatementApuesta2.setInt(3,i);
-                resultado = callStatementApuesta2.executeQuery();
-                String dineros = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + resultado.getInt("id") +" AND Tipo = 2" ;
+                        callStatementApuesta2.setInt(1, idPartido);
+                        callStatementApuesta2.setString(2, "Local");
+                        callStatementApuesta2.setInt(3, i);
+                        resultado = callStatementApuesta2.executeQuery();
+                        if (resultado.next()) {
+                            String dineros = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + resultado.getInt("id") + " AND Tipo = 2";
 
-                ResultSet dineroPartido = sentencia.executeQuery(dineros);
-                if(resultado.getString("id") == null){
-                    System.out.println("Goles: " +resultado.getString("goles")+ " Equipo ganador " + resultado.getString("equipo") + " Dinero partido: "+ dineroPartido.getInt("Dineros"));
+                            ResultSet dineroPartido = sentencia.executeQuery(dineros);
+                            if (dineroPartido.next()) {
+                                if (resultado.getString("id") == null) {
+                                    System.out.println("Goles: " + resultado.getString("goles") + " Equipo ganador " + resultado.getString("equipo") + " Dinero partido: " + dineroPartido.getInt("Dineros"));
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
@@ -448,11 +465,16 @@ public class UtilidadesAdmin {
             callStatementApuesta3.setInt(1,idPartido);
             callStatementApuesta3.setString(2,"Local");
             resultado3L = callStatementApuesta3.executeQuery();
-            String dineros3L = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + resultado3L.getInt("id") +" AND Tipo = 3" ;
-            ResultSet dineroPartido3L = sentencia.executeQuery(dineros3L);
+            if (resultado3L.next()) {
+                String dineros3L = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + resultado3L.getInt("id") + " AND Tipo = 3";
+                ResultSet dineroPartido3L = sentencia.executeQuery(dineros3L);
 
-            if (resultado3L.getString("id") == null){
-                System.out.println("Equipo ganandor"+ resultado3L.getString("ganador")+" dinero "+ dineroPartido3L.getInt("Dineros"));
+                if (dineroPartido3L.next()) {
+
+                    if (resultado3L.getString("id") == null) {
+                        System.out.println("Equipo ganandor" + resultado3L.getString("ganador") + " dinero " + dineroPartido3L.getInt("Dineros"));
+                    }
+                }
             }
 
             //Visitante
@@ -461,11 +483,16 @@ public class UtilidadesAdmin {
             callStatementApuesta3.setInt(1,idPartido);
             callStatementApuesta3.setString(2,"Visitante");
             resultado3V = callStatementApuesta3.executeQuery();
-            String dineros3V = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + resultado3V.getInt("id") +" AND Tipo = 3" ;
-            ResultSet dineroPartido3V = sentencia.executeQuery(dineros3V);
+            if (resultado3V.next()) {
+                String dineros3V = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + resultado3V.getInt("id") + " AND Tipo = 3";
+                ResultSet dineroPartido3V = sentencia.executeQuery(dineros3V);
 
-            if (resultado3L.getString("id") == null){
-                System.out.println("Equipo ganandor"+ resultado3V.getString("ganador")+" dinero "+ dineroPartido3V.getInt("Dineros"));
+                if (dineroPartido3V.next()) {
+
+                    if (resultado3L.getString("id") == null) {
+                        System.out.println("Equipo ganandor" + resultado3V.getString("ganador") + " dinero " + dineroPartido3V.getInt("Dineros"));
+                    }
+                }
             }
 
         }
