@@ -63,7 +63,7 @@ Commit
 SELECT * FROM dbo.obtenerPartidosDisponiblesParaApostar()
 
 --Procediemiento comprobarResultadoDeUnaApuesta
-DISABLE TRIGGER dbo.noSeAceptanModificaciones On dbo.Apuestas
+--DISABLE TRIGGER dbo.noSeAceptanModificaciones On dbo.Apuestas
 DELETE FROM Usuarios 
 
 SELECT * FROM Usuarios
@@ -395,7 +395,6 @@ SELECT dbo.obtenerCuotaTipo1 (1,30,9,7)
 SELECT dbo.obtenerCuotaTipo1 (1,30,0,0)
 SELECT dbo.obtenerCuotaTipo1 (15,50,3,2)
 
-
 DELETE FROM Apuestas WHERE ID = 28
 DELETE FROM Apuestas WHERE ID = 25
 DELETE FROM ApuestaTipo3 WHERE id = 25
@@ -538,6 +537,7 @@ SELECT * FROM dbo.obtenerApuestasNoContabilizadas(@IDpartido)
 
 --Procedure contabilizarApuestasNoContabilizadas
 SELECT * FROM Apuestas
+
 GO
 DECLARE @idPartido int = 15
 EXECUTE contabilizarApuestasNoContabilizadas @idPartido
