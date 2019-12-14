@@ -102,7 +102,7 @@ public class MainUser {
 
                                             //leerYValidarCantidadAApostar*
                                             capitalApuesta = UtilidadesComunes.leerYValidarCantidadAApostar(usuario);
-                                            //RealizarApuesta       //Yo esto lo haria en un modulo.
+                                            //RealizarApuesta
                                             //fechaActual = (Date) (Calendar.getInstance()).getTime();//Obtenemos la fecha actual
                                             fechaActual = UtilidadesComunes.convertUtilToSql(Calendar.getInstance().getTime());
                                             switch (tipoApuesta){

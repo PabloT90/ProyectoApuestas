@@ -32,30 +32,28 @@ public class UtilidadesComunes {
         // Carga el driver
         try {
             // Carga la clase del driver
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
             // Define the data source for the driver
-            String sourceURL = "jdbc:sqlserver://localhost";
-            String usuario = "pepito";
-            String password = "qq";
+            //String sourceURL = "jdbc:sqlserver://localhost";
+            //String usuario = "pepito";
+            //String password = "qq";
+            clsConexion miconexion = new clsConexion();
             String miSelect = "SELECT ID, fechaPartido FROM Partidos WHERE isAbierto = 1";
 
-            // Crear una connexion con el DriverManager
-            Connection connexionBaseDatos = DriverManager.getConnection(sourceURL, usuario, password);
+            miconexion.abrirConexion();
+            Connection connexionBaseDatos = miconexion.getConnexionBaseDatos();
             Statement sentencia = connexionBaseDatos.createStatement();
             ResultSet partidos = sentencia.executeQuery(miSelect);
 
             // Mostrar los datos del ResultSet
             while (partidos.next()) {
-                System.out.println(partidos.getString("ID") + " -> " + partidos.getTimestamp("fechaPartido"));
+                System.out.println("Partido: " + partidos.getString("ID") + " Abierto desde: " + partidos.getTimestamp("fechaPartido"));
             }
 
             // Cerrar conexion
             connexionBaseDatos.close();
-        } catch (ClassNotFoundException cnfe) {
-            
-            System.err.println(cnfe);
-        } catch (SQLException sqle) {
+        }catch (SQLException sqle) {
             System.err.println(sqle);
         }
     }
@@ -72,16 +70,17 @@ public class UtilidadesComunes {
             //Hacemos un SELECT con ese ID y si devuelve una fila es que existe.
             try {
                 // Carga la clase del driver
-                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
                 // Define the data source for the driver
-                String sourceURL = "jdbc:sqlserver://localhost";
-                String usuario = "pepito";
-                String password = "qq";
+                //String sourceURL = "jdbc:sqlserver://localhost";
+                //String usuario = "pepito";
+                //String password = "qq";
+                clsConexion miconexion = new clsConexion();
                 String miSelect = "SELECT id FROM Partidos where id = " +idPartido+" AND isAbierto = 1";
 
-                // Crear una connexion con el DriverManager
-                Connection connexionBaseDatos = DriverManager.getConnection(sourceURL, usuario, password);
+                miconexion.abrirConexion();
+                Connection connexionBaseDatos = miconexion.getConnexionBaseDatos();
                 Statement sentencia = connexionBaseDatos.createStatement();
                 ResultSet partidos = sentencia.executeQuery(miSelect);
 
@@ -91,9 +90,7 @@ public class UtilidadesComunes {
                 }
                 // Cerrar conexion
                 connexionBaseDatos.close();
-            } catch (ClassNotFoundException cnfe) {
-                System.err.println(cnfe);
-            } catch (SQLException sqle) {
+            }catch (SQLException sqle) {
                 System.err.println(sqle);
             }
 
@@ -111,16 +108,18 @@ public class UtilidadesComunes {
         //Hacemos un SELECT con ese ID y si devuelve una fila es que existe.
         try {
             // Carga la clase del driver
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
             // Define the data source for the driver
-            String sourceURL = "jdbc:sqlserver://localhost";
-            String usuario = "pepito";
-            String password = "qq";
+            //String sourceURL = "jdbc:sqlserver://localhost";
+            //String usuario = "pepito";
+            //String password = "qq";
+            clsConexion miconexion = new clsConexion();
             String miSelect = "SELECT * FROM Partidos where isAbierto = 1";
 
             // Crear una connexion con el DriverManager
-            Connection connexionBaseDatos = DriverManager.getConnection(sourceURL, usuario, password);
+            miconexion.abrirConexion();
+            Connection connexionBaseDatos = miconexion.getConnexionBaseDatos();
             Statement sentencia = connexionBaseDatos.createStatement();
             ResultSet partidos = sentencia.executeQuery(miSelect);
 
@@ -130,9 +129,7 @@ public class UtilidadesComunes {
             }
             // Cerrar conexion
             connexionBaseDatos.close();
-        } catch (ClassNotFoundException cnfe) {
-            System.err.println(cnfe);
-        } catch (SQLException sqle) {
+        }catch (SQLException sqle) {
             System.err.println(sqle);
         }
         return ret;
@@ -148,16 +145,18 @@ public class UtilidadesComunes {
         //Hacemos un SELECT con ese ID y si devuelve una fila es que existe.
         try {
             // Carga la clase del driver
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
             // Define the data source for the driver
-            String sourceURL = "jdbc:sqlserver://localhost";
-            String usuario = "pepito";
-            String password = "qq";
+            //String sourceURL = "jdbc:sqlserver://localhost";
+            //String usuario = "pepito";
+            //String password = "qq";
+            clsConexion miconexion =  new clsConexion();
             String miSelect = "SELECT * FROM Partidos where isAbierto = 1 AND ID="+id;
 
             // Crear una connexion con el DriverManager
-            Connection connexionBaseDatos = DriverManager.getConnection(sourceURL, usuario, password);
+            miconexion.abrirConexion();
+            Connection connexionBaseDatos = miconexion.getConnexionBaseDatos();
             Statement sentencia = connexionBaseDatos.createStatement();
             ResultSet partidos = sentencia.executeQuery(miSelect);
 
@@ -167,9 +166,7 @@ public class UtilidadesComunes {
             }
             // Cerrar conexion
             connexionBaseDatos.close();
-        } catch (ClassNotFoundException cnfe) {
-            System.err.println(cnfe);
-        } catch (SQLException sqle) {
+        }catch (SQLException sqle) {
             System.err.println(sqle);
         }
         return ret;
@@ -411,16 +408,17 @@ public class UtilidadesComunes {
         //Hacemos un SELECT con ese ID y si devuelve una fila es que existe.
         try {
             // Carga la clase del driver
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
             // Define the data source for the driver
-            String sourceURL = "jdbc:sqlserver://localhost";
-            String usuario = "pepito";
-            String password = "qq";
+            //String sourceURL = "jdbc:sqlserver://localhost";
+            //String usuario = "pepito";
+            //String password = "qq";
+            clsConexion miconexion = new clsConexion();
             String miSelect = "SELECT saldoActual FROM Usuarios where correo = '"+correo+"'";
 
-            // Crear una connexion con el DriverManager
-            Connection connexionBaseDatos = DriverManager.getConnection(sourceURL, usuario, password);
+            miconexion.abrirConexion();
+            Connection connexionBaseDatos = miconexion.getConnexionBaseDatos();
             Statement sentencia = connexionBaseDatos.createStatement();
             ResultSet usuarios = sentencia.executeQuery(miSelect);
 
@@ -430,9 +428,7 @@ public class UtilidadesComunes {
             }
             // Cerrar conexion
             connexionBaseDatos.close();
-        } catch (ClassNotFoundException cnfe) {
-            System.err.println(cnfe);
-        } catch (SQLException sqle) {
+        }catch (SQLException sqle) {
             System.err.println(sqle);
         }
 
