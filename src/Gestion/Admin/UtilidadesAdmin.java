@@ -372,8 +372,8 @@ public class UtilidadesAdmin {
                 String conseguirGolesLocales = "Select MAX(NumGolesLocal) AS [NumGolesLocal] from ApuestaTipo1 WHERE id = " + ApuestaID.getInt("ID");
                 String conseguirGolesVisitantes = "SELECT MAX(numGolesVisitante) AS [numGolesVisitante] from ApuestaTipo1 WHERE id = " + ApuestaID.getInt("ID");
                 ResultSet golesL = sentencia.executeQuery(conseguirGolesLocales);
-                ResultSet golesV = sentencia.executeQuery(conseguirGolesVisitantes);
                 maxGolesLocales = golesL.getInt("NumGolesLocal");
+                ResultSet golesV = sentencia.executeQuery(conseguirGolesVisitantes);
                 maxGolesVisitantes = golesV.getInt("numGolesVisitante");
 
                 //Llamo a la primera funcion
