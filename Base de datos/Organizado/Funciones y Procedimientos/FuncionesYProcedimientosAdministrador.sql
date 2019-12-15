@@ -124,3 +124,59 @@ BEGIN
 	CLOSE puntero
 	DEALLOCATE puntero  --Liberamos los recursos del puntero
 END
+
+GO
+/*
+Interfaz
+Nombre: partidosConApuestasSinContabilizar
+Comentario: Este método nos devuelve todos los partidos que tienen apuestas sin
+contabilizar.
+Cabecera: procedure partidosConApuestasSinContabilizar()
+Salida:
+	-Tabla de id's de los partidos con apuestas no contabilizadas
+*/
+create procedure partidosConApuestasSinContabilizar2
+AS
+	SELECT IDPartido FROM (
+	SELECT IDPartido, COUNT(*) AS [Apuestas Sin Contabilizar] FROM Apuestas WHERE Contabilizada = 0
+		GROUP BY IDPartido) AS [C1] WHERE [Apuestas Sin Contabilizar] > 0
+GO
+
+GO
+/*
+Interfaz
+Nombre: apuestasSinContabilizarDeUnPartido
+Comentario: Este método nos devuelve las apuestas sin contabilizar de un partido.
+Cabecera: procedure apuestasSinContabilizarDeUnPartido(@idPartido int)
+Entrada:
+	-@idPartido int
+Salida:
+	-Tabla con las apuestas sin contabilizar del partido
+Postcondiciones: La función devuelve una tabla con las apuestas sin contabilizar del partido, 
+si el partido no existe o si no tiene apuestas sin contabilizar la función devuelve una tabla vacía.
+*/
+CREATE procedure apuestasSinContabilizarDeUnPartido2(@idPartido int)
+AS
+	SELECT * FROM Apuestas WHERE IDPartido = @idPartido AND Contabilizada = 0
+GO
+
+GO
+/*
+Interfaz
+Nombre: insertarPartido
+Comentario: Este método nos permite insertar un partido en la base de datos.
+Cabecera: procedure insertarPartido(@maximoTipo1 smallmoney, @maximoTipo2 smallmoney, @maximoTipo3 smallmoney, @fechaPartido smalldatetime)
+Entrada:
+	-@maximoTipo1 smallmoney
+	-@maximoTipo2 smallmoney
+	-@maximoTipo3 smallmoney
+	-@fechaPartido smalldatetime
+Postcondiciones: El método inserta un partido en la base de datos.
+*/
+ALTER PROCEDURE insertarPartido(@maximoTipo1 smallmoney, @maximoTipo2 smallmoney, @maximoTipo3 smallmoney, @fechaPartido smalldatetime)
+AS
+BEGIN
+	INSERT INTO Partidos (maxApuesta1, maxApuesta2, maxApuesta3, fechaPartido, idCompeticion) VALUES (@maximoTipo1, @maximoTipo2, @maximoTipo3, @fechaPartido, 1)
+END
+GO
+
