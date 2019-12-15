@@ -11,8 +11,13 @@ import java.util.Scanner;
 public class UtilidadesComunes {
 
     /**
-     * Lee y valida el ID de un partido.
-     * @return Devuelve asociado al nombre el ID del partido seleccionado.
+     * Interfaz
+     * Nombre: leerIDpartido
+     * Comentario: Lee y valida el ID de un partido.
+     * Cabecera: public static int leerIDpartido()
+     * Salida:
+     *  -int partido
+     * Postcondiciones: Devuelve asociado al nombre el ID del partido seleccionado.
      */
     public static int leerIDpartido(){
         int partido;
@@ -26,8 +31,13 @@ public class UtilidadesComunes {
 
         return partido;
     }
-    /*
-    * Muestra todos los partidos a los que se puede apostar. Esto es, los partido que se encuentran en estado abierto.
+    /**
+    * Interfaz
+    * Nombre: verPartidosDisponiblesParaApostar
+    * Comentario: Muestra todos los partidos a los que se puede apostar. Esto es,
+    * los partido que se encuentran en estado abierto.
+    * Cabecera: public static void verPartidosDisponiblesParaApostar()
+    * Postcondiciones: La función muestra por pantalla los partidos disponibles.
     * */
     public static void verPartidosDisponiblesParaApostar() {
         // Carga el driver
@@ -53,9 +63,14 @@ public class UtilidadesComunes {
     }
 
     /**
-     * Permite saber si existe un partido con el ID recibido como parametro
-     * @param idPartido ID del partido que queremos buscar.
-     * @return True en caso de existir, false en caso contrario.
+     * Interfaz
+     * Nombre: partidoEncontrado
+     * Comentario: Permite saber si existe un partido con el ID recibido como parametro
+     * Cabecera: public static boolean partidoEncontrado(int idPartido)
+     * Entrada:
+     *  @param idPartido ID del partido que queremos buscar.
+     * Salida:
+     *  @return True en caso de existir, false en caso contrario.
      */
     public static boolean partidoEncontrado(int idPartido){
         boolean ret = false;
@@ -86,12 +101,15 @@ public class UtilidadesComunes {
     }
 
     /**
-     * Permite saber si existe algun partido abierto
-     * @return True en caso de existir alguno, false en caso contrario.
+     * Interfaz
+     * Nombre: existenPartidosAbiertos
+     * Comentario: Permite saber si existe algun partido abierto
+     * Cabecera: public static boolean existenPartidosAbiertos()
+     * Salida:
+     *  @return True en caso de existir alguno, false en caso contrario.
      */
     public static boolean existenPartidosAbiertos(){
         boolean ret = false;
-
         //Buscamos el partido
         //Hacemos un SELECT con ese ID y si devuelve una fila es que existe.
         try {
@@ -117,9 +135,13 @@ public class UtilidadesComunes {
     }
 
     /**
-     * Nos indica si un partido en concreto se encuentra abierto para apostar
-     * @param id ID del partido
-     * @return True si se encuentra abierto, false en caso contrario.
+     * Interfaz
+     * Nombre: partidoAbierto
+     * Comentario: Nos indica si un partido en concreto se encuentra abierto para apostar.
+     * Entrada:
+     *  @param id ID del partido
+     * Salida:
+     *  @return True si se encuentra abierto, false en caso contrario.
      */
     public static boolean partidoAbierto(int id){
         boolean ret = false;
@@ -148,8 +170,13 @@ public class UtilidadesComunes {
     }
 
     /**
-     * Muestra un mensaje del estado que ha devuelto la operacion seleccionada.
-     * @param codMensaje Codigo del mensaje.
+     * Interfaz
+     * Nombre: mostrarMensajeOperacion
+     * Comentario: Muestra un mensaje del estado que ha devuelto la operacion seleccionada.
+     * Cabecera: public static void mostrarMensajeOperacion(int codMensaje)
+     * Entrada:
+     *  @param codMensaje Codigo del mensaje.
+     * Postcondiciones: La función muestra por pantalla un mensaje según una operación seleccionada.
      */
     public static void mostrarMensajeOperacion(int codMensaje){
         switch (codMensaje){
@@ -169,10 +196,15 @@ public class UtilidadesComunes {
     }
 
     /**
-     * Permite saber si una cuenta especifica existe en la base de datos
-     * @param user Correo del usuario.
-     * @param pass Contraseña del usuario
-     * @return True si existe, false en caso contrario.
+     * Interfaz
+     * Nombre: existeCuenta
+     * Comentario: Permite saber si una cuenta especifica existe en la base de datos
+     * Cabecera: public static boolean existeCuenta(String user, String pass)
+     * Entrada:
+     *  @param user Correo del usuario.
+     *  @param pass Contraseña del usuario
+     * Salida:
+     *  @return True si existe, false en caso contrario.
      */
     public static boolean existeCuenta(String user, String pass){
         boolean ret = false;
@@ -180,7 +212,6 @@ public class UtilidadesComunes {
         try {
             // Carga la clase del driver
             clsConexion miConexion = new clsConexion();
-            //String miSelect = "SELECT correo FROM Usuarios where contraseña = " +"'"+pass+"'"+" AND correo = "+"'" + user+"'" ;
             String miSelect = "SELECT correo FROM Usuarios WHERE contraseña = ? AND correo = ?" ;
             // Crear una connexion con el DriverManager
             miConexion.abrirConexion();
@@ -208,10 +239,10 @@ public class UtilidadesComunes {
     * Nombre: leerYValidarTipoApuesta
     * Comentario: Este método nos permite leer y validar el tipo de una apuesta.
     * Cabecera: public static int leerYValidarTipoApuesta()
-     * Salida:
-     *  -int tipoApuesta
-     * Postcondiciones: El método devuelve un número asociado al nombre, que es el
-     * número de un tipo de apuesta o 0 si no se ha elegido ninguna.
+    * Salida:
+    *  -int tipoApuesta
+    * Postcondiciones: El método devuelve un número asociado al nombre, que es el
+    * número de un tipo de apuesta o 0 si no se ha elegido ninguna.
     * */
     public static int leerYValidarTipoApuesta(){
         int tipoApuesta = 0;
@@ -520,17 +551,17 @@ public class UtilidadesComunes {
         return resultado;
     }
 
-    /*
+    /**
     * Interfaz
-    * Nombre: convertUtilToSql
+    * Nombre: convertUtilTimeStamp
     * Comentario: Este método nos permite convertir un tipo java.util.Date
-    * a un tipo java.sql.Date.
-    * Cabecera: private static java.sql.Date convertUtilToSql(java.util.Date uDate)
+    * a un tipo java.sql.Timestamp.
+    * Cabecera: private static java.sql.Date convertUtilTimeStamp(java.util.Date uDate)
     * Entrada:
     *   -java.util.Date uDate
     * Salida:
-    *   -java.sql.Date sDate
-    * Postcondiciones: El método devuelve un tipo java.util.Date asociado al nombre,
+    *   -java.sql.Timestamp ts
+    * Postcondiciones: El método devuelve un tipo java.sql.Timestamp asociado al nombre,
     * que es la conversión del tipo java.util.Date.
     * */
     public static java.sql.Timestamp convertUtilTimeStamp(java.util.Date uDate) {
@@ -538,7 +569,7 @@ public class UtilidadesComunes {
         return ts;
     }
 
-    /*
+    /**
      * Interfaz
      * Nombre: convertUtilToSql
      * Comentario: Este método nos permite convertir un tipo java.util.Date
@@ -556,7 +587,7 @@ public class UtilidadesComunes {
         return sDate;
     }
 
-    /*
+    /**
     * Interfaz
     * Nombre: mostrarPartidosConApuestasNoContabilizadas
     * Comentario: Este función nos permite mostrar los partidos con apuestas
