@@ -571,13 +571,13 @@ public class UtilidadesComunes {
 
         try {
             conexion.abrirConexion();
-            CallableStatement callStatement = conexion.getConnexionBaseDatos().prepareCall("{call partidosConApuestasSinContabilizar()}");
+            CallableStatement callStatement = conexion.getConnexionBaseDatos().prepareCall("{call partidosConApuestasSinContabilizar2}");
             resultado = callStatement.executeQuery();
-            conexion.cerrarConexion();
 
             while (resultado.next()){
-                System.out.println("Id partido: "+resultado.getInt("id"));//Preguntar a pablo esta parte por si acaso
+                System.out.println("Id partido: "+resultado.getInt("IDpartido"));//Preguntar a pablo esta parte por si acaso
             }
+            conexion.cerrarConexion();
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -597,19 +597,17 @@ public class UtilidadesComunes {
     public static boolean existenPartidosConApuestasSinContabilizar(){
         boolean ret = false;
         clsConexion conexion = new clsConexion();
-        ResultSet resultado;
 
         try {
             conexion.abrirConexion();
-            CallableStatement callStatement = conexion.getConnexionBaseDatos().prepareCall("{? = call partidosConApuestasSinContabilizar()}");
-            callStatement.registerOutParameter(1, Types.JAVA_OBJECT);
-            callStatement.execute();
-            resultado = (ResultSet) callStatement.getObject(1);
-            conexion.cerrarConexion();
+            CallableStatement callStatement = conexion.getConnexionBaseDatos().prepareCall("{call partidosConApuestasSinContabilizar2}");
+            //callStatement.registerOutParameter(1, Types.JAVA_OBJECT);
+            ResultSet resultado = callStatement.executeQuery();
 
             if (resultado.next()){//Si tiene alguna fila, significa que existe un partido con apuestas sin contabilizar
                 ret = true;
             }
+            conexion.cerrarConexion();
         }catch (SQLException sqle) {
             System.err.println(sqle);
         }
@@ -637,14 +635,14 @@ public class UtilidadesComunes {
         ResultSet filas;
         try {
             conexion.abrirConexion();
-            CallableStatement callStatement = conexion.getConnexionBaseDatos().prepareCall("{call apuestasSinContabilizarDeUnPartido(?)}");
+            CallableStatement callStatement = conexion.getConnexionBaseDatos().prepareCall("{call apuestasSinContabilizarDeUnPartido2(?)}");
             callStatement.setInt(1,idPartido);
             filas = callStatement.executeQuery();
-            conexion.cerrarConexion();
 
             if (filas.next()){//Si tiene alguna fila, significa que el partido tiene apuestas sin contabilizar
                 resultado = true;
             }
+            conexion.cerrarConexion();
         }catch (SQLException sqle) {
             System.err.println(sqle);
         }
