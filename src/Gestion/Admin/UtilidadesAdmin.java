@@ -356,8 +356,8 @@ public class UtilidadesAdmin {
         ResultSet resultado;
         clsConexion miconexion = new clsConexion();
         int tipo = 1;
-        try {
 
+        try {
             //apuestas tipo 1
             //Conexiones
             miconexion.abrirConexion();
@@ -368,19 +368,34 @@ public class UtilidadesAdmin {
             String conseguirIDApuesta = "SELECT ID FROM Apuestas WHERE IDPartido = "+ idPartido + "AND Tipo = " + tipo;
             ResultSet ApuestaID = sentencia.executeQuery(conseguirIDApuesta);
 
-            //Consigo los goles de esa apuesta
             if (ApuestaID.next()) {
+                //Guardo el id y cierro el otro Resulset
+                int idApuesta = ApuestaID.getInt("ID");
+                //Que en ningun momento lanza su trigger
+                ApuestaID.close();
+                //Consigo los goles de esa apuesta
+                //Los goles del equipo local
+                String tgoles = "NumGolesLocal";
+                String conseguirGoles = "Select MAX("+tgoles+") AS [NumGoles] from ApuestaTipo1 WHERE id = " + idApuesta;
+                ResultSet golesL = sentencia.executeQuery(conseguirGoles);
+                maxGolesLocales = golesL.getInt("NumGoles");
+                //String conseguirGolesVisitantes = "SELECT MAX(numGolesVisitante) AS [numGoles] from ApuestaTipo1 WHERE id = " + ApuestaID.getInt("ID");
+                //Los goles del visitante
+                golesL.close();
+                tgoles = "numGolesVisitante";
+                ResultSet golesV = sentencia.executeQuery(conseguirGoles);
+                maxGolesVisitantes = golesV.getInt("NumGoles");
+                golesV.close();
 
-                String conseguirGolesLocales = "Select MAX(NumGolesLocal) AS [NumGolesLocal] from ApuestaTipo1 WHERE id = " + ApuestaID.getInt("ID");
-                String conseguirGolesVisitantes = "SELECT MAX(numGolesVisitante) AS [numGolesVisitante] from ApuestaTipo1 WHERE id = " + ApuestaID.getInt("ID");
-                ResultSet golesL = sentencia.executeQuery(conseguirGolesLocales);
-                maxGolesLocales = golesL.getInt("NumGolesLocal");
-                ResultSet golesV = sentencia.executeQuery(conseguirGolesVisitantes);
-                maxGolesVisitantes = golesV.getInt("numGolesVisitante");
+                String dineros = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + idPartido + " AND Tipo = " +tipo;
+                ResultSet dineroPartido = sentencia.executeQuery(dineros);
+                int dinero = dineroPartido.getInt("Dineros");
+                dineroPartido.close();
 
                 //Llamo a la primera funcion
                 CallableStatement callStatementApuesta1 = miconexion.getConnexionBaseDatos().prepareCall("{call consultarApuestasTipo1(?,?,?)}");
 
+                //Asi vamos comprobando cada posible apuesta
                 for (int i = 0; i < maxGolesLocales; i++) {
 
                     for (int x = 0; i < maxGolesVisitantes; x++) {
@@ -389,17 +404,11 @@ public class UtilidadesAdmin {
                         callStatementApuesta1.setInt(2, i);
                         callStatementApuesta1.setInt(3, x);
                         resultado = callStatementApuesta1.executeQuery();
+
                         if (resultado.next()) {
-
-                            String dineros = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + resultado.getInt("id") + " AND Tipo = 1";
-
-                            ResultSet dineroPartido = sentencia.executeQuery(dineros);
-                            if (dineroPartido.next()) {
-
-                                if (resultado.getString("id") == null) {
-                                    System.out.println("Goles locales: " + resultado.getString("NumGolesLocal") + " Goles visitante: " + resultado.getString("numGolesVisitante") + " Dinero apostado: " + dineroPartido.getInt("Dineros"));
+                                if (resultado.getString("id") != null) {
+                                    System.out.println("Goles locales: " + resultado.getString("NumGolesLocal") + " Goles visitante: " + resultado.getString("numGolesVisitante") + " Dinero apostado: " + dinero);
                                 }
-                            }
                         }
                     }
                 }
@@ -427,11 +436,10 @@ public class UtilidadesAdmin {
                         callStatementApuesta2.setInt(3, i);
                         resultado = callStatementApuesta2.executeQuery();
                         if (resultado.next()) {
-                            String dineros = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + resultado.getInt("id") + " AND Tipo = 2";
-
+                            String dineros = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + idPartido + " AND Tipo = "+tipo;
                             ResultSet dineroPartido = sentencia.executeQuery(dineros);
+                            if (resultado.getString("id") != null) {
 
-                            if (resultado.getString("id") == null) {
                                 System.out.println("Goles: " + resultado.getString("goles") + " Equipo ganador " + resultado.getString("equipo") + " Dinero partido: " + dineroPartido.getInt("Dineros"));
                             }
                         }
@@ -449,7 +457,7 @@ public class UtilidadesAdmin {
 
                             ResultSet dineroPartido = sentencia.executeQuery(dineros);
                             if (dineroPartido.next()) {
-                                if (resultado.getString("id") == null) {
+                                if (resultado.getString("id") != null) {
                                     System.out.println("Goles: " + resultado.getString("goles") + " Equipo ganador " + resultado.getString("equipo") + " Dinero partido: " + dineroPartido.getInt("Dineros"));
                                 }
                             }
@@ -500,6 +508,8 @@ public class UtilidadesAdmin {
         }
         catch (SQLException r) {
             r.printStackTrace();
+        }
+        finally {
         }
 
     }
