@@ -416,70 +416,27 @@ public class UtilidadesAdmin {
             connexionBaseDatos = miconexion.getConnexionBaseDatos();
             Statement sentencia = connexionBaseDatos.createStatement();
 
-            //Para conseguir el id de apuesta
-            String conseguirNumApuesta = "SELECT COUNT(ID) AS [NumeroApuestas] FROM Apuestas WHERE IDPartido = " + idPartido + " AND Tipo = " + tipo;
-            ResultSet numeroApuesta = sentencia.executeQuery(conseguirNumApuesta);
+            //Llamo a la primera funcion
+            CallableStatement callStatementApuesta1 = miconexion.getConnexionBaseDatos().prepareCall("{call consultarApuestasTipo1(?)}");
+            callStatementApuesta1.setInt(1, idPartido);
+            resultado = callStatementApuesta1.executeQuery();
 
-            if (numeroApuesta.next()) {
-                //Guardo el numero de apuestas y cierro el Resulset
-                int todasApuestas = numeroApuesta.getInt("NumeroApuestas");
-                numeroApuesta.close();
-
-                for (int i = 0; i < todasApuestas; i++, golesL++, golesV++) {
-
-                    //Llamo a la primera funcion
-                    CallableStatement callStatementApuesta1 = miconexion.getConnexionBaseDatos().prepareCall("{call consultarApuestasTipo1(?)}");
-                    callStatementApuesta1.setInt(1, idPartido);
-                    resultado = callStatementApuesta1.executeQuery();
-
-                    if (resultado.next()) {
-                        if (resultado.getString("id") != null) {
-                            System.out.println("Goles locales: " + resultado.getString("NumGolesLocal") + " Goles visitante: " + resultado.getString("numGolesVisitante") + " Dinero apostado: " + resultado.getString("DineroApostado"));
-                        }
-                    }
+            while (resultado.next()) {
+                if (resultado.getString("NumGolesLocal") != null) {
+                    System.out.println("Goles locales: " + resultado.getInt("NumGolesLocal") + " Goles visitante: " + resultado.getInt("numGolesVisitante") + " Dinero apostado: " + resultado.getInt("DineroApostado"));
                 }
             }
 
             //APUESTAS tipo 2
-            //Consigo todas las apuestas de tipo 2
-            tipo++;
-            numeroApuesta = sentencia.executeQuery(conseguirNumApuesta);
-            if (numeroApuesta.next()) {
-                 int todasApuestas = numeroApuesta.getInt("NumeroApuestas");
-                     numeroApuesta.close();
-                    //Llamo a la segunda funcion
-                    CallableStatement callStatementApuesta2 = miconexion.getConnexionBaseDatos().prepareCall("{call consultarApuestasTipo2(?)}");
-                    //Visitante
-                    for (int i = 1; i < todasApuestas; i++) {
-                        callStatementApuesta2.setInt(1, idPartido);
-                        resultado = callStatementApuesta2.executeQuery();
-                        if (resultado.next()) {
-                            String dineros = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + idPartido + " AND Tipo = " + tipo;
-                            ResultSet dineroPartido = sentencia.executeQuery(dineros);
-                            if (dineroPartido.next()) {
-                                if (resultado.getString("id") != null) {
-                                    System.out.println("Goles: " + resultado.getString("goles") + " Equipo ganador " + resultado.getString("equipo") + " Dinero partido: " + resultado.getInt("DineroApostado"));
-                                }
-                            }
-                        }
-                    }
-                    //Local
-                    /*
-                    for (int i = 1; i < todasApuestas; i++) {
-                        callStatementApuesta2.setInt(1, idPartido);
-                        callStatementApuesta2.setString(2, "Local");
-                        callStatementApuesta2.setInt(3, i);
-                        resultado = callStatementApuesta2.executeQuery();
-                        if (resultado.next()) {
-                            String dineros = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + resultado.getInt("id") + " AND Tipo = "+ tipo;
-                            ResultSet dineroPartido = sentencia.executeQuery(dineros);
-                            if (dineroPartido.next()) {
-                                if (resultado.getString("id") != null) {
-                                    System.out.println("Goles: " + resultado.getString("goles") + " Equipo ganador " + resultado.getString("equipo") + " Dinero partido: " + dineroPartido.getInt("Dineros"));
-                                }
-                            }
-                        }
-                    }*/
+            //Llamo a la segunda funcion
+            CallableStatement callStatementApuesta2 = miconexion.getConnexionBaseDatos().prepareCall("{call consultarApuestasTipo2(?)}");
+            //Visitante
+            callStatementApuesta2.setInt(1, idPartido);
+            resultado = callStatementApuesta2.executeQuery();
+            if (resultado.next()) {
+                if (resultado.getString("id") != null) {
+                    System.out.println("Goles: " + resultado.getInt("goles") + " Equipo ganador " + resultado.getString("equipo") + " Dinero partido: " + resultado.getInt("DineroApostado"));
+                }
             }
 
             //apuestas tipo 3
@@ -489,29 +446,11 @@ public class UtilidadesAdmin {
             callStatementApuesta3.setInt(1,idPartido);
             ResultSet resultado3L = callStatementApuesta3.executeQuery();
             if (resultado3L.next()) {
-                String dineros3L = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + resultado3L.getInt("id") + " AND Tipo = " + tipo;
-                ResultSet dineroPartido3L = sentencia.executeQuery(dineros3L);
-                if (dineroPartido3L.next()) {
-                    if (resultado3L.getString("id") == null) {
-                        System.out.println("Equipo ganandor" + resultado3L.getString("Ganador") + " dinero " + dineroPartido3L.getInt("DineroApostado"));
-                    }
+                if (resultado3L.getString("id") == null) {
+                    System.out.println("Equipo ganandor" + resultado3L.getString("Ganador") + " dinero " + resultado3L.getInt("DineroApostado"));
                 }
             }
 
-            //Visitante
-            /*
-            CallableStatement callStatementApuesta3V = miconexion.getConnexionBaseDatos().prepareCall("{call consultarApuestasTipo3(?)}");
-            callStatementApuesta3.setInt(1,idPartido);
-            ResultSet resultado3V = callStatementApuesta3.executeQuery();
-            if (resultado3V.next()) {
-                String dineros3V = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + resultado3V.getInt("id") + " AND Tipo = "+ tipo;
-                ResultSet dineroPartido3V = sentencia.executeQuery(dineros3V);
-                if (dineroPartido3V.next()) {
-                    if (resultado3V.getString("id") == null) {
-                        System.out.println("Equipo ganandor" + resultado3V.getString("ganador") + " dinero " + dineroPartido3V.getInt("Dineros"));
-                    }
-                }
-            }*/
 
         }
         catch (SQLException r) {

@@ -753,10 +753,16 @@ GO
 --		WHERE id = @idPartido AND ganador = @ganador
 --GO
 
---DROP FUNCTION consultarApuestasTipo3
 
 
 /*
+Interfaz
+Nombre: consultarApuestaTipo1
+Comentario: Este método nos devuelve la apuesta y el dinero del tipo 1
+Cabecera: PROCEDURE consultarApuestaTipo1(@IdPartido int)
+Salida:
+	-Cursor listadoCompeticiones
+Postcondiciones: La función devuelve la apuesta y el dinero del tipo 1
 */
 GO
 CREATE PROCEDURE consultarApuestaTipo1(@IdPartido int)
@@ -770,6 +776,13 @@ END
 GO
 
 /*
+Interfaz
+Nombre: consultarApuestaTipo2
+Comentario: Este método nos devuelve la apuesta y el dinero del tipo 2
+Cabecera: PROCEDURE consultarApuestaTipo2(@IdPartido int)
+Salida:
+	-Cursor listadoCompeticiones
+Postcondiciones: La función devuelve devuelve la apuesta y el dinero del tipo 2
 */
 CREATE PROCEDURE consultarApuestaTipo2(@IdPartido int)
 AS
@@ -782,6 +795,13 @@ END
 GO
 
 /*
+Interfaz
+Nombre: consultarApuestaTipo3
+Comentario: Este método nos devuelve la apuesta y el dinero del tipo 3
+Cabecera:  PROCEDURE consultarApuestaTipo3(@IdPartido int)
+Salida:
+	-Cursor listadoCompeticiones
+Postcondiciones: La función devuelve la apuesta y el dinero del tipo 3
 */
 CREATE PROCEDURE consultarApuestaTipo3(@IdPartido int)
 AS
