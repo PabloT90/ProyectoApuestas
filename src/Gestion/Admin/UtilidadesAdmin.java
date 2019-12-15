@@ -10,7 +10,14 @@ import java.util.Scanner;
 
 public class UtilidadesAdmin {
     /**
-     * Lee y valida si el usuario quiere ejecutar una aplicacion.
+     * Interfaz
+     * Nombre: leerValidarEjecutar
+     * Comentario: Lee y valida si el usuario quiere ejecutar una aplicacion.
+     * Cabecera: public static char leerValidarEjecutar()
+     * Salida:
+     *  -char ejecutar
+     * Postcondiciones: La función devuelve un carácter asociado al nombre,
+     * que es una ejecución válida para la aplicación.
      */
     public static char leerValidarEjecutar(){
         Scanner teclado = new Scanner(System.in);
@@ -25,8 +32,12 @@ public class UtilidadesAdmin {
     }
 
     /**
-     * Muestra un menu y obtiene una respuesta valida para la opcion seleccionada.
-     * @return asociado al nombre devuelve un entero con la opcion del menu.
+     * Interfaz
+     * Nombre: MostrarMenuLeerValidarOpcion
+     * Comentario: Muestra un menu y obtiene una respuesta valida para la opcion seleccionada.
+     * Cabecera: public static int MostrarMenuLeerValidarOpcion()
+     * Salida:
+     *  @return asociado al nombre devuelve un entero con la opcion del menu.
      */
     public static int MostrarMenuLeerValidarOpcion(){
         int opcion = 0;
@@ -215,9 +226,14 @@ public class UtilidadesAdmin {
 
 
     /**
-     * Abre el partido del mismo id que el que se le pasa
-     * @param idPartido el id del partio que se quiere abrir
-     * @return un boolean que nos dice si se ha ejecutado bien
+     * Interfaz
+     * Nombre: abrirPartido
+     * Comentario: Abre el partido del mismo id que el que se le pasa
+     * Cabecera: public static boolean abrirPartido(int idPartido)
+     * Entrada:
+     *  @param idPartido el id del partio que se quiere abrir
+     * Salida:
+     *  @return un boolean que nos dice si se ha ejecutado bien
      */
     public static boolean abrirPartido(int idPartido){
 
@@ -245,10 +261,15 @@ public class UtilidadesAdmin {
 
     }
 
-    /***
-     *  Cierra el partido que tenga el id que le pasas
-     * @param idPartido el id del partio que se quiere cerrar
-     * @return un boolean que nos dice si se ha ejecutado bien
+    /**
+     * Interfaz
+     * Nombre: cerrarPartido
+     * Comentario: Cierra el partido que tenga el id que le pasas
+     * Cabecera: public static boolean cerrarPartido(int idPartido)
+     * Entrada:
+     *  @param idPartido el id del partio que se quiere cerrar
+     * Salida:
+     *  @return un boolean que nos dice si se ha ejecutado bien
      */
     public static boolean cerrarPartido(int idPartido){
         boolean ret = true;
@@ -274,7 +295,12 @@ public class UtilidadesAdmin {
     }
 
     /**
-     * Este metodo nos muestra todos los partidos en los que no se pueda apostar  en otras palabras que estene cerrados
+     * Interfaz
+     * Nombre: verPartidosCerrados
+     * Comentario: Este metodo nos muestra todos los partidos en los que no se pueda
+     * apostar, en otras palabras que estene cerrados.
+     * Cabecera: public static void verPartidosCerrados()
+     * Postcondiciones: El método muestra por pantalla los partidos que se encuentren cerrados.
      */
    public static void verPartidosCerrados(){
 
@@ -302,8 +328,12 @@ public class UtilidadesAdmin {
    }
 
     /**
-     * Lee y valida el ID de un partido.
-     * @return Devuelve asociado al nombre el ID del partido seleccionado.
+     * Interfaz
+     * Nombre: leerIDpartido
+     * Comentario: Lee y valida el ID de un partido.
+     * Cabecera: public static int leerIDpartido()
+     * Salida:
+     *  @return Devuelve asociado al nombre el ID del partido seleccionado.
      */
     public static int leerIDpartido(){
         int partido;
@@ -318,6 +348,19 @@ public class UtilidadesAdmin {
         return partido;
     }
 
+    /**
+    * Interfaz
+    * Nombre: partidoEncontrado
+    * Comentario: Este método nos permite verificar si existe un partido con
+    * una id específica ne la base de datos.
+    * Cabecera: public static boolean partidoEncontrado(int idPartido)
+    * Entrada:
+    *   -int idPartido
+    * Salida:
+    *   -boolean ret
+    * Postcondiciones: El método devuelve un valor booleano asociado al nombre,
+    * true si el partido existe en la base de datos o false en caso contrario.
+    * */
     public static boolean partidoEncontrado(int idPartido){
         boolean ret = false;
 
@@ -348,8 +391,16 @@ public class UtilidadesAdmin {
     }
 
     /**
-     * Este metodo nos permitira consultar todas las apuestas y cuanto dinero se ha apostado a cada posible resultado
-     * @param idPartido el ide del partido que queremos consultar
+     * Interfaz
+     * Nombre: consultarApuestasPartido
+     * Comentario: Este metodo nos permitira consultar todas las apuestas y
+     * cuanto dinero se ha apostado a cada posible resultado
+     * Cabecera: public static void consultarApuestasPartido(int idPartido)
+     * Entrada:
+     *  @param idPartido el ide del partido que queremos consultar
+     * Postcondiciones: La función muestra por pantalla los datos de todas las
+     * apuestas de un partido específico. Si no existe un partido con esa id en
+     * la base de datos, no se muestra nada.
      */
     public static void consultarApuestasPartido(int idPartido){
 
@@ -472,7 +523,7 @@ public class UtilidadesAdmin {
 
     }
 
-    /*
+    /**
     * Interfaz
     * Nombre: leerYValidarPartidoConApuestasSinContabilizar
     * Comentario: Este método nos permite obtener la id de un partido con apuestas
@@ -498,7 +549,7 @@ public class UtilidadesAdmin {
         return idPartido;
     }
 
-    /*
+    /**
      * Interfaz
      * Nombre: pagarApuestasPartido
      * Comentario: Este método nos permite pagar las apuestas sin contabilizar de un partido.

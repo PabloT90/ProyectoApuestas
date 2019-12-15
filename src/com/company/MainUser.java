@@ -22,39 +22,6 @@ si quiere ejecutar
     fin_mientras
 fin_si
 
-Nivel: 1 ApostarPartido
-Inicio
-Si existen partidos abiertos
-    leerYValidarIdPartidoAbierto*
-    Si idPartidoAbierto != 0
-        leerYValidarTipoApuesta*
-        Si tipoApuesta != 0
-            LeerCaracteristicasApuesta
-            leerYValidarCantidadAApostar*
-            RealizarApuesta
-        Fin_si
-    Fin_si
-Sino
-    MostrarMensajeError
-Fin_si
-Fin
-
-Nivel: 2
-
-LeerCaracteristicasApuesta
-Inicio
-    Segun (tipoApuesta)
-        para tipoApuesta == 1
-            LeerYValidarGolesLocalesYVisitantes
-
-        para tipoApuesta == 2
-            LeerYValidarEquipoYGoles
-
-        para tipoApuesta == 3
-            leerYValidarGanador*
-
-    Fin_segun
-Fin
 * */
 public class MainUser {
     public static void main(String[] args) {

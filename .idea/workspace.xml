@@ -4,8 +4,10 @@
     <list default="true" id="a3f5145e-e47e-453b-9c69-2386a688b718" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gestion/UtilidadesComunes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gestion/UtilidadesComunes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Gestion/Admin/UtilidadesAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gestion/Admin/UtilidadesAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/MainUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/MainUser.java" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,10 +24,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/Gestion/Admin/UtilidadesAdmin.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/com/company/MainAdministradores.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/com/company/MainUser.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Gestion/UtilidadesComunes.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Gestion/Admin/UtilidadesAdmin.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectId" id="1TKJg7mfOEeQUtCLUB33qhbOqem" />
   <component name="ProjectViewState">
@@ -47,6 +49,18 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\pprats\Desktop\Apuestas_2\ProyectoApuestas\src" />
     </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager" selected="Application.MainAdministradores">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
@@ -76,18 +90,6 @@
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -209,7 +211,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/Gestion/Admin/UtilidadesAdmin.java</url>
-          <line>353</line>
+          <line>404</line>
           <properties class="Gestion.Admin.UtilidadesAdmin" method="consultarApuestasPartido">
             <option name="EMULATED" value="true" />
           </properties>
