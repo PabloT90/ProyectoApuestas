@@ -729,27 +729,67 @@ GO
 
 
 -----Para el ejercicio 10.
+--GO
+--CREATE FUNCTION consultarApuestasTipo1(@idPartido int, @golesL tinyint, @golesV tinyint) 
+--RETURNS TABLE
+--RETURN
+--	SELECT * FROM ApuestaTipo1
+--		WHERE id = @idPartido AND NumGolesLocal = @golesL AND numGolesVisitante = @golesV
+--GO
+
+--GO
+--CREATE FUNCTION consultarApuestasTipo2(@idPartido int, @equipo varchar(10), @goles tinyint) 
+--RETURNS TABLE
+--RETURN
+--	SELECT * FROM ApuestaTipo2
+--		WHERE id = @idPartido AND goles = @goles AND equipo = @equipo
+--GO
+
+--GO
+--CREATE FUNCTION consultarApuestasTipo3(@idPartido int, @ganador varchar(15)) 
+--RETURNS TABLE
+--RETURN
+--	SELECT * FROM ApuestaTipo3
+--		WHERE id = @idPartido AND ganador = @ganador
+--GO
+
+--DROP FUNCTION consultarApuestasTipo3
+
+
+/*
+*/
 GO
-CREATE FUNCTION consultarApuestasTipo1(@idPartido int, @golesL tinyint, @golesV tinyint) 
-RETURNS TABLE
-RETURN
-	SELECT * FROM ApuestaTipo1
-		WHERE id = @idPartido AND NumGolesLocal = @golesL AND numGolesVisitante = @golesV
+CREATE PROCEDURE consultarApuestaTipo1(@IdPartido int)
+AS
+BEGIN
+	SELECT A.DineroApostado, A1.NumGolesLocal, A1.numGolesVisitante FROM Apuestas AS[A]
+		INNER JOIN ApuestaTipo1 AS[A1] ON A.ID = A1.id
+		WHERE IDPartido = 1
+	ORDER BY IDPartido, Tipo
+END
 GO
 
-GO
-CREATE FUNCTION consultarApuestasTipo2(@idPartido int, @equipo varchar(10), @goles tinyint) 
-RETURNS TABLE
-RETURN
-	SELECT * FROM ApuestaTipo2
-		WHERE id = @idPartido AND goles = @goles AND equipo = @equipo
+/*
+*/
+CREATE PROCEDURE consultarApuestaTipo2(@IdPartido int)
+AS
+BEGIN
+	SELECT A.DineroApostado, A1.equipo, A1.goles FROM Apuestas AS[A]
+		INNER JOIN ApuestaTipo2 AS[A1] ON A.ID = A1.id
+		WHERE IDPartido = 1
+	ORDER BY IDPartido, Tipo
+END
 GO
 
-GO
-CREATE FUNCTION consultarApuestasTipo3(@idPartido int, @ganador varchar(15)) 
-RETURNS TABLE
-RETURN
-	SELECT * FROM ApuestaTipo3
-		WHERE id = @idPartido AND ganador = @ganador
-GO
+/*
+*/
+CREATE PROCEDURE consultarApuestaTipo3(@IdPartido int)
+AS
+BEGIN
+	SELECT A.DineroApostado, A1.Ganador FROM Apuestas AS[A]
+		INNER JOIN ApuestaTipo3 AS[A1] ON A.ID = A1.id
+		WHERE IDPartido = 1
+	ORDER BY IDPartido, Tipo
+END
+
 
