@@ -318,20 +318,21 @@ public class UtilidadesAdmin {
         return partido;
     }
 
-    public static boolean partidoEncontrado(int idPartido){ //TODO: cambiar para que tenga en cuenta ademas los partidos abiertos.
+    public static boolean partidoEncontrado(int idPartido){
         boolean ret = false;
 
         //Buscamos el partido
         //Hacemos un SELECT con ese ID y si devuelve una fila es que existe.
         try {
             clsConexion miConexion = new clsConexion();
-            String miSelect = "SELECT id FROM Partidos where id = " +idPartido;
+            String miSelect = "SELECT id FROM Partidos where id = ?";
 
             // Crear una connexion con el DriverManager
             miConexion.abrirConexion();
             Connection connexionBaseDatos = miConexion.getConnexionBaseDatos();
-            Statement sentencia = connexionBaseDatos.createStatement();
-            ResultSet partidos = sentencia.executeQuery(miSelect);
+            PreparedStatement sentencia = connexionBaseDatos.prepareStatement(miSelect);
+            sentencia.setInt(1, idPartido);
+            ResultSet partidos = sentencia.executeQuery();
 
             // Mostrar los datos del ResultSet
             if(partidos.next()){ //Si tiene una fila
@@ -532,4 +533,6 @@ public class UtilidadesAdmin {
             e.printStackTrace();
         }
     }
+
+
 }
