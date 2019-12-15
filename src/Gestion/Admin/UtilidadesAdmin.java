@@ -366,7 +366,7 @@ public class UtilidadesAdmin {
             Statement sentencia = connexionBaseDatos.createStatement();
 
             //Para conseguir el id de apuesta
-            String conseguirNumApuesta = "SELECT COUNT(ID) AS [NumeroApuestas] FROM Apuestas WHERE IDPartido = " + idPartido + "AND Tipo = " + tipo;
+            String conseguirNumApuesta = "SELECT COUNT(ID) AS [NumeroApuestas] FROM Apuestas WHERE IDPartido = " + idPartido + " AND Tipo = " + tipo;
             ResultSet numeroApuesta = sentencia.executeQuery(conseguirNumApuesta);
 
             if (numeroApuesta.next()) {
@@ -467,7 +467,7 @@ public class UtilidadesAdmin {
                 String dineros3V = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + resultado3V.getInt("id") + " AND Tipo = "+ tipo;
                 ResultSet dineroPartido3V = sentencia.executeQuery(dineros3V);
                 if (dineroPartido3V.next()) {
-                    if (resultado3L.getString("id") == null) {
+                    if (resultado3V.getString("id") == null) {
                         System.out.println("Equipo ganandor" + resultado3V.getString("ganador") + " dinero " + dineroPartido3V.getInt("Dineros"));
                     }
                 }

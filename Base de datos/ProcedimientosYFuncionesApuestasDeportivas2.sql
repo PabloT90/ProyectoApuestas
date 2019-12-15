@@ -725,26 +725,23 @@ GO
 
 -----Para el ejercicio 10.
 GO
-CREATE FUNCTION consultarApuestasTipo1(@idPartido int, @golesL tinyint, @golesV tinyint) 
-RETURNS TABLE
-RETURN
+CREATE PROCEDURE consultarApuestasTipo1(@idPartido int, @golesL tinyint, @golesV tinyint) 
+AS
 	SELECT * FROM ApuestaTipo1
 		WHERE id = @idPartido AND NumGolesLocal = @golesL AND numGolesVisitante = @golesV
 GO
 
 GO
-CREATE FUNCTION consultarApuestasTipo2(@idPartido int, @equipo varchar(10), @goles tinyint) 
-RETURNS TABLE
-RETURN
+CREATE PROCEDURE consultarApuestasTipo2(@idPartido int, @equipo varchar(10), @goles tinyint) AS
 	SELECT * FROM ApuestaTipo2
 		WHERE id = @idPartido AND goles = @goles AND equipo = @equipo
 GO
 
 GO
-CREATE FUNCTION consultarApuestasTipo3(@idPartido int, @ganador varchar(15)) 
-RETURNS TABLE
-RETURN
+CREATE PROCEDURE consultarApuestasTipo3(@idPartido int, @ganador varchar(15)) AS
 	SELECT * FROM ApuestaTipo3
 		WHERE id = @idPartido AND ganador = @ganador
 GO
+
+DROP function consultarApuestasTipo1
 
