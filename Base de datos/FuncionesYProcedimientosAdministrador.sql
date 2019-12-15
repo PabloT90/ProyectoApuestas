@@ -176,9 +176,10 @@ Entrada:
 	-@fechaPartido smalldatetime
 Postcondiciones: El método inserta un partido en la base de datos.
 */
-CREATE PROCEDURE insertarPartido(@maximoTipo1 smallmoney, @maximoTipo2 smallmoney, @maximoTipo3 smallmoney, @fechaPartido smalldatetime)
+ALTER PROCEDURE insertarPartido(@maximoTipo1 smallmoney, @maximoTipo2 smallmoney, @maximoTipo3 smallmoney, @fechaPartido smalldatetime)
 AS
 BEGIN
-	INSERT INTO Partidos (maxApuesta1, maxApuesta2, maxApuesta3, fechaPartido) VALUES (@maximoTipo1, @maximoTipo2, @maximoTipo3, @fechaPartido)
+	INSERT INTO Partidos (maxApuesta1, maxApuesta2, maxApuesta3, fechaPartido, idCompeticion) VALUES (@maximoTipo1, @maximoTipo2, @maximoTipo3, @fechaPartido, 1)
 END
 GO
+

@@ -33,6 +33,7 @@ public class MainAdministradores {
                         maximoApuesta2 = UtilidadesAdmin.leerYValidarMaximoApuestaTipo2();
                         maximoApuesta3 = UtilidadesAdmin.leerYValidarMaximoApuestaTipo3();
                         fechaPartido = UtilidadesAdmin.leerYValidarFechaPartido();
+
                         UtilidadesAdmin.insertarPartido(maximoApuesta1, maximoApuesta2, maximoApuesta3, UtilidadesComunes.convertUtilToSql(fechaPartido));
                         break;
                     case 2: //Abrir partido

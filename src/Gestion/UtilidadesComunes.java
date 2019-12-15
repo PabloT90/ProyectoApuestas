@@ -4,6 +4,7 @@ import Conexion.clsConexion;
 import Gestion.User.UtilidadesUser;
 
 import java.sql.*;
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Scanner;
 
@@ -460,14 +461,13 @@ public class UtilidadesComunes {
 
         try {
             conexion.abrirConexion();
-            CallableStatement cstmt = conexion.getConnexionBaseDatos().prepareCall("{call realizarApuestaTipo1(?,?,?,?,?,?,?)}"); //Aqui llamamos al procedimiento que queramos.
-            cstmt.setString(1, correo);
-            cstmt.setDouble(2,capitalAApostar);
-            cstmt.setString(3, correo);
-            cstmt.setInt(4, idPartido);
-            cstmt.setInt(5, numGolesLocal);
-            cstmt.setInt(6, numGolesVisitante);
-            cstmt.setInt(7, error);//Por si acaso
+            CallableStatement cstmt = conexion.getConnexionBaseDatos().prepareCall("{call realizarApuestaTipo1(?,?,?,?,?,?)}"); //Aqui llamamos al procedimiento que queramos.
+            cstmt.setDouble(1,capitalAApostar);
+            cstmt.setString(2, correo);
+            cstmt.setInt(3, idPartido);
+            cstmt.setInt(4, numGolesLocal);
+            cstmt.setInt(5, numGolesVisitante);
+            cstmt.setInt(6, error);//Por si acaso*/
             resultado = cstmt.executeUpdate();  //Filas afectadas
             conexion.cerrarConexion();
         } catch (SQLException e){
@@ -503,14 +503,13 @@ public class UtilidadesComunes {
 
         try {
             conexion.abrirConexion();
-            CallableStatement cstmt = conexion.getConnexionBaseDatos().prepareCall("{call realizarApuestaTipo2(?,?,?,?,?,?,?)}"); //Aqui llamamos al procedimiento que queramos.
-            cstmt.setString(1, correo);
-            cstmt.setDouble(2,capitalAApostar);
-            cstmt.setString(3, correo);
-            cstmt.setInt(4, idPartido);
-            cstmt.setString(5, equipo);
-            cstmt.setInt(6, goles);
-            cstmt.setInt(7, error);//Por si acaso
+            CallableStatement cstmt = conexion.getConnexionBaseDatos().prepareCall("{call realizarApuestaTipo2(?,?,?,?,?,?)}"); //Aqui llamamos al procedimiento que queramos.
+            cstmt.setDouble(1,capitalAApostar);
+            cstmt.setString(2, correo);
+            cstmt.setInt(3, idPartido);
+            cstmt.setString(4, equipo);
+            cstmt.setInt(5, goles);
+            cstmt.setInt(6, error);
             resultado = cstmt.executeUpdate();  //Filas afectadas
             conexion.cerrarConexion();
         } catch (SQLException e){
@@ -544,14 +543,14 @@ public class UtilidadesComunes {
 
         try {
             conexion.abrirConexion();
-            CallableStatement cstmt = conexion.getConnexionBaseDatos().prepareCall("{call realizarApuestaTipo3(?,?,?,?,?,?)}"); //Aqui llamamos al procedimiento que queramos.
-            cstmt.setString(1, correo);
-            cstmt.setDouble(2,capitalAApostar);
-            cstmt.setString(3, correo);
-            cstmt.setInt(4, idPartido);
-            cstmt.setString(5, equipo);
-            cstmt.setInt(6, error);//Por si acaso
+            CallableStatement cstmt = conexion.getConnexionBaseDatos().prepareCall("{call realizarApuestaTipo3(?,?,?,?,?)}");
+            cstmt.setDouble(1, capitalAApostar);
+            cstmt.setString(2, correo);
+            cstmt.setInt(3, idPartido);
+            cstmt.setString(4, equipo);
+            cstmt.setInt(5, error);//Por si acaso*/
             resultado = cstmt.executeUpdate();  //Filas afectadas
+            System.out.println(error);
             conexion.cerrarConexion();
         } catch (SQLException e){
             e.printStackTrace();
@@ -573,6 +572,24 @@ public class UtilidadesComunes {
     * Postcondiciones: El método devuelve un tipo java.util.Date asociado al nombre,
     * que es la conversión del tipo java.util.Date.
     * */
+    public static java.sql.Timestamp convertUtilTimeStamp(java.util.Date uDate) {
+        Timestamp ts = new Timestamp(uDate.getTime());
+        return ts;
+    }
+
+    /*
+     * Interfaz
+     * Nombre: convertUtilToSql
+     * Comentario: Este método nos permite convertir un tipo java.util.Date
+     * a un tipo java.sql.Date.
+     * Cabecera: private static java.sql.Date convertUtilToSql(java.util.Date uDate)
+     * Entrada:
+     *   -java.util.Date uDate
+     * Salida:
+     *   -java.sql.Date sDate
+     * Postcondiciones: El método devuelve un tipo java.util.Date asociado al nombre,
+     * que es la conversión del tipo java.util.Date.
+     * */
     public static java.sql.Date convertUtilToSql(java.util.Date uDate) {
         java.sql.Date sDate = new java.sql.Date(uDate.getTime());
         return sDate;
@@ -623,8 +640,10 @@ public class UtilidadesComunes {
 
         try {
             conexion.abrirConexion();
-            CallableStatement callStatement = conexion.getConnexionBaseDatos().prepareCall("{call partidosConApuestasSinContabilizar()}");
-            resultado = callStatement.executeQuery();
+            CallableStatement callStatement = conexion.getConnexionBaseDatos().prepareCall("{? = call partidosConApuestasSinContabilizar()}");
+            callStatement.registerOutParameter(1, Types.JAVA_OBJECT);
+            callStatement.execute();
+            resultado = (ResultSet) callStatement.getObject(1);
             conexion.cerrarConexion();
 
             if (resultado.next()){//Si tiene alguna fila, significa que existe un partido con apuestas sin contabilizar

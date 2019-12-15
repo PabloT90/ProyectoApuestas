@@ -90,8 +90,8 @@ begin
 
 	while(@@FETCH_STATUS=0)
 	begin
-		if update(resultadoLocal) or update(resultadoVisitante)
-		begin
+		--if update(resultadoLocal) or update(resultadoVisitante)
+		--begin
 			if exists (select Tipo from Apuestas
 					where @IDPartido=IDPartido and Tipo=1)
 			begin
@@ -108,9 +108,6 @@ begin
 					AT1.NumGolesLocal = @ResLocal
 					and
 					AT1.numGolesVisitante = @ResVisitante
-					
-
-				
 			end--if tipo 1
 			------------------------------------
 			if exists (select Tipo from Apuestas
@@ -156,7 +153,7 @@ begin
 			end--if tipo 3
 
 
-		end--fin if update
+		--end--fin if update
 
 	fetch next from miCursor into @IDPartido,@ResLocal,@ResVisitante,@FechaPartido,@IdCompeticion
 

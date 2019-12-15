@@ -158,7 +158,7 @@ public class UtilidadesAdmin {
             }
         }while (!fechaValida(anno, mes, dia));
 
-        return new Date(anno, mes, dia);
+        return new Date(dia, mes, anno);
     }
 
     /**
