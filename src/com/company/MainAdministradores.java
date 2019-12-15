@@ -48,13 +48,18 @@ public class MainAdministradores {
 
                         break;
                     case 3: //Cerrar partido
-                        idPartido = UtilidadesComunes.leerIDpartido();
-
-                        if (UtilidadesAdmin.cerrarPartido(idPartido)){
-                            System.out.println("Cerrado correctamente.");
+                        //Comprobar si hay algun partido abierto
+                        if(UtilidadesComunes.existenPartidosAbiertos()){
+                            idPartido = UtilidadesComunes.leerIDpartido();
+                            if (UtilidadesAdmin.cerrarPartido(idPartido)){
+                                System.out.println("Cerrado correctamente.");
+                            }else{
+                                System.out.println("No se ha podido cerrar correctamente.");
+                            }
                         }else{
-                            System.out.println("No se ha podido cerrar correctamente.");
+                            System.out.println("No hay partidos abiertos.");
                         }
+
 
                         break;
                     case 4: //Consultar apuestas partido
