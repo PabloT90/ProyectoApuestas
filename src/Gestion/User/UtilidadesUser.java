@@ -253,6 +253,9 @@ public class UtilidadesUser {
                                 UtilidadesComunes.realizarApuestaTipo3(fechaActual, capitalApuesta, correoUsuario, idPartido, equipo);
                                 break;
                         }
+                        System.out.println("Apuesta realizada con exito.");
+                    }else{
+                        System.out.println("No se ha podido apostar.");
                     }
                 }else{
                     System.out.println("El ususario no tiene capital para apostar.");

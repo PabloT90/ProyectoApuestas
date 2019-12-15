@@ -34,7 +34,11 @@ public class MainAdministradores {
                         maximoApuesta3 = UtilidadesAdmin.leerYValidarMaximoApuestaTipo3();
                         fechaPartido = UtilidadesAdmin.leerYValidarFechaPartido();
 
-                        UtilidadesAdmin.insertarPartido(maximoApuesta1, maximoApuesta2, maximoApuesta3, UtilidadesComunes.convertUtilToSql(fechaPartido));
+                        if(UtilidadesAdmin.insertarPartido(maximoApuesta1, maximoApuesta2, maximoApuesta3, UtilidadesComunes.convertUtilToSql(fechaPartido))){
+                            System.out.println("Partido insertado.");
+                        }else{
+                            System.out.println("No se ha podido insertar.");
+                        }
                         break;
                     case 2: //Abrir partido
 
