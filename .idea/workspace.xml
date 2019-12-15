@@ -4,10 +4,10 @@
     <list default="true" id="a3f5145e-e47e-453b-9c69-2386a688b718" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gestion/Admin/UtilidadesAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gestion/Admin/UtilidadesAdmin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gestion/UtilidadesComunes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gestion/UtilidadesComunes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/MainAdministradores.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/MainAdministradores.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Gestion/User/UtilidadesUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gestion/User/UtilidadesUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/MainUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/MainUser.java" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,10 +24,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/Gestion/Admin/UtilidadesAdmin.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/com/company/MainAdministradores.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/com/company/MainUser.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Gestion/UtilidadesComunes.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Gestion/Admin/UtilidadesAdmin.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectId" id="1TKJg7mfOEeQUtCLUB33qhbOqem" />
   <component name="ProjectViewState">
@@ -50,7 +50,19 @@
       <recent name="C:\Users\pprats\Desktop\Apuestas_2\ProyectoApuestas\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MainAdministradores">
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.company.MainUser" />
       <module name="untitled104" />
@@ -74,22 +86,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainAdministradores" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.MainAdministradores" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -204,5 +204,19 @@
       <screen x="1366" y="0" width="1366" height="728" />
     </state>
     <state x="1407" y="61" width="1153" height="611" key="dock-window-1/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575363708786" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/Gestion/User/UtilidadesUser.java</url>
+          <line>202</line>
+          <properties class="Gestion.User.UtilidadesUser" method="apostarAPartido">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
