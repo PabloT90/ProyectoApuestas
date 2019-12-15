@@ -146,6 +146,26 @@ GO
 GO
 /*
 Interfaz
+Nombre: apuestasSinContabilizarDeUnPartido
+Comentario: Esta función nos devuelve las apuestas sin contabilizar de un partido.
+Cabecera: function apuestasSinContabilizarDeUnPartido(@idPartido int)
+Entrada:
+	-@idPartido int
+Salida:
+	-Tabla con las apuestas sin contabilizar del partido
+Postcondiciones: La función devuelve una tabla con las apuestas sin contabilizar del partido, 
+si el partido no existe o si no tiene apuestas sin contabilizar la función devuelve una tabla vacía.
+*/
+CREATE FUNCTION apuestasSinContabilizarDeUnPartido(@idPartido int)
+RETURNS TABLE
+AS
+RETURN
+	SELECT * FROM Apuestas WHERE IDPartido = @idPartido AND Contabilizada = 0
+GO
+
+GO
+/*
+Interfaz
 Nombre: insertarPartido
 Comentario: Este método nos permite insertar un partido en la base de datos.
 Cabecera: procedure insertarPartido(@maximoTipo1 smallmoney, @maximoTipo2 smallmoney, @maximoTipo3 smallmoney, @fechaPartido smalldatetime)

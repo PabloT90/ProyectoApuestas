@@ -1,6 +1,8 @@
 package Gestion.Admin;
 
 import Conexion.clsConexion;
+import Gestion.UtilidadesComunes;
+
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -496,11 +498,60 @@ public class UtilidadesAdmin {
             }
 
         }
-        catch (SQLException r){
+        catch (SQLException r) {
             r.printStackTrace();
         }
 
-
     }
 
+    /*
+    * Interfaz
+    * Nombre: leerYValidarPartidoConApuestasSinContabilizar
+    * Comentario: Este método nos permite obtener la id de un partido con apuestas
+    * sin contabilizar.
+    * Cabecera: public static int leerYValidarPartidoConApuestasSinContabilizar()
+    * Salida:
+    *   -int idPartido
+    * Precondiciones:
+    *   -Deben exitir en la base de datos partidos con apuestas sin finalizar.
+    * Postcondiciones: El método devuelve un número entero asociado al nombre,
+    * que es el id del partido con apuestas sin finalizar.
+    * */
+    public static int leerYValidarPartidoConApuestasSinContabilizar(){
+        int idPartido = 0;
+        Scanner teclado = new Scanner(System.in);
+
+        do{
+            System.out.println("Elige un partido: ");
+            UtilidadesComunes.mostrarPartidosConApuestasNoContabilizadas();
+            idPartido = teclado.nextInt();
+        }while (!UtilidadesComunes.partidoConApuestasSinContabilizar(idPartido));
+
+        return idPartido;
+    }
+
+    /*
+     * Interfaz
+     * Nombre: pagarApuestasPartido
+     * Comentario: Este método nos permite pagar las apuestas sin contabilizar de un partido.
+     * Cabecera: public static void pagarApuestasPartido(int idPartido)
+     * Entrada:
+     *   -int idPartido
+     * Postcondiciones: El método paga las apuestas victoriosas que se encontraban sin contabilizar
+     * de un partido, si el partido no existe o si no contenía apuestas sin contabilizar, el método
+     * no realiza ninguna modificación.
+     * */
+    public static void pagarApuestasPartido(int idPartido){
+        clsConexion conexion = new clsConexion();
+
+        try {
+            conexion.abrirConexion();
+            CallableStatement cstmt = conexion.getConnexionBaseDatos().prepareCall("{call contabilizarApuestasNoContabilizadas(?)}");
+            cstmt.setInt(1, idPartido);
+            cstmt.executeUpdate();
+            conexion.cerrarConexion();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 }

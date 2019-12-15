@@ -64,7 +64,12 @@ public class MainAdministradores {
 
                         break;
                     case 5: //Pagar apuestas
-
+                        if(UtilidadesComunes.existenPartidosConApuestasSinContabilizar()){
+                            idPartido = UtilidadesAdmin.leerYValidarPartidoConApuestasSinContabilizar();
+                            UtilidadesAdmin.pagarApuestasPartido(idPartido);
+                        }else{
+                            System.out.println("No existen partidos con apuestas cin sontabilizar.");
+                        }
                         break;
                 }
 

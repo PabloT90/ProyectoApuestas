@@ -583,11 +583,11 @@ public class UtilidadesComunes {
     * Nombre: mostrarPartidosConApuestasNoContabilizadas
     * Comentario: Este función nos permite mostrar los partidos con apuestas
     * no contabilizadas.
-    * Cabecera: public void mostrarPartidosConApuestasNoContabilizadas()
+    * Cabecera: public static void mostrarPartidosConApuestasNoContabilizadas()
     * Postcondiciones: Este método nos permite mostrar por pantalla los partidos
     * con apuestas no contabilizaadas.
     * */
-    public void mostrarPartidosConApuestasNoContabilizadas(){
+    public static void mostrarPartidosConApuestasNoContabilizadas(){
         clsConexion conexion = new clsConexion();
         ResultSet resultado;
 
@@ -634,5 +634,41 @@ public class UtilidadesComunes {
             System.err.println(sqle);
         }
         return ret;
+    }
+
+    /**
+    * Interfaz
+    * Nombre: partidoConApuestasSinContabilizar
+    * Comentario: Este método nos permite verificar si un partido tiene apuestas sin contabilizar.
+    * Cabecera: public static boolean partidoConApuestasSinContabilizar(int idPartido)
+    * Entrada:
+    *   -int idPartido
+    * Salida:
+    *   -boolean resultado
+    * Precondiciones:
+    *   -El partido debe existir en la base de datos
+    * Postcondiciones: El método devuleve un valor booleano asociado al nombre,
+    * true si el partido contiene apuestas sin contabilizar o false en caso contrario.
+    * */
+    public static boolean partidoConApuestasSinContabilizar(int idPartido){
+        boolean resultado = false;
+
+        clsConexion conexion = new clsConexion();
+        ResultSet filas;
+        try {
+            conexion.abrirConexion();
+            CallableStatement callStatement = conexion.getConnexionBaseDatos().prepareCall("{call apuestasSinContabilizarDeUnPartido(?)}");
+            callStatement.setInt(1,idPartido);
+            filas = callStatement.executeQuery();
+            conexion.cerrarConexion();
+
+            if (filas.next()){//Si tiene alguna fila, significa que el partido tiene apuestas sin contabilizar
+                resultado = true;
+            }
+        }catch (SQLException sqle) {
+            System.err.println(sqle);
+        }
+
+        return resultado;
     }
 }
