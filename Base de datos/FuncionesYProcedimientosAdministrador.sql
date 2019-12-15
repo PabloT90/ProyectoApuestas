@@ -106,22 +106,22 @@ Entrada:
 	-@idPartido int
 Postcondiciones: El método contabiliza todas las apuestas no marcadas de un partido específico.
 */
-CREATE PROCEDURE contabilizarApuestasNoContabilizadas(@idPartido int)
+ALTER PROCEDURE contabilizarApuestasNoContabilizadas(@idPartido int)
 AS
 BEGIN
 	DECLARE @IdApuesta int
-	DECLARE puntero CURSOR FOR SELECT ID, Contabilizada FROM Apuestas WHERE IDPartido = @idPartido AND Contabilizada = 0
+	DECLARE puntero CURSOR FOR SELECT ID FROM Apuestas WHERE IDPartido = @idPartido AND Contabilizada = 0
 	OPEN puntero
 	FETCH NEXT FROM puntero INTO @IdApuesta --Nos permite apuntar al primer dato del cursor
 
 	WHILE (@@FETCH_STATUS = 0) --Mientras aún haya filas
 	BEGIN
-		UPDATE Apuestas SET Contabilizada = 1 WHERE ID = @IdApuesta--Ya existe un trigger que ingresa el beneficio de la apuesta que hayan sido victoriosas
+		UPDATE Apuestas SET Contabilizada = 1 WHERE ID = @IdApuesta AND IsGanador = 1--Ya existe un trigger que ingresa el beneficio de la apuesta que hayan sido victoriosas
 		FETCH NEXT FROM puntero INTO @IdApuesta
 	END
 
-	--DEALLOCATE puntero --Liberamos los recursos del puntero
 	CLOSE puntero
+	DEALLOCATE puntero --Liberamos los recursos del puntero
 END
 
 GO
@@ -134,10 +134,8 @@ Cabecera: function partidosConApuestasSinContabilizar()
 Salida:
 	-Tabla de id's de los partidos con apuestas no contabilizadas
 */
-CREATE FUNCTION partidosConApuestasSinContabilizar()
-RETURNS TABLE
+create procedure partidosConApuestasSinContabilizar2
 AS
-RETURN
 	SELECT IDPartido FROM (
 	SELECT IDPartido, COUNT(*) AS [Apuestas Sin Contabilizar] FROM Apuestas WHERE Contabilizada = 0
 		GROUP BY IDPartido) AS [C1] WHERE [Apuestas Sin Contabilizar] > 0
@@ -156,10 +154,8 @@ Salida:
 Postcondiciones: La función devuelve una tabla con las apuestas sin contabilizar del partido, 
 si el partido no existe o si no tiene apuestas sin contabilizar la función devuelve una tabla vacía.
 */
-CREATE FUNCTION apuestasSinContabilizarDeUnPartido(@idPartido int)
-RETURNS TABLE
+CREATE procedure apuestasSinContabilizarDeUnPartido2(@idPartido int)
 AS
-RETURN
 	SELECT * FROM Apuestas WHERE IDPartido = @idPartido AND Contabilizada = 0
 GO
 
