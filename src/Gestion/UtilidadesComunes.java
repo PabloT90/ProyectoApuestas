@@ -577,4 +577,62 @@ public class UtilidadesComunes {
         java.sql.Date sDate = new java.sql.Date(uDate.getTime());
         return sDate;
     }
+
+    /*
+    * Interfaz
+    * Nombre: mostrarPartidosConApuestasNoContabilizadas
+    * Comentario: Este función nos permite mostrar los partidos con apuestas
+    * no contabilizadas.
+    * Cabecera: public void mostrarPartidosConApuestasNoContabilizadas()
+    * Postcondiciones: Este método nos permite mostrar por pantalla los partidos
+    * con apuestas no contabilizaadas.
+    * */
+    public void mostrarPartidosConApuestasNoContabilizadas(){
+        clsConexion conexion = new clsConexion();
+        ResultSet resultado;
+
+        try {
+            conexion.abrirConexion();
+            CallableStatement callStatement = conexion.getConnexionBaseDatos().prepareCall("{call partidosConApuestasSinContabilizar()}");
+            resultado = callStatement.executeQuery();
+            conexion.cerrarConexion();
+
+            while (resultado.next()){
+                System.out.println("Id partido: "+resultado.getInt("id"));//Preguntar a pablo esta parte por si acaso
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Interfaz
+     * Nombre: existenPartidosConApuestasSinContabilizar
+     * Comentario: Este método nos permite verificar si existen partidos con
+     * apuestas sin contabilizar.
+     * Cabecera: public static boolean existenPartidosConApuestasSinContabilizar()
+     * Salida:
+     *  -boolean ret
+     * Postcondiciones: El método devuelve un valor booleano asociado al nombre,
+     * true si existen partidos con apuestas sin contabilizar o false en caso contrario.
+     */
+    public static boolean existenPartidosConApuestasSinContabilizar(){
+        boolean ret = false;
+        clsConexion conexion = new clsConexion();
+        ResultSet resultado;
+
+        try {
+            conexion.abrirConexion();
+            CallableStatement callStatement = conexion.getConnexionBaseDatos().prepareCall("{call partidosConApuestasSinContabilizar()}");
+            resultado = callStatement.executeQuery();
+            conexion.cerrarConexion();
+
+            if (resultado.next()){//Si tiene alguna fila, significa que existe un partido con apuestas sin contabilizar
+                ret = true;
+            }
+        }catch (SQLException sqle) {
+            System.err.println(sqle);
+        }
+        return ret;
+    }
 }
