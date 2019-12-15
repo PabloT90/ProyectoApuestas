@@ -761,7 +761,7 @@ Nombre: consultarApuestaTipo1
 Comentario: Este método nos devuelve la apuesta y el dinero del tipo 1
 Cabecera: PROCEDURE consultarApuestaTipo1(@IdPartido int)
 Salida:
-	-Cursor listadoCompeticiones
+	-int @IdPartido
 Postcondiciones: La función devuelve la apuesta y el dinero del tipo 1
 */
 GO
@@ -781,7 +781,7 @@ Nombre: consultarApuestaTipo2
 Comentario: Este método nos devuelve la apuesta y el dinero del tipo 2
 Cabecera: PROCEDURE consultarApuestaTipo2(@IdPartido int)
 Salida:
-	-Cursor listadoCompeticiones
+	-int @IdPartido
 Postcondiciones: La función devuelve devuelve la apuesta y el dinero del tipo 2
 */
 CREATE PROCEDURE consultarApuestaTipo2(@IdPartido int)

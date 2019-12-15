@@ -1,0 +1,31 @@
+MainUser
+Entradas:
+-int opcionMenu
+-int idPartido
+-String correo
+-String pass
+
+Restricciones:
+-opcionMenu solo podra valer 1,2,3,4,5,6 o 0
+-el correo y la contraseña solo pueden ser las que aparecen en la base de datos
+
+Salidas:
+-Mensajes de control con el usuario
+-int CodDevuelto
+
+MainAdmin
+Entradas:
+-int opcionMenu
+-int idPartido
+-int MaximoApuesta1
+-int MaximoApuesta2
+-int MaximoApuesta3
+-Date fechaPartido
+
+Restricciones:
+-opcionMenu solo podra valer 1,2,3,4,5 o 0
+-los Maximo de apuestas no podran tener un valor menor que 0
+-la fecha tiene debe de poder existir
+
+Salidas:
+-Mensajes de comunicacion con el usuario
