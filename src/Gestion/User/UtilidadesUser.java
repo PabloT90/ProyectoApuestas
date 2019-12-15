@@ -133,13 +133,13 @@ public class UtilidadesUser {
     public static void mostrarMovimientos(String usuario){
         try{
             clsConexion miconexion = new clsConexion();
-            String miSelect = "SELECT saldo, fechaYHora FROM Cuentas WHERE CorreoUsuario=" + "'" + usuario + "'";
-
+            String miSelect = "SELECT saldo, fechaYHora FROM Cuentas WHERE CorreoUsuario=?";
             // Crear una connexion con el DriverManager
             miconexion.abrirConexion();
             Connection connexionBaseDatos = miconexion.getConnexionBaseDatos();
-            Statement sentencia = connexionBaseDatos.createStatement();
-            ResultSet partidos = sentencia.executeQuery(miSelect);
+            PreparedStatement sentencia = connexionBaseDatos.prepareStatement(miSelect);
+            sentencia.setString(1,usuario);
+            ResultSet partidos = sentencia.executeQuery();
 
             // Mostrar los datos del ResultSet
             while (partidos.next()) {
@@ -161,13 +161,14 @@ public class UtilidadesUser {
         String isGanada;
         try{
             clsConexion miconexion = new clsConexion();
-            String miSelect = "SELECT * FROM Apuestas WHERE CorreoUsuario=" + "'" + usuario + "'";
-
+            //String miSelect = "SELECT * FROM Apuestas WHERE CorreoUsuario=" + "'" + usuario + "'";
+            String miSelect = "SELECT * FROM Apuestas WHERE CorreoUsuario=?";
             //Crear una connexion con el DriverManager
             miconexion.abrirConexion();
             Connection connexionBaseDatos = miconexion.getConnexionBaseDatos();
-            Statement sentencia = connexionBaseDatos.createStatement();
-            ResultSet partidos = sentencia.executeQuery(miSelect);
+            PreparedStatement sentencia = connexionBaseDatos.prepareStatement(miSelect);
+            sentencia.setString(1,usuario);
+            ResultSet partidos = sentencia.executeQuery();
 
             // Mostrar los datos del ResultSet
             while (partidos.next()) {

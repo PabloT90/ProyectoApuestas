@@ -32,13 +32,6 @@ public class UtilidadesComunes {
     public static void verPartidosDisponiblesParaApostar() {
         // Carga el driver
         try {
-            // Carga la clase del driver
-            //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-
-            // Define the data source for the driver
-            //String sourceURL = "jdbc:sqlserver://localhost";
-            //String usuario = "pepito";
-            //String password = "qq";
             clsConexion miconexion = new clsConexion();
             String miSelect = "SELECT ID, fechaPartido FROM Partidos WHERE isAbierto = 1";
 
@@ -70,20 +63,14 @@ public class UtilidadesComunes {
             //Buscamos el partido
             //Hacemos un SELECT con ese ID y si devuelve una fila es que existe.
             try {
-                // Carga la clase del driver
-                //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-
-                // Define the data source for the driver
-                //String sourceURL = "jdbc:sqlserver://localhost";
-                //String usuario = "pepito";
-                //String password = "qq";
                 clsConexion miconexion = new clsConexion();
-                String miSelect = "SELECT id FROM Partidos where id = " +idPartido+" AND isAbierto = 1";
-
+                //String miSelect = "SELECT id FROM Partidos where id = " +idPartido+" AND isAbierto = 1";
+                String miSelect = "SELECT id FROM Partidos where id = ? AND isAbierto = 1" ;
                 miconexion.abrirConexion();
                 Connection connexionBaseDatos = miconexion.getConnexionBaseDatos();
-                Statement sentencia = connexionBaseDatos.createStatement();
-                ResultSet partidos = sentencia.executeQuery(miSelect);
+                PreparedStatement sentencia = connexionBaseDatos.prepareStatement(miSelect);
+                sentencia.setInt(1,idPartido);
+                ResultSet partidos = sentencia.executeQuery();
 
                 // Mostrar los datos del ResultSet
                 if(partidos.next()){ //Si tiene una fila
@@ -108,13 +95,6 @@ public class UtilidadesComunes {
         //Buscamos el partido
         //Hacemos un SELECT con ese ID y si devuelve una fila es que existe.
         try {
-            // Carga la clase del driver
-            //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-
-            // Define the data source for the driver
-            //String sourceURL = "jdbc:sqlserver://localhost";
-            //String usuario = "pepito";
-            //String password = "qq";
             clsConexion miconexion = new clsConexion();
             String miSelect = "SELECT * FROM Partidos where isAbierto = 1";
 
@@ -145,21 +125,15 @@ public class UtilidadesComunes {
         boolean ret = false;
         //Hacemos un SELECT con ese ID y si devuelve una fila es que existe.
         try {
-            // Carga la clase del driver
-            //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-
-            // Define the data source for the driver
-            //String sourceURL = "jdbc:sqlserver://localhost";
-            //String usuario = "pepito";
-            //String password = "qq";
             clsConexion miconexion =  new clsConexion();
-            String miSelect = "SELECT * FROM Partidos where isAbierto = 1 AND ID="+id;
-
+            //String miSelect = "SELECT * FROM Partidos where isAbierto = 1 AND ID="+id;
+            String miSelect = "SELECT * FROM Partidos where isAbierto = 1 AND ID=?";
             // Crear una connexion con el DriverManager
             miconexion.abrirConexion();
             Connection connexionBaseDatos = miconexion.getConnexionBaseDatos();
-            Statement sentencia = connexionBaseDatos.createStatement();
-            ResultSet partidos = sentencia.executeQuery(miSelect);
+            PreparedStatement sentencia = connexionBaseDatos.prepareStatement(miSelect);
+            sentencia.setInt(1,id);
+            ResultSet partidos = sentencia.executeQuery();
 
             // Mostrar los datos del ResultSet
             if(partidos.next()){ //Si tiene una fila
@@ -205,19 +179,16 @@ public class UtilidadesComunes {
 
         try {
             // Carga la clase del driver
-            //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             clsConexion miConexion = new clsConexion();
-            // Define the data source for the driver
-            /*String sourceURL = "jdbc:sqlserver://localhost";
-            String usuario = "pablo";
-            String password = "qq";*/
-            String miSelect = "SELECT correo FROM Usuarios where contraseña = " +"'"+pass+"'"+" AND correo = "+"'" + user+"'" ;
-
+            //String miSelect = "SELECT correo FROM Usuarios where contraseña = " +"'"+pass+"'"+" AND correo = "+"'" + user+"'" ;
+            String miSelect = "SELECT correo FROM Usuarios WHERE contraseña = ? AND correo = ?" ;
             // Crear una connexion con el DriverManager
             miConexion.abrirConexion();
             Connection connexionBaseDatos = miConexion.getConnexionBaseDatos();
-            Statement sentencia = connexionBaseDatos.createStatement();
-            ResultSet partidos = sentencia.executeQuery(miSelect);
+            PreparedStatement sentencia = connexionBaseDatos.prepareStatement(miSelect);
+            sentencia.setString(2,user);
+            sentencia.setString(1,pass);
+            ResultSet partidos = sentencia.executeQuery();
 
             // Mostrar los datos del ResultSet
             if(partidos.next()){ //Si tiene una fila
@@ -225,8 +196,6 @@ public class UtilidadesComunes {
             }
             // Cerrar conexion
             connexionBaseDatos.close();
-        //} catch (ClassNotFoundException cnfe) {
-            //System.err.println(cnfe);
         } catch (SQLException sqle) {
             System.err.println(sqle);
         }
@@ -405,23 +374,15 @@ public class UtilidadesComunes {
     * */
     public static double obtenerCapitalMaximoUsuario(String correo){
         double capitalMaximo = -1.0;
-
-        //Hacemos un SELECT con ese ID y si devuelve una fila es que existe.
         try {
-            // Carga la clase del driver
-            //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-
-            // Define the data source for the driver
-            //String sourceURL = "jdbc:sqlserver://localhost";
-            //String usuario = "pepito";
-            //String password = "qq";
             clsConexion miconexion = new clsConexion();
-            String miSelect = "SELECT saldoActual FROM Usuarios where correo = '"+correo+"'";
+            String miSelect = "SELECT saldoActual FROM Usuarios where correo = ?";
 
             miconexion.abrirConexion();
             Connection connexionBaseDatos = miconexion.getConnexionBaseDatos();
-            Statement sentencia = connexionBaseDatos.createStatement();
-            ResultSet usuarios = sentencia.executeQuery(miSelect);
+            PreparedStatement sentencia = connexionBaseDatos.prepareStatement(miSelect);
+            sentencia.setString(1,correo);
+            ResultSet usuarios = sentencia.executeQuery();
 
             // Mostrar los datos del ResultSet
             if(usuarios.next()){ //Si tiene una fila
