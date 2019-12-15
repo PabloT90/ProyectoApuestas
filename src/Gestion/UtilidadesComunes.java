@@ -27,7 +27,7 @@ public class UtilidadesComunes {
             verPartidosDisponiblesParaApostar(); //Mostramos los partidos disponibles.
             System.out.println("Elige un partido de entre los mostrados.");
             partido = teclado.nextInt();
-        }while(!partidoEncontrado(partido));
+        }while(!partidoEncontradoAbierto(partido));
 
         return partido;
     }
@@ -72,7 +72,7 @@ public class UtilidadesComunes {
      * Salida:
      *  @return True en caso de existir, false en caso contrario.
      */
-    public static boolean partidoEncontrado(int idPartido){
+    public static boolean partidoEncontradoAbierto(int idPartido){
         boolean ret = false;
 
             //Buscamos el partido
@@ -679,5 +679,95 @@ public class UtilidadesComunes {
         }
 
         return resultado;
+    }
+
+    /**
+     * Interfaz
+     * Nombre: verPartidos
+     * Comentario: Muestra todos los partidos.
+     * Cabecera: public static void verPartidos()
+     * Postcondiciones: La función muestra por pantalla todos los partidos
+     * */
+    public static void verPartidos() {
+        // Carga el driver
+        try {
+            clsConexion miconexion = new clsConexion();
+            String miSelect = "SELECT ID, fechaPartido FROM Partidos";
+
+            miconexion.abrirConexion();
+            Connection connexionBaseDatos = miconexion.getConnexionBaseDatos();
+            Statement sentencia = connexionBaseDatos.createStatement();
+            ResultSet partidos = sentencia.executeQuery(miSelect);
+
+            // Mostrar los datos del ResultSet
+            while (partidos.next()) {
+                System.out.println("Partido: " + partidos.getString("ID") + " Abierto desde: " + partidos.getTimestamp("fechaPartido"));
+            }
+
+            // Cerrar conexion
+            connexionBaseDatos.close();
+        }catch (SQLException sqle) {
+            System.err.println(sqle);
+        }
+    }
+
+    /**
+     * Interfaz
+     * Nombre: leerIDpartido
+     * Comentario: Lee y valida el ID de un partido.
+     * Cabecera: public static int leerIDpartido2()
+     * Salida:
+     *  -int partido
+     * Postcondiciones: Devuelve asociado al nombre el ID del partido seleccionado.
+     */
+    public static int leerIDpartido2(){
+        int partido;
+        Scanner teclado = new Scanner(System.in);
+
+        do{
+            verPartidos(); //Mostramos los partidos disponibles.
+            System.out.println("Elige un partido de entre los mostrados.");
+            partido = teclado.nextInt();
+        }while(!partidoEncontrado(partido));
+
+        return partido;
+    }
+
+    /**
+     * Interfaz
+     * Nombre: partidoEncontrado
+     * Comentario: Permite saber si existe un partido con el ID recibido como parametro
+     * Cabecera: public static boolean partidoEncontrado(int idPartido)
+     * Entrada:
+     *  @param idPartido ID del partido que queremos buscar.
+     * Salida:
+     *  @return True en caso de existir, false en caso contrario.
+     */
+    public static boolean partidoEncontrado(int idPartido){
+        boolean ret = false;
+
+        //Buscamos el partido
+        //Hacemos un SELECT con ese ID y si devuelve una fila es que existe.
+        try {
+            clsConexion miconexion = new clsConexion();
+            //String miSelect = "SELECT id FROM Partidos where id = " +idPartido+" AND isAbierto = 1";
+            String miSelect = "SELECT id FROM Partidos where id = ?" ;
+            miconexion.abrirConexion();
+            Connection connexionBaseDatos = miconexion.getConnexionBaseDatos();
+            PreparedStatement sentencia = connexionBaseDatos.prepareStatement(miSelect);
+            sentencia.setInt(1,idPartido);
+            ResultSet partidos = sentencia.executeQuery();
+
+            // Mostrar los datos del ResultSet
+            if(partidos.next()){ //Si tiene una fila
+                ret = true;
+            }
+            // Cerrar conexion
+            connexionBaseDatos.close();
+        }catch (SQLException sqle) {
+            System.err.println(sqle);
+        }
+
+        return ret;
     }
 }

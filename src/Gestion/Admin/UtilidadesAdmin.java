@@ -318,20 +318,21 @@ public class UtilidadesAdmin {
         return partido;
     }
 
-    public static boolean partidoEncontrado(int idPartido){ //TODO: cambiar para que tenga en cuenta ademas los partidos abiertos.
+    public static boolean partidoEncontrado(int idPartido){
         boolean ret = false;
 
         //Buscamos el partido
         //Hacemos un SELECT con ese ID y si devuelve una fila es que existe.
         try {
             clsConexion miConexion = new clsConexion();
-            String miSelect = "SELECT id FROM Partidos where id = " +idPartido;
+            String miSelect = "SELECT id FROM Partidos where id = ?";
 
             // Crear una connexion con el DriverManager
             miConexion.abrirConexion();
             Connection connexionBaseDatos = miConexion.getConnexionBaseDatos();
-            Statement sentencia = connexionBaseDatos.createStatement();
-            ResultSet partidos = sentencia.executeQuery(miSelect);
+            PreparedStatement sentencia = connexionBaseDatos.prepareStatement(miSelect);
+            sentencia.setInt(1, idPartido);
+            ResultSet partidos = sentencia.executeQuery();
 
             // Mostrar los datos del ResultSet
             if(partidos.next()){ //Si tiene una fila
@@ -365,7 +366,7 @@ public class UtilidadesAdmin {
             Statement sentencia = connexionBaseDatos.createStatement();
 
             //Para conseguir el id de apuesta
-            String conseguirNumApuesta = "SELECT COUNT(ID) AS [NumeroApuestas] FROM Apuestas WHERE IDPartido = " + idPartido + "AND Tipo = " + tipo;
+            String conseguirNumApuesta = "SELECT COUNT(ID) AS [NumeroApuestas] FROM Apuestas WHERE IDPartido = " + idPartido + " AND Tipo = " + tipo;
             ResultSet numeroApuesta = sentencia.executeQuery(conseguirNumApuesta);
 
             if (numeroApuesta.next()) {
@@ -455,7 +456,7 @@ public class UtilidadesAdmin {
                 String dineros3V = "SELECT SUM(DineroApostado) AS [Dineros] FROM Apuestas WHERE IDPartido = " + resultado3V.getInt("id") + " AND Tipo = "+ tipo;
                 ResultSet dineroPartido3V = sentencia.executeQuery(dineros3V);
                 if (dineroPartido3V.next()) {
-                    if (resultado3L.getString("id") == null) {
+                    if (resultado3V.getString("id") == null) {
                         System.out.println("Equipo ganandor" + resultado3V.getString("ganador") + " dinero " + dineroPartido3V.getInt("Dineros"));
                     }
                 }
@@ -521,4 +522,6 @@ public class UtilidadesAdmin {
             e.printStackTrace();
         }
     }
+
+
 }
