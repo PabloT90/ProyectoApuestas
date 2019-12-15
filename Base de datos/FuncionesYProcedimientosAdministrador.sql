@@ -123,3 +123,23 @@ BEGIN
 	--DEALLOCATE puntero --Liberamos los recursos del puntero
 	CLOSE puntero
 END
+
+GO
+/*
+Interfaz
+Nombre: insertarPartido
+Comentario: Este método nos permite insertar un partido en la base de datos.
+Cabecera: procedure insertarPartido(@maximoTipo1 smallmoney, @maximoTipo2 smallmoney, @maximoTipo3 smallmoney, @fechaPartido smalldatetime)
+Entrada:
+	-@maximoTipo1 smallmoney
+	-@maximoTipo2 smallmoney
+	-@maximoTipo3 smallmoney
+	-@fechaPartido smalldatetime
+Postcondiciones: El método inserta un partido en la base de datos.
+*/
+CREATE PROCEDURE insertarPartido(@maximoTipo1 smallmoney, @maximoTipo2 smallmoney, @maximoTipo3 smallmoney, @fechaPartido smalldatetime)
+AS
+BEGIN
+	INSERT INTO Partidos (maxApuesta1, maxApuesta2, maxApuesta3, fechaPartido) VALUES (@maximoTipo1, @maximoTipo2, @maximoTipo3, @fechaPartido)
+END
+GO
