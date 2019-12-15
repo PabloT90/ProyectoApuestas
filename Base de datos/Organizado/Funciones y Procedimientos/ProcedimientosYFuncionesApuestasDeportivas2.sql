@@ -770,8 +770,8 @@ AS
 BEGIN
 	SELECT A.DineroApostado, A1.NumGolesLocal, A1.numGolesVisitante FROM Apuestas AS[A]
 		INNER JOIN ApuestaTipo1 AS[A1] ON A.ID = A1.id
-		WHERE IDPartido = 1
-	ORDER BY IDPartido, Tipo
+		WHERE IDPartido = @IdPartido
+	ORDER BY NumGolesLocal, Tipo
 END
 GO
 
@@ -789,8 +789,8 @@ AS
 BEGIN
 	SELECT A.DineroApostado, A1.equipo, A1.goles FROM Apuestas AS[A]
 		INNER JOIN ApuestaTipo2 AS[A1] ON A.ID = A1.id
-		WHERE IDPartido = 1
-	ORDER BY IDPartido, Tipo
+		WHERE IDPartido = @IdPartido
+	ORDER BY goles, Tipo
 END
 GO
 
@@ -808,8 +808,8 @@ AS
 BEGIN
 	SELECT A.DineroApostado, A1.Ganador FROM Apuestas AS[A]
 		INNER JOIN ApuestaTipo3 AS[A1] ON A.ID = A1.id
-		WHERE IDPartido = 1
-	ORDER BY IDPartido, Tipo
+		WHERE IDPartido = @IdPartido
+	ORDER BY ganador, Tipo
 END
 
 

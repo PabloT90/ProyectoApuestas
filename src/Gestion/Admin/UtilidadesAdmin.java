@@ -9,37 +9,16 @@ import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 public class UtilidadesAdmin {
-    /**
-     * Interfaz
-     * Nombre: leerValidarEjecutar
-     * Comentario: Lee y valida si el usuario quiere ejecutar una aplicacion.
-     * Cabecera: public static char leerValidarEjecutar()
-     * Salida:
-     *  -char ejecutar
-     * Postcondiciones: La función devuelve un carácter asociado al nombre,
-     * que es una ejecución válida para la aplicación.
-     */
-    public static char leerValidarEjecutar(){
-        Scanner teclado = new Scanner(System.in);
-        char ejecutar;
-
-        do{
-            System.out.println("Quieres ejecutar?");
-            ejecutar = Character.toLowerCase(teclado.next().charAt(0));
-        }while(ejecutar != 's' && ejecutar != 'n');
-
-        return ejecutar;
-    }
 
     /**
      * Interfaz
      * Nombre: MostrarMenuLeerValidarOpcion
      * Comentario: Muestra un menu y obtiene una respuesta valida para la opcion seleccionada.
-     * Cabecera: public static int MostrarMenuLeerValidarOpcion()
+     * Cabecera: public int MostrarMenuLeerValidarOpcion()
      * Salida:
      *  @return asociado al nombre devuelve un entero con la opcion del menu.
      */
-    public static int MostrarMenuLeerValidarOpcion(){
+    public int MostrarMenuLeerValidarOpcion(){
         int opcion = 0;
         Scanner teclado = new Scanner(System.in);
         do{
@@ -61,7 +40,7 @@ public class UtilidadesAdmin {
     * Interfaz
     * Nombre: insertarPartido
     * Comentario: Este método nos permite insertar un nuevo partido en la base de datos.
-    * Cabecera: public static boolean crearPartido(double maximoTipo1, double maximoTipo2, double maximoTipo3, Date fechaPartido)
+    * Cabecera: public boolean crearPartido(double maximoTipo1, double maximoTipo2, double maximoTipo3, Date fechaPartido)
     * Entrada:
     *   -double maximoTipo1
     *   -double maximoTipo2
@@ -72,7 +51,7 @@ public class UtilidadesAdmin {
     * Postcondiciones: Este método nos devuelve un valor booleano asociado al nombre, true si se ha
     * conseguido insertar el nuevo partido en la base de datos o false en caso contrario.
     * */
-    public static boolean insertarPartido(double maximoTipo1, double maximoTipo2, double maximoTipo3, Date fechaPartido){
+    public boolean insertarPartido(double maximoTipo1, double maximoTipo2, double maximoTipo3, Date fechaPartido){
         boolean insertado = true;
 
         clsConexion conexion = new clsConexion();
@@ -100,13 +79,13 @@ public class UtilidadesAdmin {
     * Nombre: leerYValidarMaximoApuestaTipo1
     * Comentario: Este método nos permite leer y validar el capital máximo
     * para una apuesta del tipo1
-    * Cabecera: public static double leerYValidarMaximoApuestaTipo1()
+    * Cabecera: public double leerYValidarMaximoApuestaTipo1()
     * Salida:
     *   -double maximoApuesta
     * Postcondiciones: El método devuelve un número entero asociado al nombre,
     * que es el máximo posible de capital que se puede apostar al tipo 1.
     * */
-    public static double leerYValidarMaximoApuestaTipo1(){
+    public double leerYValidarMaximoApuestaTipo1(){
         Scanner teclado = new Scanner(System.in);
         double maximoApuesta = 0.0;
 
@@ -123,13 +102,13 @@ public class UtilidadesAdmin {
      * Nombre: leerYValidarMaximoApuestaTipo2
      * Comentario: Este método nos permite leer y validar el capital máximo
      * para una apuesta del tipo2
-     * Cabecera: public static double leerYValidarMaximoApuestaTipo2()
+     * Cabecera: public double leerYValidarMaximoApuestaTipo2()
      * Salida:
      *   -double maximoApuesta
      * Postcondiciones: El método devuelve un número entero asociado al nombre,
      * que es el máximo posible de capital que se puede apostar al tipo 2.
      * */
-    public static double leerYValidarMaximoApuestaTipo2(){
+    public double leerYValidarMaximoApuestaTipo2(){
         Scanner teclado = new Scanner(System.in);
         double maximoApuesta = 0.0;
 
@@ -145,13 +124,13 @@ public class UtilidadesAdmin {
     * Interfaz
     * Nombre: leerYValidarFechaPartido
     * Comentario: Este método nos permite leer y validar una fecha para un partido.
-    * Cabecera: public static Date leerYValidarFechaPartido()
+    * Cabecera: public Date leerYValidarFechaPartido()
     * Salida:
     *   -Date fechaValida
     * Postcondiciones: El método devuelve un tipo Date asociado al nombre,
     * que es la fecha válida.
     * */
-    public static Date leerYValidarFechaPartido(){
+    public Date leerYValidarFechaPartido(){
         Scanner teclado = new Scanner(System.in);
         int anno = 0, mes = 0, dia = 0;
         boolean correcto = false;
@@ -176,7 +155,7 @@ public class UtilidadesAdmin {
     * Interfaz
     * Nombre: fechaValida
     * Comentario: Este método nos permite verificar si una fecha es válida.
-    * Cabecera: public static boolean fechaValida(int anno, int mes, int dia)
+    * Cabecera: public boolean fechaValida(int anno, int mes, int dia)
     * Entrada:
     *   -int anno
     *   -int mes
@@ -186,7 +165,7 @@ public class UtilidadesAdmin {
     * Postcondiciones: Este método nos devuelve un valor booleano asociado al nombre,
     * true si la fecha es válida o false en caso contrario.
     * */
-    public static boolean fechaValida(int anno, int mes, int dia){
+    public boolean fechaValida(int anno, int mes, int dia){
         boolean fechaValida = false;
 
         try {
@@ -206,13 +185,13 @@ public class UtilidadesAdmin {
      * Nombre: leerYValidarMaximoApuestaTipo3
      * Comentario: Este método nos permite leer y validar el capital máximo
      * para una apuesta del tipo3
-     * Cabecera: public static double leerYValidarMaximoApuestaTipo3()
+     * Cabecera: public double leerYValidarMaximoApuestaTipo3()
      * Salida:
      *   -double maximoApuesta
      * Postcondiciones: El método devuelve un número entero asociado al nombre,
      * que es el máximo posible de capital que se puede apostar al tipo 3.
      * */
-    public static double leerYValidarMaximoApuestaTipo3(){
+    public double leerYValidarMaximoApuestaTipo3(){
         Scanner teclado = new Scanner(System.in);
         double maximoApuesta = 0.0;
 
@@ -229,13 +208,13 @@ public class UtilidadesAdmin {
      * Interfaz
      * Nombre: abrirPartido
      * Comentario: Abre el partido del mismo id que el que se le pasa
-     * Cabecera: public static boolean abrirPartido(int idPartido)
+     * Cabecera: public boolean abrirPartido(int idPartido)
      * Entrada:
      *  @param idPartido el id del partio que se quiere abrir
      * Salida:
      *  @return un boolean que nos dice si se ha ejecutado bien
      */
-    public static boolean abrirPartido(int idPartido){
+    public boolean abrirPartido(int idPartido){
 
         boolean ret = true;
         int resultado;
@@ -265,13 +244,13 @@ public class UtilidadesAdmin {
      * Interfaz
      * Nombre: cerrarPartido
      * Comentario: Cierra el partido que tenga el id que le pasas
-     * Cabecera: public static boolean cerrarPartido(int idPartido)
+     * Cabecera: public boolean cerrarPartido(int idPartido)
      * Entrada:
      *  @param idPartido el id del partio que se quiere cerrar
      * Salida:
      *  @return un boolean que nos dice si se ha ejecutado bien
      */
-    public static boolean cerrarPartido(int idPartido){
+    public boolean cerrarPartido(int idPartido){
         boolean ret = true;
         int resul;
 
@@ -297,16 +276,15 @@ public class UtilidadesAdmin {
     /**
      * Interfaz
      * Nombre: verPartidosCerrados
-     * Comentario: Este metodo nos muestra todos los partidos en los que no se pueda
-     * apostar, en otras palabras que estene cerrados.
-     * Cabecera: public static void verPartidosCerrados()
+     * Comentario: Este metodo nos muestra todos los partidos.
+     * Cabecera: public void verPartidos()
      * Postcondiciones: El método muestra por pantalla los partidos que se encuentren cerrados.
      */
-   public static void verPartidosCerrados(){
+   public void verPartidosnoAbiertos(){
 
        try {
            clsConexion miconexion = new clsConexion();
-           String miSelect = "SELECT ID, fechaPartido FROM Partidos WHERE isAbierto = 0";
+           String miSelect = "SELECT ID, fechaPartido FROM Partidos WHERE IsAbierto = 0";
 
            // Crear una connexion con el DriverManager
            miconexion.abrirConexion();
@@ -316,7 +294,7 @@ public class UtilidadesAdmin {
 
            // Mostrar los datos del ResultSet
            while (partidos.next()) {
-               System.out.println(partidos.getString("ID") + " -> " + partidos.getTimestamp("fechaPartido"));
+               System.out.println(partidos.getString("ID") + " Fecha del Partido: -> " + partidos.getTimestamp("fechaPartido"));
            }
 
            // Cerrar conexion
@@ -331,19 +309,19 @@ public class UtilidadesAdmin {
      * Interfaz
      * Nombre: leerIDpartido
      * Comentario: Lee y valida el ID de un partido.
-     * Cabecera: public static int leerIDpartido()
+     * Cabecera: public int leerIDpartido()
      * Salida:
      *  @return Devuelve asociado al nombre el ID del partido seleccionado.
      */
-    public static int leerIDpartido(){
+    public int leerIDpartido(){
         int partido;
         Scanner teclado = new Scanner(System.in);
 
         do{
-            verPartidosCerrados(); //Mostramos los partidos disponibles.
+            verPartidosnoAbiertos(); //Mostramos los partidos disponibles.
             System.out.println("Elige un partido de entre los mostrados.");
             partido = teclado.nextInt();
-        }while(!partidoEncontrado(partido));
+        }while(!partidoEncontradoYCerrado(partido));
 
         return partido;
     }
@@ -352,8 +330,8 @@ public class UtilidadesAdmin {
     * Interfaz
     * Nombre: partidoEncontrado
     * Comentario: Este método nos permite verificar si existe un partido con
-    * una id específica ne la base de datos.
-    * Cabecera: public static boolean partidoEncontrado(int idPartido)
+    * una id específica ne la base de datos y ademas esta cerrado..
+    * Cabecera: public boolean partidoEncontradoYCerrado(int idPartido)
     * Entrada:
     *   -int idPartido
     * Salida:
@@ -361,14 +339,14 @@ public class UtilidadesAdmin {
     * Postcondiciones: El método devuelve un valor booleano asociado al nombre,
     * true si el partido existe en la base de datos o false en caso contrario.
     * */
-    public static boolean partidoEncontrado(int idPartido){
+    public boolean partidoEncontradoYCerrado(int idPartido){
         boolean ret = false;
 
         //Buscamos el partido
         //Hacemos un SELECT con ese ID y si devuelve una fila es que existe.
         try {
             clsConexion miConexion = new clsConexion();
-            String miSelect = "SELECT id FROM Partidos where id = ?";
+            String miSelect = "SELECT id FROM Partidos where id = ? AND IsAbierto = 0";
 
             // Crear una connexion con el DriverManager
             miConexion.abrirConexion();
@@ -395,14 +373,14 @@ public class UtilidadesAdmin {
      * Nombre: consultarApuestasPartido
      * Comentario: Este metodo nos permitira consultar todas las apuestas y
      * cuanto dinero se ha apostado a cada posible resultado
-     * Cabecera: public static void consultarApuestasPartido(int idPartido)
+     * Cabecera: public void consultarApuestasPartido(int idPartido)
      * Entrada:
      *  @param idPartido el ide del partido que queremos consultar
      * Postcondiciones: La función muestra por pantalla los datos de todas las
      * apuestas de un partido específico. Si no existe un partido con esa id en
      * la base de datos, no se muestra nada.
      */
-    public static void consultarApuestasPartido(int idPartido){
+    public void consultarApuestasPartido(int idPartido){
 
         ResultSet resultado;
         clsConexion miconexion = new clsConexion();
@@ -416,8 +394,9 @@ public class UtilidadesAdmin {
             connexionBaseDatos = miconexion.getConnexionBaseDatos();
             Statement sentencia = connexionBaseDatos.createStatement();
 
+            System.out.println("--Apuestas Tipo 1--");
             //Llamo a la primera funcion
-            CallableStatement callStatementApuesta1 = miconexion.getConnexionBaseDatos().prepareCall("{call consultarApuestasTipo1(?)}");
+            CallableStatement callStatementApuesta1 = miconexion.getConnexionBaseDatos().prepareCall("{call consultarApuestaTipo1(?)}");
             callStatementApuesta1.setInt(1, idPartido);
             resultado = callStatementApuesta1.executeQuery();
 
@@ -427,31 +406,31 @@ public class UtilidadesAdmin {
                 }
             }
 
+            System.out.println("--Apuestas Tipo 2--");
             //APUESTAS tipo 2
             //Llamo a la segunda funcion
-            CallableStatement callStatementApuesta2 = miconexion.getConnexionBaseDatos().prepareCall("{call consultarApuestasTipo2(?)}");
+            CallableStatement callStatementApuesta2 = miconexion.getConnexionBaseDatos().prepareCall("{call consultarApuestaTipo2(?)}");
             //Visitante
             callStatementApuesta2.setInt(1, idPartido);
             resultado = callStatementApuesta2.executeQuery();
             if (resultado.next()) {
-                if (resultado.getString("id") != null) {
+                if (resultado.getString("DineroApostado") != null) {
                     System.out.println("Goles: " + resultado.getInt("goles") + " Equipo ganador " + resultado.getString("equipo") + " Dinero partido: " + resultado.getInt("DineroApostado"));
                 }
             }
 
+            System.out.println("--Apuestas Tipo 3--");
             //apuestas tipo 3
             //Local
-            CallableStatement callStatementApuesta3 = miconexion.getConnexionBaseDatos().prepareCall("{call consultarApuestasTipo3(?)}");
+            CallableStatement callStatementApuesta3 = miconexion.getConnexionBaseDatos().prepareCall("{call consultarApuestaTipo3(?)}");
             tipo++;
             callStatementApuesta3.setInt(1,idPartido);
             ResultSet resultado3L = callStatementApuesta3.executeQuery();
             if (resultado3L.next()) {
-                if (resultado3L.getString("id") == null) {
+                if (resultado3L.getString("DineroApostado") != null) {
                     System.out.println("Equipo ganandor" + resultado3L.getString("Ganador") + " dinero " + resultado3L.getInt("DineroApostado"));
                 }
             }
-
-
         }
         catch (SQLException r) {
             r.printStackTrace();
@@ -467,7 +446,7 @@ public class UtilidadesAdmin {
     * Nombre: leerYValidarPartidoConApuestasSinContabilizar
     * Comentario: Este método nos permite obtener la id de un partido con apuestas
     * sin contabilizar.
-    * Cabecera: public static int leerYValidarPartidoConApuestasSinContabilizar()
+    * Cabecera: public int leerYValidarPartidoConApuestasSinContabilizar()
     * Salida:
     *   -int idPartido
     * Precondiciones:
@@ -475,15 +454,16 @@ public class UtilidadesAdmin {
     * Postcondiciones: El método devuelve un número entero asociado al nombre,
     * que es el id del partido con apuestas sin finalizar.
     * */
-    public static int leerYValidarPartidoConApuestasSinContabilizar(){
+    public int leerYValidarPartidoConApuestasSinContabilizar(){
+        UtilidadesComunes uComunes = new UtilidadesComunes();
         int idPartido = 0;
         Scanner teclado = new Scanner(System.in);
 
         do{
             System.out.println("Elige un partido: ");
-            UtilidadesComunes.mostrarPartidosConApuestasNoContabilizadas();
+            uComunes.mostrarPartidosConApuestasNoContabilizadas();
             idPartido = teclado.nextInt();
-        }while (!UtilidadesComunes.partidoConApuestasSinContabilizar(idPartido));
+        }while (!uComunes.partidoConApuestasSinContabilizar(idPartido));
 
         return idPartido;
     }
@@ -492,14 +472,14 @@ public class UtilidadesAdmin {
      * Interfaz
      * Nombre: pagarApuestasPartido
      * Comentario: Este método nos permite pagar las apuestas sin contabilizar de un partido.
-     * Cabecera: public static void pagarApuestasPartido(int idPartido)
+     * Cabecera: public void pagarApuestasPartido(int idPartido)
      * Entrada:
      *   -int idPartido
      * Postcondiciones: El método paga las apuestas victoriosas que se encontraban sin contabilizar
      * de un partido, si el partido no existe o si no contenía apuestas sin contabilizar, el método
      * no realiza ninguna modificación.
      * */
-    public static void pagarApuestasPartido(int idPartido){
+    public void pagarApuestasPartido(int idPartido){
         clsConexion conexion = new clsConexion();
 
         try {
@@ -512,6 +492,5 @@ public class UtilidadesAdmin {
             e.printStackTrace();
         }
     }
-
 
 }

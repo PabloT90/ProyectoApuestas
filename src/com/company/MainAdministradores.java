@@ -1,9 +1,8 @@
 package com.company;
 
 import Gestion.Admin.UtilidadesAdmin;
+import Gestion.User.UtilidadesUser;
 import Gestion.UtilidadesComunes;
-
-import java.time.LocalDate;
 import java.util.Date;
 
 /*
@@ -21,30 +20,33 @@ fin_si
  */
 public class MainAdministradores {
     public static void main(String[]args){
+        UtilidadesComunes uComunes = new UtilidadesComunes();
+        UtilidadesAdmin uAdmin = new UtilidadesAdmin();
+        UtilidadesUser uUser = new UtilidadesUser();
+
         int opcionMenu = 0, idPartido = 0;
         double maximoApuesta1, maximoApuesta2, maximoApuesta3;
         Date fechaPartido;
 
-        if(UtilidadesAdmin.leerValidarEjecutar() == 's') {
-            while ((opcionMenu = UtilidadesAdmin.MostrarMenuLeerValidarOpcion()) != 0) {
+        if(uComunes.leerValidarEjecutar() == 's') {
+            while ((opcionMenu = uAdmin.MostrarMenuLeerValidarOpcion()) != 0) {
                 switch (opcionMenu) {
                     case 1: //Crear partido
-                        maximoApuesta1 = UtilidadesAdmin.leerYValidarMaximoApuestaTipo1();
-                        maximoApuesta2 = UtilidadesAdmin.leerYValidarMaximoApuestaTipo2();
-                        maximoApuesta3 = UtilidadesAdmin.leerYValidarMaximoApuestaTipo3();
-                        fechaPartido = UtilidadesAdmin.leerYValidarFechaPartido();
+                        maximoApuesta1 = uAdmin.leerYValidarMaximoApuestaTipo1();
+                        maximoApuesta2 = uAdmin.leerYValidarMaximoApuestaTipo2();
+                        maximoApuesta3 = uAdmin.leerYValidarMaximoApuestaTipo3();
+                        fechaPartido = uAdmin.leerYValidarFechaPartido();
 
-                        if(UtilidadesAdmin.insertarPartido(maximoApuesta1, maximoApuesta2, maximoApuesta3, UtilidadesComunes.convertUtilToSql(fechaPartido))){
+                        if(uAdmin.insertarPartido(maximoApuesta1, maximoApuesta2, maximoApuesta3, uComunes.convertUtilToSql(fechaPartido))){
                             System.out.println("Partido insertado.");
                         }else{
                             System.out.println("No se ha podido insertar.");
                         }
                         break;
                     case 2: //Abrir partido
+                        idPartido = uAdmin.leerIDpartido();
 
-                        idPartido = UtilidadesAdmin.leerIDpartido();
-
-                        if (UtilidadesAdmin.abrirPartido(idPartido)){
+                        if (uAdmin.abrirPartido(idPartido)){
                             System.out.println("Se ha abierto correctamente.");
                         }else{
                             System.out.println("No se ha podido abrir.");
@@ -53,9 +55,9 @@ public class MainAdministradores {
                         break;
                     case 3: //Cerrar partido
                         //Comprobar si hay algun partido abierto
-                        if(UtilidadesComunes.existenPartidosAbiertos()){
-                            idPartido = UtilidadesComunes.leerIDpartido();
-                            if (UtilidadesAdmin.cerrarPartido(idPartido)){
+                        if(uComunes.existenPartidosAbiertos()){
+                            idPartido = uComunes.leerIDpartido();
+                            if (uAdmin.cerrarPartido(idPartido)){
                                 System.out.println("Cerrado correctamente.");
                             }else{
                                 System.out.println("No se ha podido cerrar correctamente.");
@@ -63,20 +65,15 @@ public class MainAdministradores {
                         }else{
                             System.out.println("No hay partidos abiertos.");
                         }
-
-
                         break;
                     case 4: //Consultar apuestas partido
-
-                        idPartido = UtilidadesComunes.leerIDpartido2();
-
-                        UtilidadesAdmin.consultarApuestasPartido(idPartido);
-
+                        idPartido = uComunes.leerIDpartido2();
+                        uAdmin.consultarApuestasPartido(idPartido);
                         break;
                     case 5: //Pagar apuestas
-                        if(UtilidadesComunes.existenPartidosConApuestasSinContabilizar()){
-                            idPartido = UtilidadesAdmin.leerYValidarPartidoConApuestasSinContabilizar();
-                            UtilidadesAdmin.pagarApuestasPartido(idPartido);
+                        if(uComunes.existenPartidosConApuestasSinContabilizar()){
+                            idPartido = uAdmin.leerYValidarPartidoConApuestasSinContabilizar();
+                            uAdmin.pagarApuestasPartido(idPartido);
                         }else{
                             System.out.println("No existen partidos con apuestas sin contabilizar.");
                         }

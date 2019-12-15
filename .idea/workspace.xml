@@ -4,7 +4,6 @@
     <list default="true" id="a3f5145e-e47e-453b-9c69-2386a688b718" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,10 +20,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/Gestion/Admin/UtilidadesAdmin.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/com/company/MainAdministradores.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/com/company/MainUser.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Gestion/UtilidadesComunes.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Gestion/Admin/UtilidadesAdmin.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectId" id="1TKJg7mfOEeQUtCLUB33qhbOqem" />
   <component name="ProjectViewState">
@@ -46,18 +45,6 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\pprats\Desktop\Apuestas_2\ProyectoApuestas\src" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="Application.MainAdministradores">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
@@ -87,6 +74,18 @@
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -146,30 +145,30 @@
     </state>
     <state x="389" y="105" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575363154394" />
     <state x="547" y="150" key="FileChooserDialogImpl/0.0.1920.1040/1920.304.1360.728@0.0.1920.1040" timestamp="1576184329001" />
-    <state width="1899" height="375" key="GridCell.Tab.0.bottom" timestamp="1576434857735">
+    <state width="1899" height="348" key="GridCell.Tab.0.bottom" timestamp="1576453995398">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1345" height="295" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575969902253" />
     <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.304.1360.728@0.0.1920.1040" timestamp="1576345199383" />
-    <state width="1899" height="375" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576434857735" />
-    <state width="1899" height="375" key="GridCell.Tab.0.center" timestamp="1576434857734">
+    <state width="1899" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576453995398" />
+    <state width="1899" height="348" key="GridCell.Tab.0.center" timestamp="1576453995398">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1345" height="295" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575969902252" />
     <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.304.1360.728@0.0.1920.1040" timestamp="1576345199382" />
-    <state width="1899" height="375" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576434857734" />
-    <state width="1899" height="375" key="GridCell.Tab.0.left" timestamp="1576434857734">
+    <state width="1899" height="348" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576453995398" />
+    <state width="1899" height="348" key="GridCell.Tab.0.left" timestamp="1576453995398">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1345" height="295" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575969902252" />
     <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.304.1360.728@0.0.1920.1040" timestamp="1576345199382" />
-    <state width="1899" height="375" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576434857734" />
-    <state width="1899" height="375" key="GridCell.Tab.0.right" timestamp="1576434857734">
+    <state width="1899" height="348" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576453995398" />
+    <state width="1899" height="348" key="GridCell.Tab.0.right" timestamp="1576453995398">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1345" height="295" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1575969902252" />
     <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.304.1360.728@0.0.1920.1040" timestamp="1576345199382" />
-    <state width="1899" height="375" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576434857734" />
+    <state width="1899" height="348" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576453995398" />
     <state width="1899" height="526" key="GridCell.Tab.1.bottom" timestamp="1576434866541">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -186,12 +185,12 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="526" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576434866540" />
-    <state x="229" y="0" key="SettingsEditor" timestamp="1576433333298">
+    <state x="229" y="0" key="SettingsEditor" timestamp="1576453360071">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="163" y="0" key="SettingsEditor/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1576066337932" />
     <state x="229" y="0" key="SettingsEditor/0.0.1920.1040/1920.304.1360.728@0.0.1920.1040" timestamp="1576192270242" />
-    <state x="229" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1576433333298" />
+    <state x="229" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1576453360071" />
     <state x="533" y="267" key="com.intellij.ide.util.TipDialog" timestamp="1576342397586">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -209,7 +208,7 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/Gestion/Admin/UtilidadesAdmin.java</url>
           <line>404</line>
-          <properties class="Gestion.Admin.UtilidadesAdmin" method="consultarApuestasPartido">
+          <properties class="Gestion.Admin.UtilidadesAdmin">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="6" />

@@ -3,9 +3,6 @@ import Gestion.Admin.UtilidadesAdmin;
 import Gestion.User.UtilidadesUser;
 import Gestion.UtilidadesComunes;
 
-import java.sql.Date;
-import java.util.Calendar;
-
 /*
 Nivel: 0
 si quiere ejecutar
@@ -25,44 +22,47 @@ fin_si
 * */
 public class MainUser {
     public static void main(String[] args) {
+        UtilidadesComunes uComunes = new UtilidadesComunes();
+        UtilidadesAdmin uAdmin = new UtilidadesAdmin();
+        UtilidadesUser uUser = new UtilidadesUser();
         int opcionMenu = 0, codDevuelto;
         double capitalApuesta;
         String usuario, pass;
 
-        if(UtilidadesAdmin.leerValidarEjecutar() == 's') {
+        if(uComunes.leerValidarEjecutar() == 's') {
             //AccederCuentaUsuario
-            usuario = UtilidadesUser.LeerCorreo();
-            pass = UtilidadesUser.LeerPassword();
+            usuario = uUser.LeerCorreo();
+            pass = uUser.LeerPassword();
 
-            if (!UtilidadesComunes.existeCuenta(usuario, pass)) {
+            if (!uComunes.existeCuenta(usuario, pass)) {
                 System.out.println("Credenciales incorrectas para el usuario: " + usuario);
             } else {
                 System.out.println("Bienvenido: " + usuario + ". Que quieres hacer?");
-                while ((opcionMenu = UtilidadesUser.MostrarMenuLeerValidarOpcion()) != 0) {
+                while ((opcionMenu = uUser.MostrarMenuLeerValidarOpcion()) != 0) {
                     switch (opcionMenu) {
                         case 1: //Apostar partidos
-                            UtilidadesUser.apostarAPartido(usuario);
+                            uUser.apostarAPartido(usuario);
                             break;
                         case 2://Ver partidos disponibles
-                            if(UtilidadesComunes.existenPartidosAbiertos()){
-                                UtilidadesComunes.verPartidosDisponiblesParaApostar();
+                            if(uComunes.existenPartidosAbiertos()){
+                                uComunes.verPartidosDisponiblesParaApostar();
                             }else{
                                 System.out.println("No hay partidos disponibles para apostar.");
                             }
                             break;
                         case 3: //Comprobar resultados de apuestas anteriores
-                            UtilidadesUser.MostrarApuestasAnteriores(usuario);
+                            uUser.MostrarApuestasAnteriores(usuario);
                             break;
                         case 4: //Realizar ingreso
-                            codDevuelto = UtilidadesUser.ingresarDinero(UtilidadesUser.LeerValidarDinero(), usuario);
-                            UtilidadesComunes.mostrarMensajeOperacion(codDevuelto);
+                            codDevuelto = uUser.ingresarDinero(uUser.LeerValidarDinero(), usuario);
+                            uComunes.mostrarMensajeOperacion(codDevuelto);
                             break;
                         case 5: //Retirar dinero
-                            codDevuelto = UtilidadesUser.retirarDinero(UtilidadesUser.LeerValidarDinero(), usuario);
-                            UtilidadesComunes.mostrarMensajeOperacion(codDevuelto);
+                            codDevuelto = uUser.retirarDinero(uUser.LeerValidarDinero(), usuario);
+                            uComunes.mostrarMensajeOperacion(codDevuelto);
                             break;
                         case 6: //Ver movimientos.
-                            UtilidadesUser.mostrarMovimientos(usuario);
+                            uUser.mostrarMovimientos(usuario);
                             break;
                     }
                 }

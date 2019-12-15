@@ -13,7 +13,7 @@ public class UtilidadesUser {
      * Muestra un menu y obtiene una respuesta valida para la opcion seleccionada.
      * @return asociado al nombre devuelve un entero con la opcion del menu.
      */
-    public static int MostrarMenuLeerValidarOpcion(){
+    public int MostrarMenuLeerValidarOpcion(){
         int opcion;
         Scanner teclado = new Scanner(System.in);
         do{
@@ -36,7 +36,7 @@ public class UtilidadesUser {
      * @param correo Correo de la persona.
      * @return entero con el numero de error producido.
      */
-    public static int ingresarDinero(int cantidad, String correo){
+    public int ingresarDinero(int cantidad, String correo){
         int resultado = 0;
         clsConexion conexion = new clsConexion();
 
@@ -58,7 +58,7 @@ public class UtilidadesUser {
      * Leer y valida la cantidad de dinero que queremos ingresar.
      * @return cantidad a ingresar.
      */
-    public static int LeerValidarDinero(){
+    public int LeerValidarDinero(){
         int cantidad;
         Scanner teclado = new Scanner(System.in);
 
@@ -74,7 +74,7 @@ public class UtilidadesUser {
      * Lee un correo electronico y se asegura que no esta vacio.
      * @return Correo de la persona.
      */
-    public static String LeerCorreo(){ //Se podria mejorar con regex.
+    public String LeerCorreo(){ //Se podria mejorar con regex.
         String correo;
         Scanner teclado = new Scanner(System.in);
 
@@ -90,7 +90,7 @@ public class UtilidadesUser {
      * Lee una contraseña y se asegura que no esta vacio.
      * @return Contraseña de la persona.
      */
-    public static String LeerPassword(){
+    public String LeerPassword(){
         String pass;
         Scanner teclado = new Scanner(System.in);
 
@@ -108,7 +108,7 @@ public class UtilidadesUser {
      * @param correo Correo de la persona.
      * @return entero con el numero de error producido.
      */
-    public static int retirarDinero(int cantidad, String correo){
+    public int retirarDinero(int cantidad, String correo){
         int resultado = 0;
         clsConexion conexion = new clsConexion();
 
@@ -130,7 +130,7 @@ public class UtilidadesUser {
      * Muestra los movimientos que ha hecho un usuario concreto.
      * @param usuario Correo del usuario a consultar.
      */
-    public static void mostrarMovimientos(String usuario){
+    public void mostrarMovimientos(String usuario){
         try{
             clsConexion miconexion = new clsConexion();
             String miSelect = "SELECT saldo, fechaYHora FROM Cuentas WHERE CorreoUsuario=?";
@@ -157,7 +157,7 @@ public class UtilidadesUser {
      * Muestra las apuestas que ha realizado un usuario y su resultado.
      * @param usuario Correo del usuario.
      */
-    public static void MostrarApuestasAnteriores(String usuario){
+    public void MostrarApuestasAnteriores(String usuario){
         String isGanada;
         try{
             clsConexion miconexion = new clsConexion();
@@ -195,62 +195,62 @@ public class UtilidadesUser {
     * en cualquiera de los pasos de creación de la apuesta cancelar la misma. Estye estructura
     * se ha pasado a un método para que la lectura del código sea más clara y ordenada.
     * Este método es útilizado por la clase MainUser.
-    * Cabecera: public static void apostarAPartido(String correoUsuario)
+    * Cabecera: public void apostarAPartido(String correoUsuario)
     * Entrada:
     *   -String correoUsuario
     * Postcondiciones: Si el usuario ha completado el último paso para la creación de la apuesta,
     * este se inserta en la base de datos de la aplicación.
     * */
-    public static void apostarAPartido(String correoUsuario){
+    public void apostarAPartido(String correoUsuario){
+        UtilidadesComunes uComunes = new UtilidadesComunes();
         int idPartido, tipoApuesta, golesLocales = 0, golesVisitantes = 0, goles = 0;
         double capitalApuesta = 0.0;
         Date fechaActual = null;
         String equipo = " ";
 
-        if (UtilidadesComunes.existenPartidosAbiertos()) { //Si existe algun partido abierto
-            if (UtilidadesComunes.obtenerCapitalMaximoUsuario(correoUsuario) > 0) {
+        if (uComunes.existenPartidosAbiertos()) { //Si existe algun partido abierto
+            if (uComunes.obtenerCapitalMaximoUsuario(correoUsuario) > 0) {
                 // //Si el partido elegido es correcto, es decir, está abierto
-                if ((idPartido = UtilidadesComunes.leerIDpartido()) != 0) {
+                if ((idPartido = uComunes.leerIDpartido()) != 0) {
                     //leerYValidarTipoApuesta*
-                    if ((tipoApuesta = UtilidadesComunes.leerYValidarTipoApuesta()) != 0) {
+                    if ((tipoApuesta = uComunes.leerYValidarTipoApuesta()) != 0) {
                         //LeerCaracteristicasApuesta
                         switch (tipoApuesta) {
                             case 1:
                                 //LeerYValidarGolesLocalesYVisitantes
-                                golesLocales = UtilidadesComunes.leerYValidarGolesLocales();
-                                golesVisitantes = UtilidadesComunes.leerYValidarGolesVisitante();
+                                golesLocales = uComunes.leerYValidarGolesLocales();
+                                golesVisitantes = uComunes.leerYValidarGolesVisitante();
                                 break;
                             case 2:
                                 //LeerYValidarEquipoYGoles
-                                equipo = UtilidadesComunes.leerYValidarEquipo();
-                                goles = UtilidadesComunes.leerYValidarGoles();
+                                equipo = uComunes.leerYValidarEquipo();
+                                goles = uComunes.leerYValidarGoles();
                                 break;
 
                             case 3:
                                 //leerYValidarEquipo()
-                                equipo = UtilidadesComunes.leerYValidarEquipo();
+                                equipo = uComunes.leerYValidarEquipo();
                                 break;
                         }
 
                         //leerYValidarCantidadAApostar*
-                        capitalApuesta = UtilidadesComunes.leerYValidarCantidadAApostar(correoUsuario);
+                        capitalApuesta = uComunes.leerYValidarCantidadAApostar(correoUsuario);
                         //RealizarApuesta
-                        //fechaActual = (Date) (Calendar.getInstance()).getTime();//Obtenemos la fecha actual
-                        fechaActual = UtilidadesComunes.convertUtilToSql(Calendar.getInstance().getTime());
+                        fechaActual = uComunes.convertUtilToSql(Calendar.getInstance().getTime());
                         switch (tipoApuesta) {
                             case 1:
                                 //realizarApuestaTipo1*
-                                UtilidadesComunes.realizarApuestaTipo1(fechaActual, capitalApuesta, correoUsuario, idPartido, golesLocales, golesVisitantes);
+                                uComunes.realizarApuestaTipo1(fechaActual, capitalApuesta, correoUsuario, idPartido, golesLocales, golesVisitantes);
                                 break;
 
                             case 2:
                                 //realizarApuestaTipo2*
-                                UtilidadesComunes.realizarApuestaTipo2(fechaActual, capitalApuesta, correoUsuario, idPartido, equipo, goles);
+                                uComunes.realizarApuestaTipo2(fechaActual, capitalApuesta, correoUsuario, idPartido, equipo, goles);
                                 break;
 
                             case 3:
                                 //realizarApuestaTipo3*
-                                UtilidadesComunes.realizarApuestaTipo3(fechaActual, capitalApuesta, correoUsuario, idPartido, equipo);
+                                uComunes.realizarApuestaTipo3(fechaActual, capitalApuesta, correoUsuario, idPartido, equipo);
                                 break;
                         }
                         System.out.println("Apuesta realizada con exito.");

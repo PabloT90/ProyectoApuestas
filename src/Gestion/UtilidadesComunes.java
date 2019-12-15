@@ -14,12 +14,12 @@ public class UtilidadesComunes {
      * Interfaz
      * Nombre: leerIDpartido
      * Comentario: Lee y valida el ID de un partido.
-     * Cabecera: public static int leerIDpartido()
+     * Cabecera: public int leerIDpartido()
      * Salida:
      *  -int partido
      * Postcondiciones: Devuelve asociado al nombre el ID del partido seleccionado.
      */
-    public static int leerIDpartido(){
+    public int leerIDpartido(){
         int partido;
         Scanner teclado = new Scanner(System.in);
 
@@ -36,10 +36,10 @@ public class UtilidadesComunes {
     * Nombre: verPartidosDisponiblesParaApostar
     * Comentario: Muestra todos los partidos a los que se puede apostar. Esto es,
     * los partido que se encuentran en estado abierto.
-    * Cabecera: public static void verPartidosDisponiblesParaApostar()
+    * Cabecera: public void verPartidosDisponiblesParaApostar()
     * Postcondiciones: La función muestra por pantalla los partidos disponibles.
     * */
-    public static void verPartidosDisponiblesParaApostar() {
+    public void verPartidosDisponiblesParaApostar() {
         // Carga el driver
         try {
             clsConexion miconexion = new clsConexion();
@@ -66,13 +66,13 @@ public class UtilidadesComunes {
      * Interfaz
      * Nombre: partidoEncontrado
      * Comentario: Permite saber si existe un partido con el ID recibido como parametro
-     * Cabecera: public static boolean partidoEncontrado(int idPartido)
+     * Cabecera: public boolean partidoEncontrado(int idPartido)
      * Entrada:
      *  @param idPartido ID del partido que queremos buscar.
      * Salida:
      *  @return True en caso de existir, false en caso contrario.
      */
-    public static boolean partidoEncontradoAbierto(int idPartido){
+    public boolean partidoEncontradoAbierto(int idPartido){
         boolean ret = false;
 
             //Buscamos el partido
@@ -104,11 +104,11 @@ public class UtilidadesComunes {
      * Interfaz
      * Nombre: existenPartidosAbiertos
      * Comentario: Permite saber si existe algun partido abierto
-     * Cabecera: public static boolean existenPartidosAbiertos()
+     * Cabecera: public boolean existenPartidosAbiertos()
      * Salida:
      *  @return True en caso de existir alguno, false en caso contrario.
      */
-    public static boolean existenPartidosAbiertos(){
+    public boolean existenPartidosAbiertos(){
         boolean ret = false;
         //Buscamos el partido
         //Hacemos un SELECT con ese ID y si devuelve una fila es que existe.
@@ -143,7 +143,7 @@ public class UtilidadesComunes {
      * Salida:
      *  @return True si se encuentra abierto, false en caso contrario.
      */
-    public static boolean partidoAbierto(int id){
+    public boolean partidoAbierto(int id){
         boolean ret = false;
         //Hacemos un SELECT con ese ID y si devuelve una fila es que existe.
         try {
@@ -178,7 +178,7 @@ public class UtilidadesComunes {
      *  @param codMensaje Codigo del mensaje.
      * Postcondiciones: La función muestra por pantalla un mensaje según una operación seleccionada.
      */
-    public static void mostrarMensajeOperacion(int codMensaje){
+    public void mostrarMensajeOperacion(int codMensaje){
         switch (codMensaje){
             case 0:
                 System.out.println("Se ha retirado correctamente.");
@@ -199,14 +199,14 @@ public class UtilidadesComunes {
      * Interfaz
      * Nombre: existeCuenta
      * Comentario: Permite saber si una cuenta especifica existe en la base de datos
-     * Cabecera: public static boolean existeCuenta(String user, String pass)
+     * Cabecera: public boolean existeCuenta(String user, String pass)
      * Entrada:
      *  @param user Correo del usuario.
      *  @param pass Contraseña del usuario
      * Salida:
      *  @return True si existe, false en caso contrario.
      */
-    public static boolean existeCuenta(String user, String pass){
+    public boolean existeCuenta(String user, String pass){
         boolean ret = false;
 
         try {
@@ -238,13 +238,13 @@ public class UtilidadesComunes {
     * Interfaz
     * Nombre: leerYValidarTipoApuesta
     * Comentario: Este método nos permite leer y validar el tipo de una apuesta.
-    * Cabecera: public static int leerYValidarTipoApuesta()
+    * Cabecera: public int leerYValidarTipoApuesta()
     * Salida:
     *  -int tipoApuesta
     * Postcondiciones: El método devuelve un número asociado al nombre, que es el
     * número de un tipo de apuesta o 0 si no se ha elegido ninguna.
     * */
-    public static int leerYValidarTipoApuesta(){
+    public int leerYValidarTipoApuesta(){
         int tipoApuesta = 0;
         Scanner teclado = new Scanner(System.in);
 
@@ -263,7 +263,7 @@ public class UtilidadesComunes {
     * Cabecera: public void mostrarMenuTiposApuesta()
     * Postcondiciones: Se muestra un menú por pantalla.
     * */
-    private static void mostrarMenuTiposApuesta(){
+    private void mostrarMenuTiposApuesta(){
         System.out.println();
         System.out.println("Elige una de los siguientes tipos de apuesta:");
         System.out.println();
@@ -278,13 +278,13 @@ public class UtilidadesComunes {
      * Interfaz
      * Nombre: leerYValidarGolesLocales
      * Comentario: Este método nso permite leer y validar un número de goles de un equipo local.
-     * Cabecera: public static int leerYValidarGolesLocales()
+     * Cabecera: public int leerYValidarGolesLocales()
      * Salida:
      *   -int goles
      * Postcondiciones: El método devuelve un número entero asociado al nombre,
      * que son el número de goles.
      * */
-    public static int leerYValidarGolesLocales(){
+    public int leerYValidarGolesLocales(){
         int goles = 0;
         Scanner teclado = new Scanner(System.in);
 
@@ -301,13 +301,13 @@ public class UtilidadesComunes {
      * Interfaz
      * Nombre: leerYValidarGolesVisitante
      * Comentario: Este método nso permite leer y validar un número de goles de un equipo local.
-     * Cabecera: public static int leerYValidarGolesVisitante()
+     * Cabecera: public int leerYValidarGolesVisitante()
      * Salida:
      *   -int goles
      * Postcondiciones: El método devuelve un número entero asociado al nombre,
      * que son el número de goles.
      * */
-    public static int leerYValidarGolesVisitante(){
+    public int leerYValidarGolesVisitante(){
         int goles = 0;
         Scanner teclado = new Scanner(System.in);
 
@@ -324,13 +324,13 @@ public class UtilidadesComunes {
     * Interfaz
     * Nombre: leerYValidarEquipo
     * Comentario: Este método nos permite leer y validar un equipo.
-    * Cabecera: public static String leerYValidarEquipo()
+    * Cabecera: public String leerYValidarEquipo()
     * Salida:
     *   -String equipo
     * Postcondiciones: El método devuelve una cadena asociada al nombre, que
     * indica si el equipo es local o visitante.
     * */
-    public static String leerYValidarEquipo(){
+    public String leerYValidarEquipo(){
         String equipo = "";
         Scanner teclado = new Scanner(System.in);
 
@@ -342,16 +342,38 @@ public class UtilidadesComunes {
     }
 
     /**
+     * Interfaz
+     * Nombre: leerValidarEjecutar
+     * Comentario: Lee y valida si el usuario quiere ejecutar una aplicacion.
+     * Cabecera: public char leerValidarEjecutar()
+     * Salida:
+     *  -char ejecutar
+     * Postcondiciones: La función devuelve un carácter asociado al nombre,
+     * que es una ejecución válida para la aplicación.
+     */
+    public char leerValidarEjecutar(){
+        Scanner teclado = new Scanner(System.in);
+        char ejecutar;
+
+        do{
+            System.out.println("Quieres ejecutar?");
+            ejecutar = Character.toLowerCase(teclado.next().charAt(0));
+        }while(ejecutar != 's' && ejecutar != 'n');
+
+        return ejecutar;
+    }
+
+    /**
     * Interfaz
     * Nombre: leerYValidarGoles
     * Comentario: Este método nso permite leer y validar un número de goles de un equipo.
-    * Cabecera: public static int leerYValidarGoles()
+    * Cabecera: public int leerYValidarGoles()
     * Salida:
     *   -int goles
     * Postcondiciones: El método devuelve un número entero asociado al nombre,
     * que son el número de goles.
     * */
-    public static int leerYValidarGoles(){
+    public int leerYValidarGoles(){
         int goles = 0;
         Scanner teclado = new Scanner(System.in);
 
@@ -369,7 +391,7 @@ public class UtilidadesComunes {
     * Nombre: leerYValidarCantidadAApostar
     * Comentario: Este método nos permite obtener una cantidad válida de capital para
     * realizar una apuesta.
-    * Cabecera: public static double leerYValidarCantidadAApostar(String correo)
+    * Cabecera: public double leerYValidarCantidadAApostar(String correo)
     * Entrada:
     *   -String correo
     * Salida:
@@ -377,7 +399,7 @@ public class UtilidadesComunes {
     * Postcondiciones: El método devuelve un número real asociado al nombre, que es el
     * capital válido.
     * */
-    public static double leerYValidarCantidadAApostar(String correo){
+    public double leerYValidarCantidadAApostar(String correo){
         double capital = 0.0, capitalMaximoUsuario = obtenerCapitalMaximoUsuario(correo);
         Scanner teclado = new Scanner(System.in);
 
@@ -395,7 +417,7 @@ public class UtilidadesComunes {
     * Nombre: obtenerCapitalMaximoUsuario
     * Comentario: Este método nos permite obtener el capital máximo en la cuenta
     * de un usurio de la base de datos.
-    * Cabecera: public static double obtenerCapitalMaximoUsuario(String correo)
+    * Cabecera: public double obtenerCapitalMaximoUsuario(String correo)
     * Entrada:
     *   -String correo
     * Salida:
@@ -403,7 +425,7 @@ public class UtilidadesComunes {
     * Postcondiciones: El método devuelve un número real asociado al nombre, que es el
     * capital máximo del usuario o -1 si no se ha encontrado el usuario en la base de datos.
     * */
-    public static double obtenerCapitalMaximoUsuario(String correo){
+    public double obtenerCapitalMaximoUsuario(String correo){
         double capitalMaximo = -1.0;
         try {
             clsConexion miconexion = new clsConexion();
@@ -447,7 +469,7 @@ public class UtilidadesComunes {
     * Postcondiciones: El método devuelve un número asociado al nombre, 1 si se ha conseguido
     * insertar la nueva apuesta o 0 en caso contrario.
     * */
-    public static int realizarApuestaTipo1(Date fechaHora, double capitalAApostar, String correo, int idPartido, int numGolesLocal, int numGolesVisitante){
+    public int realizarApuestaTipo1(Date fechaHora, double capitalAApostar, String correo, int idPartido, int numGolesLocal, int numGolesVisitante){
         clsConexion conexion = new clsConexion();
         int resultado = 0, error = 0;
 
@@ -489,7 +511,7 @@ public class UtilidadesComunes {
      * Postcondiciones: El método devuelve un número asociado al nombre, 1 si se ha conseguido
      * insertar la nueva apuesta o 0 en caso contrario.
      * */
-    public static int realizarApuestaTipo2(Date fechaHora, double capitalAApostar, String correo, int idPartido, String equipo, int goles){
+    public int realizarApuestaTipo2(Date fechaHora, double capitalAApostar, String correo, int idPartido, String equipo, int goles){
         clsConexion conexion = new clsConexion();
         int resultado = 0, error = 0;
 
@@ -529,7 +551,7 @@ public class UtilidadesComunes {
      * Postcondiciones: El método devuelve un número asociado al nombre, 1 si se ha conseguido
      * insertar la nueva apuesta o 0 en caso contrario.
      * */
-    public static int realizarApuestaTipo3(Date fechaHora, double capitalAApostar, String correo, int idPartido, String equipo){
+    public int realizarApuestaTipo3(Date fechaHora, double capitalAApostar, String correo, int idPartido, String equipo){
         clsConexion conexion = new clsConexion();
         int resultado = 0, error = 0;
 
@@ -556,7 +578,7 @@ public class UtilidadesComunes {
     * Nombre: convertUtilTimeStamp
     * Comentario: Este método nos permite convertir un tipo java.util.Date
     * a un tipo java.sql.Timestamp.
-    * Cabecera: private static java.sql.Date convertUtilTimeStamp(java.util.Date uDate)
+    * Cabecera: private java.sql.Date convertUtilTimeStamp(java.util.Date uDate)
     * Entrada:
     *   -java.util.Date uDate
     * Salida:
@@ -564,7 +586,7 @@ public class UtilidadesComunes {
     * Postcondiciones: El método devuelve un tipo java.sql.Timestamp asociado al nombre,
     * que es la conversión del tipo java.util.Date.
     * */
-    public static java.sql.Timestamp convertUtilTimeStamp(java.util.Date uDate) {
+    public java.sql.Timestamp convertUtilTimeStamp(java.util.Date uDate) {
         Timestamp ts = new Timestamp(uDate.getTime());
         return ts;
     }
@@ -574,7 +596,7 @@ public class UtilidadesComunes {
      * Nombre: convertUtilToSql
      * Comentario: Este método nos permite convertir un tipo java.util.Date
      * a un tipo java.sql.Date.
-     * Cabecera: private static java.sql.Date convertUtilToSql(java.util.Date uDate)
+     * Cabecera: private java.sql.Date convertUtilToSql(java.util.Date uDate)
      * Entrada:
      *   -java.util.Date uDate
      * Salida:
@@ -582,7 +604,7 @@ public class UtilidadesComunes {
      * Postcondiciones: El método devuelve un tipo java.util.Date asociado al nombre,
      * que es la conversión del tipo java.util.Date.
      * */
-    public static java.sql.Date convertUtilToSql(java.util.Date uDate) {
+    public java.sql.Date convertUtilToSql(java.util.Date uDate) {
         java.sql.Date sDate = new java.sql.Date(uDate.getTime());
         return sDate;
     }
@@ -592,11 +614,11 @@ public class UtilidadesComunes {
     * Nombre: mostrarPartidosConApuestasNoContabilizadas
     * Comentario: Este función nos permite mostrar los partidos con apuestas
     * no contabilizadas.
-    * Cabecera: public static void mostrarPartidosConApuestasNoContabilizadas()
+    * Cabecera: public void mostrarPartidosConApuestasNoContabilizadas()
     * Postcondiciones: Este método nos permite mostrar por pantalla los partidos
     * con apuestas no contabilizaadas.
     * */
-    public static void mostrarPartidosConApuestasNoContabilizadas(){
+    public void mostrarPartidosConApuestasNoContabilizadas(){
         clsConexion conexion = new clsConexion();
         ResultSet resultado;
 
@@ -619,13 +641,13 @@ public class UtilidadesComunes {
      * Nombre: existenPartidosConApuestasSinContabilizar
      * Comentario: Este método nos permite verificar si existen partidos con
      * apuestas sin contabilizar.
-     * Cabecera: public static boolean existenPartidosConApuestasSinContabilizar()
+     * Cabecera: public boolean existenPartidosConApuestasSinContabilizar()
      * Salida:
      *  -boolean ret
      * Postcondiciones: El método devuelve un valor booleano asociado al nombre,
      * true si existen partidos con apuestas sin contabilizar o false en caso contrario.
      */
-    public static boolean existenPartidosConApuestasSinContabilizar(){
+    public boolean existenPartidosConApuestasSinContabilizar(){
         boolean ret = false;
         clsConexion conexion = new clsConexion();
 
@@ -649,7 +671,7 @@ public class UtilidadesComunes {
     * Interfaz
     * Nombre: partidoConApuestasSinContabilizar
     * Comentario: Este método nos permite verificar si un partido tiene apuestas sin contabilizar.
-    * Cabecera: public static boolean partidoConApuestasSinContabilizar(int idPartido)
+    * Cabecera: public boolean partidoConApuestasSinContabilizar(int idPartido)
     * Entrada:
     *   -int idPartido
     * Salida:
@@ -659,7 +681,7 @@ public class UtilidadesComunes {
     * Postcondiciones: El método devuleve un valor booleano asociado al nombre,
     * true si el partido contiene apuestas sin contabilizar o false en caso contrario.
     * */
-    public static boolean partidoConApuestasSinContabilizar(int idPartido){
+    public boolean partidoConApuestasSinContabilizar(int idPartido){
         boolean resultado = false;
 
         clsConexion conexion = new clsConexion();
@@ -685,10 +707,10 @@ public class UtilidadesComunes {
      * Interfaz
      * Nombre: verPartidos
      * Comentario: Muestra todos los partidos.
-     * Cabecera: public static void verPartidos()
+     * Cabecera: public void verPartidos()
      * Postcondiciones: La función muestra por pantalla todos los partidos
      * */
-    public static void verPartidos() {
+    public void verPartidos() {
         // Carga el driver
         try {
             clsConexion miconexion = new clsConexion();
@@ -715,12 +737,12 @@ public class UtilidadesComunes {
      * Interfaz
      * Nombre: leerIDpartido
      * Comentario: Lee y valida el ID de un partido.
-     * Cabecera: public static int leerIDpartido2()
+     * Cabecera: public int leerIDpartido2()
      * Salida:
      *  -int partido
      * Postcondiciones: Devuelve asociado al nombre el ID del partido seleccionado.
      */
-    public static int leerIDpartido2(){
+    public int leerIDpartido2(){
         int partido;
         Scanner teclado = new Scanner(System.in);
 
@@ -737,13 +759,13 @@ public class UtilidadesComunes {
      * Interfaz
      * Nombre: partidoEncontrado
      * Comentario: Permite saber si existe un partido con el ID recibido como parametro
-     * Cabecera: public static boolean partidoEncontrado(int idPartido)
+     * Cabecera: public boolean partidoEncontrado(int idPartido)
      * Entrada:
      *  @param idPartido ID del partido que queremos buscar.
      * Salida:
      *  @return True en caso de existir, false en caso contrario.
      */
-    public static boolean partidoEncontrado(int idPartido){
+    public boolean partidoEncontrado(int idPartido){
         boolean ret = false;
 
         //Buscamos el partido

@@ -175,7 +175,9 @@ Postcondiciones: El método inserta un partido en la base de datos.
 ALTER PROCEDURE insertarPartido(@maximoTipo1 smallmoney, @maximoTipo2 smallmoney, @maximoTipo3 smallmoney, @fechaPartido smalldatetime)
 AS
 BEGIN
-	INSERT INTO Partidos (maxApuesta1, maxApuesta2, maxApuesta3, fechaPartido, idCompeticion) VALUES (@maximoTipo1, @maximoTipo2, @maximoTipo3, @fechaPartido, 1)
+	INSERT INTO Partidos (isAbierto,maxApuesta1, maxApuesta2, maxApuesta3, fechaPartido, idCompeticion) VALUES (0,@maximoTipo1, @maximoTipo2, @maximoTipo3, @fechaPartido, 1)
 END
 GO
+
+SELECT *FROM Partidos
 
