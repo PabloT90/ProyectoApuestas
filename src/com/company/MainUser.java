@@ -4,21 +4,54 @@ import Gestion.User.UtilidadesUser;
 import Gestion.UtilidadesComunes;
 
 /*
-Nivel: 0
-si quiere ejecutar
-    IngresarCuentaUsuario
-    mientras no quiera salir (opcionMenu != 7)
-        segun(opcionMenu)
-            caso 1: ApostarPartido
-            caso 2: VerPartidosDisponibles
-            caso 3: ComprobarResultadoApuestaAnterior
-            caso 4: RealizarIngreso
-            caso 5: RetirarDinero
-            caso 6: VerMovimientos
-        fin_segun
-    fin_mientras
+PG N0 MainUser
+INICIO
+si quiere ejecutar*
+	LeerCredenciales*
+	si no existeCuenta*
+		MostrarMensajeErrorCredenciales
+	sino
+		mientras no quiera salir
+			segun opcionMenu
+				caso 1: ApostarPartidos*
+				caso 2: VerPartidosDisponibles
+				caso 3: ComprobarApuestasAnteriores*
+				caso 4: RealizarIngreso
+				caso 5: RetirarDinero
+				caso 6: VerMovimientos*
+			fin_segun
+		fin_mientras
+	fin_si
 fin_si
+FIN
 
+Entradas:
+    -int opcionMenu
+    -int idPartido
+    -String correo
+    -String pass
+    -double capitalApuesta
+    -int tipoApuesta
+    -int golesLocales
+    -int golesVisitantes
+    -string equipo
+    -int goles
+    -int cantidad
+
+Restricciones:
+    -opcionMenu solo podra valer 1,2,3,4,5,6 o 0
+    -el idPartido tendra que ser mayor que 0
+    -el capitalApuesta debe de ser mayor que 0
+    -el tipoApuesta solo podra ser 1,2 o 3
+    -los golesLocales deben de estar entre 0 y 100
+    -los golesVisitante deben de estar entre 0 y 100
+    -El equipo solo podra ser 'local' o 'visitante'
+    -los goles deben de estar entre 0 y 100
+    -la cantidad debe de ser mayor que 0
+
+Salidas:
+    -Mensajes de comunicacion con el usuario(errores, informativos...)
+    -int CodDevuelto
 * */
 public class MainUser {
     public static void main(String[] args) {

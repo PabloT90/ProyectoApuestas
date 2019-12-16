@@ -1,0 +1,60 @@
+PG N0 MainUser
+INICIO
+si quiere ejecutar*
+	LeerCredenciales*
+	si no existeCuenta*
+		MostrarMensajeErrorCredenciales
+	sino
+		mientras no quiera salir
+			segun opcionMenu
+				caso 1: ApostarPartidos*
+				caso 2: VerPartidosDisponibles
+				caso 3: ComprobarApuestasAnteriores*
+				caso 4: RealizarIngreso
+				caso 5: RetirarDinero
+				caso 6: VerMovimientos*
+			fin_segun
+		fin_mientras
+	fin_si	
+fin_si
+FIN
+
+----
+PG N0 MainAdministradores
+INICIO
+Si quiere ejecutar*
+	mientras no quiera salir*
+		segun opcionMenu
+			caso 1: CrearPartido
+			caso 2: AbrirPartido
+			caso 3: CerrarPartido
+			caso 4: ConsultarApuestasPartido
+			caso 5: PagarApuestas
+		fin_segun
+	fin_mientras
+fin_si
+FIN
+
+PG N1 CrearPartido
+INICIO
+	LeerValidarMaximoApuestasyFecha
+	si se ha insertado*
+		MensajeInsercionCorrecta
+	sino
+		MensajeInsercionFallida
+	fin_si
+FIN
+
+PG N1 CerrarPartido
+INICIO
+	si existenPartidoAbiertos*
+		leerIDpartido*
+		si cerrarPartido*
+			MensajeCerradoCorrecto
+		sino
+			MensajeCerradoIncorrecto
+		fin_si
+	sino
+		MensajeNoHayPartidoAbiertos
+	fin_si
+FIN

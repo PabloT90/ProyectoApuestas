@@ -5,10 +5,11 @@ import Gestion.User.UtilidadesUser;
 import Gestion.UtilidadesComunes;
 import java.util.Date;
 
-/*
-si quiere ejecutar
-    mientras no quiera salir (opcionMenu != 6)
-        segun(opcionMenu)
+/*PG N0 MainAdministradores
+INICIO
+Si quiere ejecutar*
+    mientras no quiera salir*
+        segun opcionMenu
             caso 1: CrearPartido
             caso 2: AbrirPartido
             caso 3: CerrarPartido
@@ -17,7 +18,49 @@ si quiere ejecutar
         fin_segun
     fin_mientras
 fin_si
- */
+FIN
+
+PG N1 CrearPartido
+INICIO
+LeerValidarMaximoApuestasyFecha
+si se ha insertado*
+    mensajeInsercionCorrecta
+sino
+    MensajeInsercionFallida
+fin_si
+FIN
+
+PG N1 CerrarPartido
+INICIO
+si existenPartidoAbiertos*
+    leerIDpartido*
+    si cerrarPartido*
+        MensajeCerradoCorrecto
+    sino
+        MensajeCerradoIncorrecto
+    fin_si
+sino
+    MensajeNoHayPartidoAbiertos
+fin_si
+FIN
+
+Entradas:
+-int opcionMenu
+-int idPartido
+-int MaximoApuesta1
+-int MaximoApuesta2
+-int MaximoApuesta3
+-Date fechaPartido
+
+Restricciones:
+-opcionMenu solo podra valer 1,2,3,4,5 o 0
+-el idPartido debe de ser mayor que 0
+-los Maximo de apuestas no podran tener un valor menor que 0
+-la fecha tiene debe de poder existir
+
+Salidas:
+-Mensajes de comunicacion con el usuario
+*/
 public class MainAdministradores {
     public static void main(String[]args){
         UtilidadesComunes uComunes = new UtilidadesComunes();
