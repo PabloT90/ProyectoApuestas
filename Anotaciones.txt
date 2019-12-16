@@ -1,0 +1,3 @@
+tienen un equipos en los partidos
+tienen usuarios que no son admin
+Fusionar diaposi de procedimientos y funciones
