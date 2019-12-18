@@ -117,6 +117,7 @@ public class MainAdministradores {
                         if(uComunes.existenPartidosConApuestasSinContabilizar()){
                             idPartido = uAdmin.leerYValidarPartidoConApuestasSinContabilizar();
                             uAdmin.pagarApuestasPartido(idPartido);
+                            System.out.println("Apuestas pagadas correctamente.");
                         }else{
                             System.out.println("No existen partidos con apuestas sin contabilizar.");
                         }

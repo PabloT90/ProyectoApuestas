@@ -1,7 +1,4 @@
---------------------------
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+go
 CREATE
 TRIGGER [dbo].[noApuestesLoQueNoTienes]
 ON [dbo].[Apuestas]
@@ -19,24 +16,10 @@ BEGIN
 		ROLLBACK
 	END
 END
-
-------------------
-
+go
+-----------
 GO
-ALTER 
-TRIGGER [dbo].[restarDineroApuestaInmediatamente]
-ON [dbo].[Apuestas]
-AFTER INSERT AS 
-BEGIN
-	/*HAY QUE HACER DOS COSAS: MODIFICAR EL SALDO ACTUAL DEL USUARIO Y REGISTRAR EL MOVIMIENTO EN CUENTAS*/
-	UPDATE Usuarios
-	SET saldoActual = saldoActual - (SELECT DINEROAPOSTADO FROM inserted )
-	WHERE correo = (SELECT CORREOUSUARIO FROM inserted)
-END
-
---------
-
-ALTER TRIGGER [dbo].[SumarDinero] ON [dbo].[Apuestas]
+CREATE TRIGGER [dbo].[SumarDinero] ON [dbo].[Apuestas]
 AFTER UPDATE AS
 BEGIN
 	DECLARE @Correo varchar(30)
@@ -54,12 +37,23 @@ BEGIN
 		WHERE correo = @Correo
 	end
 END
-
----------------------
-
-ALTER 
-  
-trigger [dbo].[T_ActualizarGanador] on [dbo].[Partidos]
+GO
+----
+GO
+CREATE 
+TRIGGER [dbo].[restarDineroApuestaInmediatamente]
+ON [dbo].[Apuestas]
+AFTER INSERT AS 
+BEGIN
+	
+	UPDATE Usuarios
+	SET saldoActual = saldoActual - (SELECT DINEROAPOSTADO FROM inserted )
+	WHERE correo = (SELECT CORREOUSUARIO FROM inserted)
+END
+go
+-----
+go
+CREATE trigger [dbo].[T_ActualizarGanador] on [dbo].[Partidos]
 after update as
 begin
 	declare @IDPartido int,
@@ -159,18 +153,16 @@ begin
 	close miCursor--cerramos
 	deallocate miCursor--liberamos la memoria
 end --cierra el trigger
+go
 
-
------------------
-
-ALTER 
+-----
+go
+CREATE 
 --drop
 TRIGGER [dbo].[grabarMovimientoEnCuenta]
 ON [dbo].[Usuarios]
 AFTER UPDATE AS 
 BEGIN
-	
-	/*comprobamos si la columna del saldo ha sido modificada*/
 
 	if exists (select saldoActual from inserted)
 	begin
@@ -187,19 +179,16 @@ BEGIN
 
 	
 END
-
----------------------------
-
-GO
---ALTER
-ALTER 
+go
+-----
+go
+CREATE
 --drop
 TRIGGER [dbo].[grabarMovimientoEnCuentaAfterInsert]
 ON [dbo].[Usuarios]
 AFTER insert AS 
 BEGIN
 	
-	/*comprobamos si la columna del saldo ha sido modificada*/
 
 	if exists (select saldoActual from inserted)
 	begin
@@ -216,3 +205,4 @@ BEGIN
 
 	
 END
+go

@@ -180,18 +180,16 @@ public class UtilidadesComunes {
      */
     public void mostrarMensajeOperacion(int codMensaje){
         switch (codMensaje){
-            case 0:
-                System.out.println("Se ha retirado correctamente.");
+            case 0: case 1:
+                System.out.println("Operacion realizada correctamente.");
                 break;
             case -1:
-                System.out.println("El correo introducido no es correcto.");
+                System.out.println("La cantidad introducida no es correcta");
                 break;
-            case -3:
+            case -2:
                 System.out.println("No tienes tanto dinero para retirar.");
                 break;
-            default:
-                System.out.println("Dinero ingresado correctamente.");
-                break;
+
         }
     }
 
@@ -723,7 +721,7 @@ public class UtilidadesComunes {
 
             // Mostrar los datos del ResultSet
             while (partidos.next()) {
-                System.out.println("Partido: " + partidos.getString("ID") + " Abierto desde: " + partidos.getTimestamp("fechaPartido"));
+                System.out.println("Partido: " + partidos.getString("ID") + " Fecha: " + partidos.getTimestamp("fechaPartido"));
             }
 
             // Cerrar conexion

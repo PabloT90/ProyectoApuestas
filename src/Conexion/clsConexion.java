@@ -13,7 +13,7 @@ public class clsConexion {
     public clsConexion(){
         sourceURL="jdbc:sqlserver://localhost";
         //sourceURL="jdbc:sqlserver://DESKTOP-G756AJ8";
-        usuario="pepito"; //Cambiar a pablo
+        usuario="final"; //Cambiar a pablo
         password="qq";
     }
     public clsConexion(String sourceURL, String usuario, String password){
